@@ -1,15 +1,12 @@
-package id.teknologi.teknologiid.feature.home;
-
-import android.annotation.SuppressLint;
+package id.teknologi.teknologiid.feature.thread;
 
 import id.teknologi.teknologiid.base.BasePresenter;
-import id.teknologi.teknologiid.base.BaseView;
 import id.teknologi.teknologiid.utils.ErrorHandler;
 import id.teknologi.teknologiid.utils.RxUtils;
 
-public class HomePresenter extends BasePresenter<HomeView> {
-    public HomePresenter(HomeView homeView) {
-        super(homeView);
+public class ThreadPresenter extends BasePresenter<ThreadView> {
+    public ThreadPresenter(ThreadView threadView) {
+        super(threadView);
     }
 
     void getThreads(){

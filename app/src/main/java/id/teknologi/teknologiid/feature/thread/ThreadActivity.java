@@ -1,4 +1,4 @@
-package id.teknologi.teknologiid.feature.home;
+package id.teknologi.teknologiid.feature.thread;
 
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -18,9 +18,9 @@ import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
-public class HomeActivity extends BaseActivity implements HomeView, RecyclerInterface{
+public class ThreadActivity extends BaseActivity implements ThreadView, RecyclerInterface{
 
-    HomePresenter presenter;
+    ThreadPresenter presenter;
     ThreadsAdapter threadsAdapter;
     List<Thread> threadList = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class HomeActivity extends BaseActivity implements HomeView, RecyclerInte
 
     @Override
     protected void setupData(Bundle savedInstanceState) {
-        presenter = new HomePresenter(this);
+        presenter = new ThreadPresenter(this);
         presenter.getThreads();
         threadsAdapter = new ThreadsAdapter(this, threadList, this);
     }
