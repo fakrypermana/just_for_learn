@@ -2,14 +2,11 @@ package id.teknologi.teknologiid.base;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
-
 
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;

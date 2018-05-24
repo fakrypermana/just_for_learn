@@ -15,9 +15,6 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.google.android.gms.common.ConnectionResult;
-//import com.google.android.gms.common.GoogleApiAvailability;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -26,6 +23,8 @@ import java.io.OutputStream;
 import java.text.DecimalFormat;
 
 import id.teknologi.teknologiid.R;
+
+//import com.google.android.gms.common.GoogleApiAvailability;
 
 /**
  * Created by galihgasur on 10/1/17.

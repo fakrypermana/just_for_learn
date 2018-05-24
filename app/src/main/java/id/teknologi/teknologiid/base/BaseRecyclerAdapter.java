@@ -48,7 +48,11 @@ public abstract class BaseRecyclerAdapter<Model,VH extends BaseViewHolder<Model>
 
     protected abstract int getResLayout(int type);
 
-    protected RecyclerInterface recyclerCallback;
+    private RecyclerInterface recyclerCallback;
+
+    public RecyclerInterface getRecyclerCallback() {
+        return recyclerCallback;
+    }
 
     public void insertAndNotify(List<Model> models){
         modelList.addAll(models);

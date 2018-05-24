@@ -1,8 +1,6 @@
 package id.teknologi.teknologiid.base;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Looper;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -10,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
-import id.teknologi.teknologiid.R;
 
 /**
  * Created by galihgasur on 10/1/17.
