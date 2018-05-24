@@ -63,6 +63,8 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
 
     @Override
     public void onRecyclerItemClicked(int position) {
+        Thread thread = threadList.get(position);
         Toast.makeText(this, "Clicked "+threadList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+        ThreadDetailActivity.start(this, thread.getId(), thread.getSlug());
     }
 }

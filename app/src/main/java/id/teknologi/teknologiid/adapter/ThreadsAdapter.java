@@ -41,6 +41,20 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
         ImageView ivCover;
         @BindView(R.id.tv_title)
         TextView tvTitle;
+        @BindView(R.id.tv_user_name)
+        TextView tvUser_name;
+        @BindView(R.id.tv_created_at)
+        TextView tvCreated_at;
+        @BindView(R.id.tv_user_work)
+        TextView tvUser_work;
+        @BindView(R.id.tv_topics)
+        TextView tvTopics;
+        @BindView(R.id.tv_comments)
+        TextView tvComments;
+        @BindView(R.id.tv_views)
+        TextView tvViews;
+        @BindView(R.id.iv_user_url_photo)
+        ImageView ivUser_url_photo;
 
         public ThreadVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
@@ -54,6 +68,16 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
                     .into(ivCover);
             Log.d("Thread",thread.getUrl_cover());
             tvTitle.setText(thread.getTitle());
+            tvUser_name.setText(thread.getUsername());
+            tvCreated_at.setText(thread.getCreated_at());
+            tvUser_work.setText(thread.getUser_work());
+            tvTopics.setText(thread.getTopics().toArray().toString());
+            tvComments.setText(String.valueOf(thread.getComments() +" jawaban ."));
+            tvViews.setText(String.valueOf(thread.getViews()+" dilihat ."));
+            Glide.with(itemView)
+                    .load(thread.getUser_url_photo())
+                    .into(ivUser_url_photo);
+
         }
     }
 }
