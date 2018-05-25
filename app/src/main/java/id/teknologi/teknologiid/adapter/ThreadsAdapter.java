@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -76,6 +77,7 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
             tvViews.setText(String.valueOf(thread.getViews()+" dilihat ."));
             Glide.with(itemView)
                     .load(thread.getUser_url_photo())
+                    .apply(RequestOptions.circleCropTransform())
                     .into(ivUser_url_photo);
 
         }
