@@ -17,4 +17,8 @@ public class DataManager {
     public Observable<ResponseArray<Thread>> getThreads() {
         return apiService.getThreads();
     }
+
+//    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
+//        return apiService.getThreadDetail(id,slug);
+//    }
 }

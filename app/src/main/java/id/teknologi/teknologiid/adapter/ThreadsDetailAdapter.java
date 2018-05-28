@@ -7,8 +7,8 @@ import id.teknologi.teknologiid.BaseApplication;
 
 public class ThreadsDetailAdapter extends BaseApplication{
 
-    WebView webView;
-    AdvanceWebView vw;
+//    WebView webView;
+//    AdvanceWebView vw;
 
 }
 

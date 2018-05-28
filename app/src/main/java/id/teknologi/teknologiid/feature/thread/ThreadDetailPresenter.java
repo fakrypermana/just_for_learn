@@ -6,7 +6,7 @@ import id.teknologi.teknologiid.utils.RxUtils;
 
 public class ThreadDetailPresenter{
     public ThreadDetailPresenter(ThreadDetailView threadDetailView){
-        super(threadDetailView);
+        //super(threadDetailView);
     }
 
     void getThreadDetilePresenter(){
