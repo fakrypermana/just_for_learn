@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".feature.thread.ThreadActivity">
+        <activity android:name=".Navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,6 +20,7 @@
         </activity>
         <activity android:name=".feature.thread.ThreadDetailActivity">
         </activity>
+        <activity android:name=".feature.thread.ThreadActivity"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="5654d30e8fca327d371a3421402897bd4c58d5db" />
