@@ -1,6 +1,7 @@
 package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
+import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 
@@ -16,6 +17,10 @@ public class DataManager {
 
     public Observable<ResponseArray<Thread>> getThreads() {
         return apiService.getThreads();
+    }
+
+    public Observable<ResponseArray<Pekerjaan>> getPekerjaan() {
+        return apiService.getPekerjaan();
     }
 
 //    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
