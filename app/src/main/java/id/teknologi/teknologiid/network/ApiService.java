@@ -3,6 +3,7 @@ package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -17,7 +18,7 @@ public interface ApiService {
     Observable<ResponseArray<Thread>> getThreads();
 
     @GET("threads/{id}/{slug}")
-    Observable<ResponseObject<Thread>> getThreadDetail(
+    Observable<ResponseObject<CobaModel>> getThreadDetail(
             @Path("id") int id,
             @Path("slug") String slug
     );

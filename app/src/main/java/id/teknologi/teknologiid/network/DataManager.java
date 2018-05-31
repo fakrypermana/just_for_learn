@@ -1,6 +1,8 @@
 package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
+import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 
@@ -18,6 +20,9 @@ public class DataManager {
         return apiService.getThreads();
     }
 
+    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
+        return apiService.getThreadDetail(id, slug);
+    }
 //    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
 //        return apiService.getThreadDetail(id,slug);
 //    }

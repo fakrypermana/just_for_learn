@@ -1,22 +1,24 @@
-package id.teknologi.teknologiid.feature.thread;
+package id.teknologi.teknologiid.feature.coba;
 
 import id.teknologi.teknologiid.base.BasePresenter;
+import id.teknologi.teknologiid.feature.thread.ThreadView;
 import id.teknologi.teknologiid.utils.ErrorHandler;
 import id.teknologi.teknologiid.utils.RxUtils;
 
-public class ThreadPresenter extends BasePresenter<ThreadView> {
-    public ThreadPresenter(ThreadView threadView) {
-        super(threadView);
+public class CobaPresenter extends BasePresenter<CobaView> {
+// auto generate
+    public CobaPresenter(CobaView cobaView) {
+        super(cobaView);
     }
 
-    void getThreads(){
+    public void getThreadDetail(int id, String slug){
         getView().onLoading(true);
-        dataManager.getThreads()
+        dataManager.getThreadDetail(id, slug)
                 .doOnTerminate(() -> getView().onLoading(false))
                 .compose(RxUtils.applyScheduler())
                 .compose(RxUtils.applyApiCall())
                 .subscribe(response -> {
-                    getView().onSuccessThreads(response.getData());
+                    getView().onSuccessThreadDetail(response.getData());
                 }, throwable -> {
                     String message = ErrorHandler.handleError(throwable);
                     getView().onFailed(message);

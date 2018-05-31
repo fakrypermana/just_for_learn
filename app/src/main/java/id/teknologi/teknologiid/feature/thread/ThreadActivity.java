@@ -14,6 +14,7 @@ import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.ThreadsAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
+import id.teknologi.teknologiid.feature.coba.ThreadDetailActivity;
 import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -23,14 +24,13 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     ThreadPresenter presenter;
     ThreadsAdapter threadsAdapter;
     List<Thread> threadList = new ArrayList<>();
-    private int umur;
 
     @BindView(R.id.rv_threads)
     RecyclerView rvThreads;
 
     @Override
     protected int contentView() {
-        return R.layout.activity_main;
+        return R.layout.activity_thread;
     }
 
     @Override
@@ -67,9 +67,5 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
         Thread thread = threadList.get(position);
         Toast.makeText(this, "Clicked "+threadList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
         ThreadDetailActivity.start(this, thread.getId(), thread.getSlug());
-    }
-
-    public int getUmur(){
-        return umur;
     }
 }
