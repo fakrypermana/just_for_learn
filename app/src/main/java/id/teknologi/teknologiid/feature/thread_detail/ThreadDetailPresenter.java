@@ -1,13 +1,12 @@
-package id.teknologi.teknologiid.feature.coba;
+package id.teknologi.teknologiid.feature.thread_detail;
 
 import id.teknologi.teknologiid.base.BasePresenter;
-import id.teknologi.teknologiid.feature.thread.ThreadView;
 import id.teknologi.teknologiid.utils.ErrorHandler;
 import id.teknologi.teknologiid.utils.RxUtils;
 
-public class CobaPresenter extends BasePresenter<CobaView> {
+public class ThreadDetailPresenter extends BasePresenter<ThreadDetailView> {
 // auto generate
-    public CobaPresenter(CobaView cobaView) {
+    public ThreadDetailPresenter(ThreadDetailView cobaView) {
         super(cobaView);
     }
 

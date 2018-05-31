@@ -1,27 +1,23 @@
-package id.teknologi.teknologiid.feature.coba;
+package id.teknologi.teknologiid.feature.thread_detail;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Display;
+import android.view.WindowManager;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
-import id.teknologi.teknologiid.adapter.ThreadsDetailAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
-import id.teknologi.teknologiid.feature.thread.ThreadDetailPresenter;
-import id.teknologi.teknologiid.feature.thread.ThreadPresenter;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Comment;
-import id.teknologi.teknologiid.model.Thread;
 
-public class ThreadDetailActivity extends BaseActivity implements CobaView{
+public class ThreadDetailActivity extends BaseActivity implements ThreadDetailView {
 
     @BindView(R.id.wv_detileThread)
     WebView webView;
@@ -29,7 +25,7 @@ public class ThreadDetailActivity extends BaseActivity implements CobaView{
     private final static String SLUG = "SLUG";
     private int id;
     private String slug;
-    CobaPresenter presenter;
+    ThreadDetailPresenter presenter;
     @Override
     protected int contentView() {
         return R.layout.activity_detail_thread;
@@ -40,13 +36,14 @@ public class ThreadDetailActivity extends BaseActivity implements CobaView{
         Intent intent = getIntent();
         id = intent.getIntExtra(ID, 0);
         slug = intent.getStringExtra(SLUG);
-        presenter = new CobaPresenter(this);
+        presenter = new ThreadDetailPresenter(this);
         presenter.getThreadDetail(id, slug);
     }
 
     @Override
     protected void setupView() {
         webView.setWebViewClient(new WebViewClient());
+        webView.setPadding(50,50,50,50);
         WebSettings webSettings = webView.getSettings();
         webSettings.setJavaScriptEnabled(true);
     }
@@ -76,4 +73,5 @@ public class ThreadDetailActivity extends BaseActivity implements CobaView{
         intent.putExtra(SLUG, slug);
         activity.startActivity(intent);
     }
+
 }
