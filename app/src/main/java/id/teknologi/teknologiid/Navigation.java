@@ -6,7 +6,11 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import java.util.concurrent.ThreadFactory;
+
+import id.teknologi.teknologiid.dummy_activity.Pertanyaan;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
+import id.teknologi.teknologiid.model.Thread;
 
 public class Navigation extends TabActivity{
 
@@ -16,58 +20,58 @@ public class Navigation extends TabActivity{
 
         final TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost); // initiate TabHost
         TabHost.TabSpec spec; // Reusable TabSpec for each tab
-        Intent intent;
+        Intent intent; // Reusable Intent for each tab
 
-        //Pertanyaan
-        spec = tabHost.newTabSpec("Pertanyaan"); // Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
+        spec = tabHost.newTabSpec("pertanyaan"); // Create a new TabSpec using tab host
+        spec.setIndicator("",getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
+        // Create an Intent to launch an Activity for the tab (to be reused)
+        intent = new Intent(this, Pertanyaan.class);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
 
+        // Do the same for the other tabs
+
+        spec = tabHost.newTabSpec("beranda"); // Create a new TabSpec using tab host
+        spec.setIndicator("",getResources().getDrawable(R.drawable.pertanyaan)); // set the “CONTACT” as an indicator
+
+        // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent(this, ThreadActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
-        //Thread
-        spec = tabHost.newTabSpec("Thread");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
-        intent = new Intent(this, ThreadActivity.class);
+        spec = tabHost.newTabSpec("Toko"); // Create a new TabSpec using tab host
+        spec.setIndicator("",getResources().getDrawable(R.drawable.pertanyaan)); // set the “ABOUT” as an indicator
+        // Create an Intent to launch an Activity for the tab (to be reused)
+        intent = new Intent(this, Thread.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
-        tabHost.addTab(spec);
-
-        //Pekerjaan
-        spec = tabHost.newTabSpec("Pekerjaan");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
-        intent = new Intent(this, ThreadActivity.class);
-        spec.setContent(intent);
-        tabHost.addTab(spec);
-        tabHost.addTab(spec);
-
-        //Profil
-        spec = tabHost.newTabSpec("profil");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
-        intent = new Intent(this, ThreadActivity.class);
-        spec.setContent(intent);
-        tabHost.addTab(spec);
-        tabHost.addTab(spec);
-
-        //Notif
-        spec = tabHost.newTabSpec("Notif");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
-        intent = new Intent(this, ThreadActivity.class);
-        spec.setContent(intent);
-        tabHost.addTab(spec);
-        tabHost.addTab(spec);
-
+        //set tab which one you want to open first time 0 or 1 or 2
         tabHost.setCurrentTab(1);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
-                                            @Override
-                                            public void onTabChanged(String tabId) {
-                                                 //display the name of the tab whenever a tab is changed
-                                                Toast.makeText(getApplicationContext(), tabId, Toast.LENGTH_SHORT).show();
+            @Override
+            public void onTabChanged(String tabId) {
+                // display the name of the tab whenever a tab is changed
+                Toast.makeText(getApplicationContext(), tabId, Toast.LENGTH_SHORT).show();
 
-                                            }
-                                        }
-        );
+
+
+
+            }
+        });
+        spec = tabHost.newTabSpec("Barang");
+        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan));
+
+        intent = new Intent(this, ThreadActivity.class);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
+
+
+        spec = tabHost.newTabSpec("FAQ");
+        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan));
+
+        intent = new Intent(this, ThreadActivity.class);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
 
     }
 }
