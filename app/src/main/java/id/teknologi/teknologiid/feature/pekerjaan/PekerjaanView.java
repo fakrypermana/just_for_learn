@@ -3,7 +3,8 @@ package id.teknologi.teknologiid.feature.pekerjaan;
 import java.util.List;
 
 import id.teknologi.teknologiid.base.BaseView;
+import id.teknologi.teknologiid.model.Pekerjaan;
 
 public interface PekerjaanView extends BaseView {
-    void onSuccessThreads(List<Thread> threadList);
+    void onSuccessPekerjaan(List<Pekerjaan> pekerjaanList);
 }
