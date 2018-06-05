@@ -13,16 +13,16 @@ public class CobaPresenter extends BasePresenter<CobaView> {
 
     public void getThreadDetail(int id, String slug){
         getView().onLoading(true);
-        dataManager.getThreadDetail(id, slug)
-                .doOnTerminate(() -> getView().onLoading(false))
-                .compose(RxUtils.applyScheduler())
-                .compose(RxUtils.applyApiCall())
-                .subscribe(response -> {
-                    getView().onSuccessThreadDetail(response.getData());
-                }, throwable -> {
-                    String message = ErrorHandler.handleError(throwable);
-                    getView().onFailed(message);
-                })
-                .isDisposed();
+//       dataManager.getThreadDetail(id, slug)
+//                .doOnTerminate(() -> getView().onLoading(false))
+//                .compose(RxUtils.applyScheduler())
+//                .compose(RxUtils.applyApiCall())
+//                .subscribe(response -> {
+//                    getView().onSuccessThreadDetail(response.getData());
+//                }, throwable -> {
+//                    String message = ErrorHandler.handleError(throwable);
+//                    getView().onFailed(message);
+//                })
+//                .isDisposed();
     }
 }
