@@ -6,6 +6,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import butterknife.BindView;
@@ -18,8 +20,8 @@ import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAdapter.PekerjaanVH>
 {
-    public PekerjaanAdapter(Context context, List<id.teknologi.teknologiid.model.Pekerjaan> pekerjaans) {
-        super(context, pekerjaans);
+    public PekerjaanAdapter(Context context, List<Pekerjaan> pekerjaanList, RecyclerInterface recyclerCallBack) {
+        super(context, pekerjaanList, recyclerCallBack);
     }
 
     @Override
@@ -42,6 +44,8 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         TextView tvNamaPerusahaan;
         @BindView(R.id.tv_alamat_job)
         TextView tvAlamatJob;
+        @BindView(R.id.tv_date_exp_job)
+        TextView tvDateExp;
 
         public PekerjaanVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
@@ -50,7 +54,10 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
 
         @Override
         public void onBind(Pekerjaan pekerjaan) {
-
+            Glide.with(itemView).load(pekerjaan.getPhoto()).into(ivCoverJob);
+            tvNamaJob.setText(pekerjaan.getName());
+            tvAlamatJob.setText(pekerjaan.getLocation());
+            tvDateExp.setText(pekerjaan.getDate_exp());
         }
     }
 }

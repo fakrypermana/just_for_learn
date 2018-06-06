@@ -1,11 +1,15 @@
 package id.teknologi.teknologiid.model;
 
+import java.util.List;
+
 public class Pekerjaan {
+
+    //Pekerjaan
     private int id;
     private String description;
     private String name;
+    private String photo;
     private int req_employee;
-    private String skills;
     private String location;
     private int salary_min;
     private int salary_max;
@@ -15,6 +19,15 @@ public class Pekerjaan {
     private int status;
     private String date_exp;
 
+    //Detail Pekerjaan
+    private String desc_long;
+    private int id_company;
+    private String skills;
+    private List<String> tags;
+    private List<Company> company;
+
+
+    //getter pekerjaan list
     public int getId() {
         return id;
     }
@@ -25,6 +38,10 @@ public class Pekerjaan {
 
     public String getName() {
         return name;
+    }
+
+    public String getPhoto() {
+        return photo;
     }
 
     public int getReq_employee() {
@@ -65,5 +82,23 @@ public class Pekerjaan {
 
     public String getDate_exp() {
         return date_exp;
+    }
+
+
+    //getter detail pekerjaan
+    public String getDesc_long() {
+        return desc_long;
+    }
+
+    public int getId_company() {
+        return id_company;
+    }
+
+    public List<String> getTags() {
+        return tags;
+    }
+
+    public List<Company> getCompany() {
+        return company;
     }
 }
