@@ -24,6 +24,8 @@
         <activity android:name=".feature.thread_detail.ThreadDetailActivity">
         </activity>
         <activity android:name=".feature.thread.ThreadActivity"/>
+        <activity android:name=".feature.pekerjaan.PekerjaanActivity"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="5654d30e8fca327d371a3421402897bd4c58d5db" />
