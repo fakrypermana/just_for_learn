@@ -21,14 +21,12 @@ public class DataManager {
         return apiService.getThreads();
     }
 
+    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
+        return apiService.getThreadDetail(id, slug);
+    }
 
     public Observable<ResponseArray<Pekerjaan>> getPekerjaan() {
         return apiService.getPekerjaan();
-    }
-
-
-    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
-        return apiService.getThreadDetail(id, slug);
     }
 
 }

@@ -20,6 +20,6 @@ public class PekerjaanPresenter extends BasePresenter<PekerjaanView> {
                 }, throwable -> {
                     String message = ErrorHandler.handleError(throwable);
                     getView().onFailed(message);
-                });
+                }).isDisposed();
     }
 }
