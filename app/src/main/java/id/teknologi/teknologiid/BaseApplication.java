@@ -7,6 +7,10 @@ import android.support.multidex.MultiDex;
 import com.crashlytics.android.Crashlytics;
 import com.orhanobut.hawk.Hawk;
 
+import java.util.List;
+
+import id.teknologi.teknologiid.model.DetileThread;
+import id.teknologi.teknologiid.utils.RecyclerInterface;
 import io.fabric.sdk.android.Fabric;
 
 /**
@@ -14,6 +18,9 @@ import io.fabric.sdk.android.Fabric;
  */
 
 public class BaseApplication extends Application {
+
+    public BaseApplication(Context context, List<DetileThread> threadList, RecyclerInterface recyclerCallback) {
+    }
 
     @Override
     public void onCreate() {
