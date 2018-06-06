@@ -1,5 +1,7 @@
 package id.teknologi.teknologiid.model;
 
+import java.util.List;
+
 public class QuestionListModel {
 
 //    QUESTION LIST
@@ -17,6 +19,7 @@ public class QuestionListModel {
     private String user_name;
     private String user_url_photo;
     private String user_work;
+    private List<String> tags;
 //            "tags": [
 //            "html",
 //            "css"
@@ -80,6 +83,10 @@ public class QuestionListModel {
 
     public int getAnswer_count() {
         return answer_count;
+    }
+
+    public List<String> getTags() {
+        return tags;
     }
 }
 
