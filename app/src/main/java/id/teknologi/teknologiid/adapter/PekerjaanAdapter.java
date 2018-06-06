@@ -34,7 +34,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         return new PekerjaanVH(initView(viewType, parent), getRecyclerCallback());
     }
 
-    public class PekerjaanVH extends BaseViewHolder<Pekerjaan>{
+    class PekerjaanVH extends BaseViewHolder<Pekerjaan>{
 
         @BindView(R.id.iv_cover_job)
         ImageView ivCoverJob;
@@ -56,7 +56,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         public void onBind(Pekerjaan pekerjaan) {
             Glide.with(itemView).load(pekerjaan.getPhoto()).into(ivCoverJob);
             tvNamaJob.setText(pekerjaan.getName());
-            tvNamaPerusahaan.setText(pekerjaan.getName());
+            tvNamaPerusahaan.setText(pekerjaan.getName()); //masih belum diganti nama perusahaan
             tvAlamatJob.setText(pekerjaan.getLocation());
             tvDateExp.setText(pekerjaan.getDate_exp());
         }

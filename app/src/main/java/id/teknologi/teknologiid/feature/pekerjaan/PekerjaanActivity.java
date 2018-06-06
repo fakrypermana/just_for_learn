@@ -47,7 +47,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
 
     @Override
     public void onSuccessPekerjaan(List<Pekerjaan> pekerjaanList) {
-        Log.d("THREADS", new Gson().toJson(pekerjaanList));
+        Log.d("Pekerjaan", new Gson().toJson(pekerjaanList));
         adapter.insertAndNotify(pekerjaanList);
     }
 
@@ -58,7 +58,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
 
     @Override
     public void onFailed(String message) {
-        Log.d("THREADS","ERROR");
+        Log.d("Pekerjaan","ERROR");
     }
 
     @Override
