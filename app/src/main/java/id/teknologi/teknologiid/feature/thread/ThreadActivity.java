@@ -28,6 +28,9 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     @BindView(R.id.rv_threads)
     RecyclerView rvThreads;
 
+    public ThreadActivity() {
+    }
+
     @Override
     protected int contentView() {
         return R.layout.activity_main;
@@ -72,4 +75,5 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     public int getUmur(){
         return umur;
     }
+
 }

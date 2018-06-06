@@ -88,5 +88,6 @@ public class QuestionListModel {
     public List<String> getTags() {
         return tags;
     }
+
 }
 

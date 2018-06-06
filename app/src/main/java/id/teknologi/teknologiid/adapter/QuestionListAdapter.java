@@ -3,6 +3,7 @@ package id.teknologi.teknologiid.adapter;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -12,9 +13,12 @@ import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
@@ -64,10 +68,20 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
         public QuestionListVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
+            ButterKnife.bind(this,itemView);
         }
 
         @Override
-        public void onBind(QuestionListModel questionListModel) {
+        public void onBind(QuestionListModel questionList) {
+            Glide.with(itemView)
+                    .load(questionList.getUser_url_photo())
+                    .into(iv_userProfilePict);
+            Log.d("QuestionList", questionList.getUser_url_photo());
+            tvDate.setText(questionList.getCreated_at());
+            tvQuestion.setText(questionList.getTitle());
+            tvTag.setText(questionList.getTags().toArray().toString());
+
+
 
         }
     }
