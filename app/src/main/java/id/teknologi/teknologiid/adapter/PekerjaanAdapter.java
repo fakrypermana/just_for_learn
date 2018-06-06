@@ -56,7 +56,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         public void onBind(Pekerjaan pekerjaan) {
             Glide.with(itemView).load(pekerjaan.getPhoto()).into(ivCoverJob);
             tvNamaJob.setText(pekerjaan.getName());
-            tvNamaPerusahaan.setText(pekerjaan.getName()); //masih belum diganti nama perusahaan
+            tvNamaPerusahaan.setText("nyusul"); //masih belum diganti nama perusahaan
             tvAlamatJob.setText(pekerjaan.getLocation());
             tvDateExp.setText(pekerjaan.getDate_exp());
         }

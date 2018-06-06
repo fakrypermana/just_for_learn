@@ -24,7 +24,7 @@ public class Pekerjaan {
     private int id_company;
     private String skills;
     private List<String> tags;
-    private List<Company> company;
+    private Company company;
 
 
     //getter pekerjaan list
@@ -98,7 +98,7 @@ public class Pekerjaan {
         return tags;
     }
 
-    public List<Company> getCompany() {
+    public Company getCompany() {
         return company;
     }
 }
