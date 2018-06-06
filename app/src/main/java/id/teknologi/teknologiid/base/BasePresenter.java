@@ -28,7 +28,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public abstract class BasePresenter<MvpView extends BaseView> {
-    private MvpView mvpView;
+        private MvpView mvpView;
     protected MvpView getView(){
         return mvpView;
     };

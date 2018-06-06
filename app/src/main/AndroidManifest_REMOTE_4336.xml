@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="id.teknologi.teknologiid">
-
     <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -20,15 +18,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity android:name=".feature.thread_detail.ThreadDetailActivity">
         </activity>
         <activity android:name=".feature.thread.ThreadActivity"/>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="5654d30e8fca327d371a3421402897bd4c58d5db" />
-
-        <activity android:name=".feature.pekerjaan.PekerjaanActivity"></activity>
     </application>
 
 </manifest>

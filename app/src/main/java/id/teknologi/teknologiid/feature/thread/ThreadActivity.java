@@ -14,6 +14,7 @@ import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.ThreadsAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
+import id.teknologi.teknologiid.feature.thread_detail.ThreadDetailActivity;
 import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -29,7 +30,7 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
 
     @Override
     protected int contentView() {
-        return R.layout.activity_main;
+        return R.layout.activity_thread;
     }
 
     @Override
