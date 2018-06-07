@@ -26,8 +26,8 @@ import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, QuestionListAdapter.QuestionListVH>  {
-    public QuestionListAdapter(Context context, List<QuestionListModel> questionList, RecyclerInterface recyclerCallback) {
-        super(context, questionList, recyclerCallback);
+    public QuestionListAdapter(Context context, List<QuestionListModel> questionListModels, RecyclerInterface recyclerCallback) {
+        super(context, questionListModels, recyclerCallback);
     }
 
     @Override
@@ -37,7 +37,8 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
     @Override
     public QuestionListVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
+
+        return new QuestionListVH(initView(viewType, parent),getRecyclerCallback());
     }
 
     public class QuestionListVH extends BaseViewHolder<QuestionListModel> {
