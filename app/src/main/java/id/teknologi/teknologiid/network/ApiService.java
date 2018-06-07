@@ -24,6 +24,13 @@ public interface ApiService {
             @Path("slug") String slug
     );
 
+    //Pekerjaan
     @GET("jobs")
     Observable<ResponseArray<Pekerjaan>> getPekerjaan();
+
+    @GET("jobs/{id}/{name}")
+    Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(
+            @Path("id") int id,
+            @Path("name") String name
+    );
 }

@@ -46,6 +46,8 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         TextView tvAlamatJob;
         @BindView(R.id.tv_date_exp_job)
         TextView tvDateExp;
+        @BindView(R.id.tv_tags_job)
+        TextView tvTags;
 
         public PekerjaanVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
@@ -59,6 +61,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
             tvNamaPerusahaan.setText("nyusul"); //masih belum diganti nama perusahaan
             tvAlamatJob.setText(pekerjaan.getLocation());
             tvDateExp.setText(pekerjaan.getDate_exp());
+//            tvTags.setText(pekerjaan.getTags().toArray().toString());
         }
     }
 }

@@ -15,6 +15,7 @@ import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.PekerjaanAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
+import id.teknologi.teknologiid.feature.pekerjaan_detail.DetailPekerjaanActivity;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -65,5 +66,6 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     public void onRecyclerItemClicked(int position) {
         Pekerjaan pekerjaan = pekerjaanList.get(position);
         Toast.makeText(this,"Clicked"+pekerjaanList.get(position).getName(), Toast.LENGTH_SHORT).show();
+        DetailPekerjaanActivity.start(this,pekerjaan.getId(),pekerjaan.getName());
     }
 }

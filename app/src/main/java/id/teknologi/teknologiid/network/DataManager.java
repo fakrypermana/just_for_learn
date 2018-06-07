@@ -25,8 +25,12 @@ public class DataManager {
         return apiService.getThreadDetail(id, slug);
     }
 
+    //Pekerjaan
     public Observable<ResponseArray<Pekerjaan>> getPekerjaan() {
         return apiService.getPekerjaan();
     }
 
+    public Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(int id, String name) {
+        return apiService.getPekerjaanDetail(id,name);
+    }
 }
