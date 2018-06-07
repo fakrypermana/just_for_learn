@@ -26,8 +26,8 @@ import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, QuestionListAdapter.QuestionListVH>  {
-    public QuestionListAdapter(Context context, List<QuestionListModel> questionListModels, RecyclerInterface recyclerCallback) {
-        super(context, questionListModels, recyclerCallback);
+    public QuestionListAdapter(Context context, List<QuestionListModel> questionList, RecyclerInterface recyclerCallback) {
+        super(context, questionList, recyclerCallback);
     }
 
     @Override
@@ -45,14 +45,13 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
         @BindView(R.id.iv_user_profile_pict)
         ImageView iv_userProfilePict;
-        @BindView(R.id.sv_search)
-        SearchView svSearch;
-        @BindView(R.id.btn_addQuestion)
-        Button btnAddQuestion;
-        @BindView(R.id.ib_answered)
-        ImageButton imageButtonAnsered;
-        @BindView(R.id.ib_favorite)
-        ImageButton imageButtonFavorite;
+
+//        @BindView(R.id.btn_addQuestion)
+//        Button btnAddQuestion;
+//        @BindView(R.id.ib_answered)
+//        ImageButton imageButtonAnsered;
+//        @BindView(R.id.ib_favorite)
+//        ImageButton imageButtonFavorite;
         @BindView(R.id.tv_date)
         TextView tvDate;
         @BindView(R.id.tv_question)
@@ -61,8 +60,8 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         TextView tvTag;
         @BindView(R.id.tv_user_name)
         TextView tvUserName;
-        @BindView(R.id.spin_filter)
-        Spinner spinFilter;
+//        @BindView(R.id.spin_filter)
+//        Spinner spinFilter;
         @BindView(R.id.tv_voted)
         TextView tvVoted;
 
@@ -83,7 +82,7 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
             tvQuestion.setText(questionList.getTitle());
             tvTag.setText(questionList.getTags().toArray().toString());
             tvUserName.setText(questionList.getUser_name());
-            tvVoted.setText(questionList.getUpvote());
+            tvVoted.setText(""+questionList.getUpvote());
 
 
 

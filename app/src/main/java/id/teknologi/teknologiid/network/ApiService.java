@@ -22,6 +22,6 @@ public interface ApiService {
             @Path("id") int id,
             @Path("slug") String slug
     );
-    @GET("forum")
+    @GET("forum/question")
     Observable<ResponseArray<QuestionListModel>> getQuestionList();
 }
