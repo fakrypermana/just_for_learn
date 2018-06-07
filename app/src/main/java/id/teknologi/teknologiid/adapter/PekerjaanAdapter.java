@@ -46,8 +46,8 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         TextView tvAlamatJob;
         @BindView(R.id.tv_date_exp_job)
         TextView tvDateExp;
-        @BindView(R.id.tv_tags_job)
-        TextView tvTags;
+        //@BindView(R.id.tv_tags_job)
+        //TextView tvTags;
 
         public PekerjaanVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);

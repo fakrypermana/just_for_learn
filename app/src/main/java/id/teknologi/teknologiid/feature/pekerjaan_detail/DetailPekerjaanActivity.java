@@ -17,14 +17,14 @@ import id.teknologi.teknologiid.model.Pekerjaan;
 
 public class DetailPekerjaanActivity extends BaseActivity implements DetailPekerjaanView {
 
-    @BindView(R.id.tv_nama_job_detail)
+    /*@BindView(R.id.tv_nama_job_detail)
     TextView tvNamaJobDetail;
     @BindView(R.id.tv_nama_perusahaan_detail)
     TextView tvPerusahaanJobDetail;
     @BindView(R.id.tv_alamat_job_detail)
     TextView tvAlamatJobDetail;
     @BindView(R.id.tv_date_exp_job_detail)
-    TextView tvDateJobDetail;
+    TextView tvDateJobDetail;*/
     @BindView(R.id.wv_job_detail)
     WebView wvJobDetail;
 
@@ -33,6 +33,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     private final static String ID ="ID";
     private final static String NAME = "NAME";
     DetailPekerjaanPresenter presenter;
+    Pekerjaan pekerjaan;
 
     @Override
     protected int contentView() {
@@ -51,15 +52,20 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     @Override
     protected void setupView() {
         wvJobDetail.setWebViewClient(new WebViewClient());
-        wvJobDetail.setPadding(50,50,50,50);
+        //wvJobDetail.setPadding(50,50,50,50);
         WebSettings webSettings = wvJobDetail.getSettings();
         webSettings.setJavaScriptEnabled(true);
+
+        /*tvNamaJobDetail.setText(pekerjaan.getName());
+        tvAlamatJobDetail.setText(pekerjaan.getLocation());
+        tvDateJobDetail.setText(pekerjaan.getDate_exp());
+        tvPerusahaanJobDetail.setText("Nyusul");*/
     }
 
     @Override
     public void onSuccessDetailPekerjaan(Pekerjaan pekerjaan) {
-        String data = pekerjaan.getDesc_long();
-        wvJobDetail.loadData(data,"text/html", "UTF-8");
+        String desc = pekerjaan.getDesc_long();
+        wvJobDetail.loadData(desc,"text/html", "UTF-8");
     }
 
     @Override
@@ -72,10 +78,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     }
 
-    public static void start(Activity activity, int id, String slug){
+    public static void start(Activity activity, int id, String name){
         Intent intent = new Intent(activity, DetailPekerjaanActivity.class);
         intent.putExtra(ID, id);
-        intent.putExtra(NAME, slug);
+        intent.putExtra(NAME, name);
         activity.startActivity(intent);
     }
 }
