@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import id.teknologi.teknologiid.feature.Question.QuestionListActivity;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
 
 public class Navigation extends TabActivity{
@@ -21,9 +22,9 @@ public class Navigation extends TabActivity{
         //Pertanyaan
         spec = tabHost.newTabSpec("Pertanyaan"); // Create a new TabSpec using tab host
         spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
-
-        intent = new Intent(this, ThreadActivity.class);
+        intent = new Intent(this, QuestionListActivity.class);
         spec.setContent(intent);
+        tabHost.addTab(spec);
         tabHost.addTab(spec);
 
         //Thread

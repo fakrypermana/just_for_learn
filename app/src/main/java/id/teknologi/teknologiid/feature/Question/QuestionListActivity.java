@@ -22,7 +22,7 @@ public class QuestionListActivity extends BaseActivity implements QuestionView, 
 
     QuestionListPresenter questionListPresenter;
     QuestionListAdapter questionListAdapter;
-    List<QuestionListModel> questionList = new ArrayList<>();
+    List<QuestionListModel> questionListModels = new ArrayList<>();
 
     @BindView(R.id.rv_QuestionList)
     RecyclerView rvQuestionList;
@@ -38,7 +38,7 @@ public class QuestionListActivity extends BaseActivity implements QuestionView, 
     protected void setupData(Bundle savedInstanceState) {
         questionListPresenter=new QuestionListPresenter(this);
         questionListPresenter.getQuestionList();
-        questionListAdapter = new QuestionListAdapter(this, questionList,this);
+        questionListAdapter = new QuestionListAdapter(this, questionListModels,this);
 
     }
 
@@ -50,9 +50,9 @@ public class QuestionListActivity extends BaseActivity implements QuestionView, 
     }
 
     @Override
-    public void onSuccessQuestion(List<QuestionListModel> questionList) {
-        Log.d("QUESTION LIST", new Gson().toJson(questionList));
-        questionListAdapter.insertAndNotify(questionList);
+    public void onSuccessQuestion(List<QuestionListModel> questionListModels) {
+        Log.d("QUESTION LIST", new Gson().toJson(questionListModels));
+        questionListAdapter.insertAndNotify(questionListModels);
 
     }
 
@@ -70,8 +70,8 @@ public class QuestionListActivity extends BaseActivity implements QuestionView, 
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        QuestionListModel question= questionList.get(position);
-        Toast.makeText(this,"Clicked"+questionList.get(position).getTitle(),Toast.LENGTH_SHORT).show();
+        QuestionListModel question= questionListModels.get(position);
+        Toast.makeText(this,"Clicked"+questionListModels.get(position).getTitle(),Toast.LENGTH_SHORT).show();
 //        QuestionDetailActivity.start
 
     }

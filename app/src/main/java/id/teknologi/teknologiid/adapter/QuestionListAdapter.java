@@ -62,6 +62,8 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         TextView tvUserName;
         @BindView(R.id.spin_filter)
         Spinner spinFilter;
+        @BindView(R.id.tv_voted)
+        TextView tvVoted;
 
 
 
@@ -79,6 +81,10 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
             tvDate.setText(questionList.getCreated_at());
             tvQuestion.setText(questionList.getTitle());
             tvTag.setText(questionList.getTags().toArray().toString());
+            tvUserName.setText(questionList.getUser_name());
+            tvVoted.setText(questionList.getUpvote());
+
+
 
 
 
