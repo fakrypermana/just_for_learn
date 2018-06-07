@@ -62,8 +62,7 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         TextView tvUserName;
         @BindView(R.id.spin_filter)
         Spinner spinFilter;
-        @BindView(R.id.btn_addQuestion)
-        FloatingActionButton fabAddQuestion;
+
 
 
         public QuestionListVH(View itemView, RecyclerInterface recyclerInterface) {

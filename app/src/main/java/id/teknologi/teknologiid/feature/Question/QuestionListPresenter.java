@@ -12,7 +12,7 @@ public class QuestionListPresenter extends BasePresenter<QuestionView> {
 
     void getQuestionList() {
         getView().onLoading(true);
-        dataManager.getThreads()
+        dataManager.getQuestionList()
                 .doOnTerminate(() -> getView().onLoading(false))
                 .compose(RxUtils.applyScheduler())
                 .compose(RxUtils.applyApiCall())

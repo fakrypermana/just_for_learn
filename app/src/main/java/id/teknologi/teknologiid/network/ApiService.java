@@ -3,6 +3,7 @@ package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
@@ -21,4 +22,6 @@ public interface ApiService {
             @Path("id") int id,
             @Path("slug") String slug
     );
+    @GET("questionList")
+    Observable<ResponseArray<QuestionListModel>> getQuestionList();
 }
