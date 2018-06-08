@@ -1,4 +1,8 @@
 package id.teknologi.teknologiid.feature.Question;
 
-public interface QuestionDetailView {
+import id.teknologi.teknologiid.base.BaseView;
+
+public interface QuestionDetailView extends BaseView {
+
 }
+
