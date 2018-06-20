@@ -72,7 +72,7 @@ public class QuestionListActivity extends BaseActivity implements QuestionView, 
     public void onRecyclerItemClicked(int position) {
         QuestionListModel question= questionListModels.get(position);
         Toast.makeText(this,"Clicked"+questionListModels.get(position).getTitle(),Toast.LENGTH_SHORT).show();
-//        QuestionDetailActivity.start
+        QuestionDetailActivity.start(this,question.getId(), question.getSlug());
 
     }
 }

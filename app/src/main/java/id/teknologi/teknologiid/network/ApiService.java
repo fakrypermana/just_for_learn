@@ -3,6 +3,7 @@ package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
@@ -24,4 +25,11 @@ public interface ApiService {
     );
     @GET("forum/question")
     Observable<ResponseArray<QuestionListModel>> getQuestionList();
+
+
+    @GET("forum/question/{id}/{slug}")
+    Observable<ResponseArray<QuestionDetailModel>> getQuestionDetail(
+            @Path("id") int id,
+            @Path("slug") String slug
+    );
 }

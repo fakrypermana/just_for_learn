@@ -9,3 +9,4 @@ import id.teknologi.teknologiid.model.QuestionListModel;
 public interface QuestionView extends BaseView {
     void onSuccessQuestion(List<QuestionListModel> questionListModels);
 }
+

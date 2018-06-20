@@ -36,13 +36,13 @@ public class QuestionDetailModel {
         return is_answered;
     }
     public int getStatus(){
-        return status
+        return status;
     }
     public int getId_category(){
         return id_category;
     }
     public int getUpvote(){
-        return upvote
+        return upvote;
     }
     public String getCreated_at(){
         return created_at;
@@ -53,7 +53,7 @@ public class QuestionDetailModel {
     public int getViews(){
         return views;
     }
-    public List<String> getTagstags(){
+    public List<String> getTags(){
         return tags;
     }
 
