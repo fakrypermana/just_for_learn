@@ -21,6 +21,7 @@ public class ThreadDetailActivity extends BaseActivity implements ThreadDetailVi
 
     @BindView(R.id.wv_detileThread)
     WebView webView;
+
     private final static String ID = "ID";
     private final static String SLUG = "SLUG";
     private int id;
