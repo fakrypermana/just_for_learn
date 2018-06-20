@@ -8,6 +8,8 @@ import android.widget.Toast;
 
 import java.util.concurrent.ThreadFactory;
 
+import id.teknologi.teknologiid.dummy_activity.Notifikasi;
+import id.teknologi.teknologiid.dummy_activity.Pekerjaan;
 import id.teknologi.teknologiid.dummy_activity.Pertanyaan;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
 import id.teknologi.teknologiid.model.Thread;
@@ -61,7 +63,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pekerjaan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pekerjaan));
 
-        intent = new Intent(this, ThreadActivity.class);
+        intent = new Intent(this, Pekerjaan.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -69,7 +71,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pemberitahuan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pemberitahuan));
 
-        intent = new Intent(this, ThreadActivity.class);
+        intent = new Intent(this, Notifikasi.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
