@@ -1,5 +1,6 @@
 package id.teknologi.teknologiid;
 
+import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +8,12 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
+import id.teknologi.teknologiid.feature.profile.ProfileActivity;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
 
 public class Navigation extends TabActivity{
+
+    ProgressDialog progress;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +41,7 @@ public class Navigation extends TabActivity{
 
         //Pekerjaan
         spec = tabHost.newTabSpec("Pekerjaan");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
+        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan));
         intent = new Intent(this, PekerjaanActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
@@ -46,7 +50,7 @@ public class Navigation extends TabActivity{
         //Profil
         spec = tabHost.newTabSpec("profil");  //Create a new TabSpec using tab host
         spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
-        intent = new Intent(this, ThreadActivity.class);
+        intent = new Intent(this, ProfileActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
         tabHost.addTab(spec);

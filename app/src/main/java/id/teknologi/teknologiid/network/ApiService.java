@@ -33,4 +33,7 @@ public interface ApiService {
             @Path("id") int id,
             @Path("name") String name
     );
+
+    //login dan register
+
 }

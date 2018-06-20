@@ -1,5 +1,6 @@
 package id.teknologi.teknologiid.feature.pekerjaan;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     PekerjaanPresenter presenter;
     PekerjaanAdapter adapter;
     List<Pekerjaan> pekerjaanList = new ArrayList<>();
+    ProgressDialog progress;
 
     @BindView(R.id.rv_pekerjaan)
     RecyclerView rvPekerjaan;
@@ -48,13 +50,14 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
 
     @Override
     public void onSuccessPekerjaan(List<Pekerjaan> pekerjaanList) {
-        Log.d("Pekerjaan", new Gson().toJson(pekerjaanList));
+        //Log.d("Pekerjaan", new Gson().toJson(pekerjaanList));
         adapter.insertAndNotify(pekerjaanList);
     }
 
     @Override
     public void onLoading(boolean isLoading) {
         Log.d("Pekerjaan","LOADING "+isLoading);
+
     }
 
     @Override
@@ -68,4 +71,6 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
         Toast.makeText(this,"Clicked"+pekerjaanList.get(position).getName(), Toast.LENGTH_SHORT).show();
         DetailPekerjaanActivity.start(this,pekerjaan.getId(),pekerjaan.getName());
     }
+
+
 }
