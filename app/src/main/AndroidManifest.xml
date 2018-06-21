@@ -20,7 +20,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.thread.ThreadDetailActivity">
+        <activity android:name=".feature.Question.QuestionListActivity">
+        </activity>
+        <activity android:name=".feature.Question.QuestionDetailActivity">
+        </activity>
+        <activity android:name=".feature.thread_detail.ThreadDetailActivity">
         </activity>
         <activity android:name=".feature.thread.ThreadActivity"/>
         <meta-data

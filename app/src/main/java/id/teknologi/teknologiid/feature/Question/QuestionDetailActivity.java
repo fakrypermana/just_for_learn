@@ -50,6 +50,10 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     }
 
     public static void start(QuestionListActivity questionListActivity, int id, String slug) {
+        Intent intent = new Intent(questionListActivity, QuestionDetailActivity.class);
+        intent.putExtra(ID, id);
+        intent.putExtra(SLUG, slug);
+        questionListActivity.startActivity(intent);
     }
 
     @Override
