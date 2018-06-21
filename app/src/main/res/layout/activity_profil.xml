@@ -4,11 +4,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".dummy_activity.Profil">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/rv_threads"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
-
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="PROFIL"
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="222dp" />
 </android.support.constraint.ConstraintLayout>

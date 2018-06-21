@@ -1,6 +1,9 @@
 package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
+import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.CobaModel;
+import id.teknologi.teknologiid.model.DetileThread;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
@@ -23,10 +26,20 @@ public class DataManager {
         return apiService.getQuestionList();
     }
 
-    public Observable<ResponseArray<QuestionDetailModel>> getQuestionDetail() {
+    public Observable<ResponseArray<QuestionDetailModel>> getQuestionDetail(int id, String slug) {
         return apiService.getQuestionDetail(id,slug);
     }
 
+
+
+
+    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
+        return apiService.getThreadDetail(id, slug);
+    }
+
+    public Observable<ResponseObject<DetileThread>> getThreadDetail(int id, String slug, String comment) {
+        return apiService.getThreadDetail(id, slug, comment);
+    }
 //    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
 //        return apiService.getThreadDetail(id,slug);
 //    }

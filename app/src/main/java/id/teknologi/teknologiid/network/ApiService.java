@@ -3,6 +3,8 @@ package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.CobaModel;
+import id.teknologi.teknologiid.model.DetileThread;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
@@ -19,7 +21,7 @@ public interface ApiService {
     Observable<ResponseArray<Thread>> getThreads();
 
     @GET("threads/{id}/{slug}")
-    Observable<ResponseObject<Thread>> getThreadDetail(
+    Observable<ResponseObject<CobaModel>> getThreadDetail(
             @Path("id") int id,
             @Path("slug") String slug
     );
@@ -31,5 +33,12 @@ public interface ApiService {
     Observable<ResponseArray<QuestionDetailModel>> getQuestionDetail(
             @Path("id") int id,
             @Path("slug") String slug
+    );
+
+    @GET("threads/{id}/{slug}/{comments}")
+    Observable<ResponseObject<DetileThread>> getThreadDetail(
+            @Path("id") int id,
+            @Path("slug") String slug,
+            @Path("comments") String comments
     );
 }

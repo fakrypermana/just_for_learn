@@ -8,9 +8,9 @@ public class QuestionDetailPresenter extends BasePresenter<QuestionDetailView>{
     public QuestionDetailPresenter(QuestionDetailView questionDetailView) {
         super(questionDetailView);
     }
-    void getQuestionDetail() {
+    public void getQuestionDetail(int id, String slug) {
         getView().onLoading(true);
-        dataManager.getQuestionDetail()
+        dataManager.getQuestionDetail(id, slug)
                 .doOnTerminate(() -> getView().onLoading(false))
                 .compose(RxUtils.applyScheduler())
                 .compose(RxUtils.applyApiCall())
@@ -22,4 +22,6 @@ public class QuestionDetailPresenter extends BasePresenter<QuestionDetailView>{
                 });
 
     }
+
+
 }
