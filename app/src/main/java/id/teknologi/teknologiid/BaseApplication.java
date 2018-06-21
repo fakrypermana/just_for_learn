@@ -19,9 +19,6 @@ import io.fabric.sdk.android.Fabric;
 
 public class BaseApplication extends Application {
 
-    public BaseApplication(Context context, List<DetileThread> threadList, RecyclerInterface recyclerCallback) {
-    }
-
     @Override
     public void onCreate() {
         super.onCreate();

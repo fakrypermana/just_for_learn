@@ -82,8 +82,8 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     }
 
     static final float MINIMUM = 25;
-    public abstract void show();
-    public abstract void hide();
+//    public abstract void show();
+//    public abstract void hide();
 
     protected void setFloatingActionButton(){
         rvThreads.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -91,12 +91,12 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
                 if (isVisible && scrollDist > MINIMUM) {
-                    hide();
+//                    hide();
                     scrollDist = 0;
                     isVisible = false;
                 }
                 else if (!isVisible && scrollDist < -MINIMUM) {
-                    show();
+//                    show();
                     scrollDist = 0;
                     isVisible = true;
                 }

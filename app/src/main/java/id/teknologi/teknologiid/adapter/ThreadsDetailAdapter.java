@@ -15,15 +15,5 @@ import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class ThreadsDetailAdapter extends BaseApplication{
 
-    public ThreadsAdapter(Context context, List<DetileThread> threadList, RecyclerInterface recyclerCallback) {
-        super(context, threadList, recyclerCallback);
-    }
-
-    @Override
-    protected int getResLayout(int type) {
-        return R.layout.list_comment;
-    }
-
-
 }
 
