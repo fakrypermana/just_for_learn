@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.Toast;
 
+import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
@@ -50,7 +51,7 @@ public class Navigation extends TabActivity{
         //Profil
         spec = tabHost.newTabSpec("profil");  //Create a new TabSpec using tab host
         spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
-        intent = new Intent(this, ProfileActivity.class);
+        intent = new Intent(this, PrevLoginRegistActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
         tabHost.addTab(spec);

@@ -3,4 +3,6 @@
     <string name="please_choose_other_image">Harap pilih gambar lain</string>
     <string name="choose_profile_photo">Pilih foto profil</string>
     <string name="dibuka_sampai">Dibuka sampai :</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
 </resources>
