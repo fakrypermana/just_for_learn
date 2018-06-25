@@ -30,8 +30,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     private int id;
     private String name;
+    private String slug;
     private final static String ID ="ID";
     private final static String NAME = "NAME";
+    private final static String SLUG = "SLUG";
     DetailPekerjaanPresenter presenter;
     Pekerjaan pekerjaan;
 
@@ -44,9 +46,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     protected void setupData(Bundle savedInstanceState) {
         Intent intent = getIntent();
         id = intent.getIntExtra(ID, 0);
-        name = intent.getStringExtra(NAME);
+        //name = intent.getStringExtra(NAME);
+        slug = intent.getStringExtra(SLUG);
         presenter = new DetailPekerjaanPresenter(this);
-        presenter.getDetailPekerjaan(id, name);
+        presenter.getDetailPekerjaan(id, slug);
     }
 
     @Override
@@ -78,10 +81,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     }
 
-    public static void start(Activity activity, int id, String name){
+    public static void start(Activity activity, int id, String slug){
         Intent intent = new Intent(activity, DetailPekerjaanActivity.class);
         intent.putExtra(ID, id);
-        intent.putExtra(NAME, name);
+        intent.putExtra(SLUG, slug);
         activity.startActivity(intent);
     }
 }

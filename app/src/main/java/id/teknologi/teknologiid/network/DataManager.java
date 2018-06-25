@@ -30,7 +30,7 @@ public class DataManager {
         return apiService.getPekerjaan();
     }
 
-    public Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(int id, String name) {
-        return apiService.getPekerjaanDetail(id,name);
+    public Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(int id, String slug) {
+        return apiService.getPekerjaanDetail(id,slug);
     }
 }
