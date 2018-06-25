@@ -70,7 +70,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     public void onRecyclerItemClicked(int position) {
         Pekerjaan pekerjaan = pekerjaanList.get(position);
         Toast.makeText(this,"Clicked"+pekerjaanList.get(position).getName(), Toast.LENGTH_SHORT).show();
-        DetailPekerjaanActivity.start(this,pekerjaan.getId(),pekerjaan.getName());
+        DetailPekerjaanActivity.start(this,pekerjaan.getId(),pekerjaan.getSlug());
     }
 
     /* Show progress dialog. */

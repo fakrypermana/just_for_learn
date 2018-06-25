@@ -35,10 +35,10 @@ public interface ApiService {
     @GET("jobs")
     Observable<ResponseArray<Pekerjaan>> getPekerjaan();
 
-    @GET("jobs/{id}/{name}")
+    @GET("jobs/{id}/{slug}")
     Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(
             @Path("id") int id,
-            @Path("name") String name
+            @Path("slug") String slug
     );
 
     //Profile
