@@ -25,18 +25,18 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class RegisterActivity extends BaseActivity implements View.OnClickListener {
-    private @BindView(R.id.input_username_regist)
+public class RegisterActivity extends BaseActivity {
+    @BindView(R.id.input_username_regist)
     EditText edtusername = null;
-    private @BindView(R.id.input_nama_regist)
+    @BindView(R.id.input_nama_regist)
     EditText edtname = null;
-    private@BindView(R.id.input_email_regist)
+    @BindView(R.id.input_email_regist)
     EditText edtemail = null;
-    private@BindView(R.id.input_password_regist)
+    @BindView(R.id.input_password_regist)
     EditText edtpass = null;
-    private@BindView(R.id.input_conpassword_regist)
+    @BindView(R.id.input_conpassword_regist)
     EditText edtconfpass = null;
-    private @BindView(R.id.btn_register)
+    @BindView(R.id.btn_register)
     Button btnRegist = null;
 
     private ProgressDialog progressDialog;
@@ -70,7 +70,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
                 retrofit2.Callback<ResponseBody> callback = new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                        //hideProgressDialog();
+                        hideProgressDialog();
 
                         StringBuffer messageBuffer   = new StringBuffer();
                         int statusCode = response.code();
@@ -167,7 +167,7 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
         progressDialog.setMessage("Please Wait");
 
         // The progress dialog can not be cancelled.
-        progressDialog.setCancelable(false);
+        progressDialog.setCancelable(true);
 
         // Show it.
         progressDialog.show();
@@ -185,12 +185,4 @@ public class RegisterActivity extends BaseActivity implements View.OnClickListen
 
     }
 
-    @Override
-    public void onClick(View view) {
-        registUser();
-    }
-
-    private void registUser() {
-
-    }
 }

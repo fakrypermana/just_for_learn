@@ -7,7 +7,6 @@
     tools:context=".feature.pekerjaan.PekerjaanActivity">
 
 
-
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_pekerjaan"
         android:layout_width="match_parent"

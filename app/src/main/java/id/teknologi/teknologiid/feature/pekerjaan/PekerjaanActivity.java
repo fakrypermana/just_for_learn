@@ -25,7 +25,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     PekerjaanPresenter presenter;
     PekerjaanAdapter adapter;
     List<Pekerjaan> pekerjaanList = new ArrayList<>();
-    ProgressDialog progress;
+    ProgressDialog progressDialog;
 
     @BindView(R.id.rv_pekerjaan)
     RecyclerView rvPekerjaan;
@@ -51,13 +51,14 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     @Override
     public void onSuccessPekerjaan(List<Pekerjaan> pekerjaanList) {
         //Log.d("Pekerjaan", new Gson().toJson(pekerjaanList));
+        //showProgressDialog();
         adapter.insertAndNotify(pekerjaanList);
     }
 
     @Override
     public void onLoading(boolean isLoading) {
         Log.d("Pekerjaan","LOADING "+isLoading);
-
+        //showProgressDialog();
     }
 
     @Override
@@ -71,6 +72,26 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
         Toast.makeText(this,"Clicked"+pekerjaanList.get(position).getName(), Toast.LENGTH_SHORT).show();
         DetailPekerjaanActivity.start(this,pekerjaan.getId(),pekerjaan.getName());
     }
+
+    /* Show progress dialog. */
+    /*private void showProgressDialog()
+    {
+        // Set progress dialog display message.
+        progressDialog.setMessage("Please Wait");
+
+        // The progress dialog can not be cancelled.
+        progressDialog.setCancelable(true);
+
+        // Show it.
+        progressDialog.show();
+    }
+
+    *//* Hide progress dialog. *//*
+    private void hideProgressDialog()
+    {
+        // Close it.
+        progressDialog.hide();
+    }*/
 
 
 }

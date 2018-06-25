@@ -128,5 +128,4 @@
         android:layout_height="wrap_content">
     </WebView>
 
-
 </android.support.constraint.ConstraintLayout>

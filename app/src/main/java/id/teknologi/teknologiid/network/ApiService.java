@@ -5,6 +5,7 @@ import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.model.CobaModel;
+import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
@@ -39,6 +40,10 @@ public interface ApiService {
             @Path("id") int id,
             @Path("name") String name
     );
+
+    //Profile
+    @GET("profile")
+    Observable<ResponseObject<Profile>> getProfile();
 
     //login dan register
     @FormUrlEncoded

@@ -4,6 +4,7 @@ import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
+import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 import retrofit2.Converter;
@@ -39,6 +40,11 @@ public class DataManager {
 
     public Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(int id, String name) {
         return apiService.getPekerjaanDetail(id,name);
+    }
+
+    //Profile
+    public Observable<ResponseObject<Profile>> getProfile() {
+        return apiService.getProfile();
     }
 
     //login
