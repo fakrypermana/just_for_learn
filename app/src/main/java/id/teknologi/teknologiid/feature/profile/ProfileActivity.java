@@ -10,7 +10,9 @@ import android.widget.TextView;
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseActivity;
+import id.teknologi.teknologiid.feature.login_register.LoginActivity;
 import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
+import id.teknologi.teknologiid.feature.login_register.RegisterActivity;
 import id.teknologi.teknologiid.model.Profile;
 
 public class ProfileActivity extends BaseActivity implements ProfileView{
@@ -29,6 +31,8 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     TextView tvPointProfile;
     @BindView(R.id.tv_peringkat_profile)
     TextView tvPeringkatProfile;
+    @BindView(R.id.btn_to_login_profile)
+    Button btnToLogin;
 
     @Override
     protected int contentView() {
@@ -40,6 +44,13 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         presenter = new ProfilePresenter(this);
         presenter.getProfile();
 
+        btnToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(ProfileActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     @Override
