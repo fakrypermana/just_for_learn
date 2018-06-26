@@ -33,10 +33,8 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     @BindView(R.id.rv_threads)
     RecyclerView rvThreads;
 
-    @BindView(R.id.floating_action_button)
-    FloatingActionButton floatingActionButton;
-
-
+    @BindView(R.id.fab_threadNew)
+    FloatingActionButton fab_threadnew;
 
     @Override
     protected int contentView() {
@@ -78,4 +76,8 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
         Toast.makeText(this, "Clicked " + threadList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
         ThreadDetailActivity.start(this, thread.getId(), thread.getSlug());
     }
+
+
+
+
 }

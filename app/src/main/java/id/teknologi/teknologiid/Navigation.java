@@ -12,6 +12,7 @@ import id.teknologi.teknologiid.dummy_activity.Notifikasi;
 import id.teknologi.teknologiid.dummy_activity.Pekerjaan;
 import id.teknologi.teknologiid.dummy_activity.Pertanyaan;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
+import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity;
 import id.teknologi.teknologiid.model.Thread;
 
 public class Navigation extends TabActivity{
@@ -27,7 +28,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pertanyaan"); // Create a new TabSpec using tab host
         spec.setIndicator("",getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent(this, Pertanyaan.class);
+        intent = new Intent(this, ThreadNewActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -54,10 +55,6 @@ public class Navigation extends TabActivity{
             public void onTabChanged(String tabId) {
                 // display the name of the tab whenever a tab is changed
                 Toast.makeText(getApplicationContext(), tabId, Toast.LENGTH_SHORT).show();
-
-
-
-
             }
         });
         spec = tabHost.newTabSpec("pekerjaan");
@@ -66,7 +63,6 @@ public class Navigation extends TabActivity{
         intent = new Intent(this, Pekerjaan.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
-
 
         spec = tabHost.newTabSpec("pemberitahuan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pemberitahuan));
