@@ -119,5 +119,14 @@ dependencies {
     }
 
     // firebase
-    implementation 'com.google.firebase:firebase-database:16.0.1'
+    implementation 'com.google.firebase:firebase-database:11.6.2'
+    implementation 'com.google.firebase:firebase-core:11.6.2'
+    implementation 'com.google.firebase:firebase-auth:11.6.2'
+
+    //google
+    implementation 'com.google.android.gms:play-services-auth:11.6.2'
+
+    //facebook
+    implementation 'com.facebook.android:facebook-login:[4,5)'
 }
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "722131694665",
+    "firebase_url": "https://teknologiid-12f5a.firebaseio.com",
+    "project_id": "teknologiid-12f5a",
+    "storage_bucket": "teknologiid-12f5a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:722131694665:android:f801116966cc1e94",
+        "android_client_info": {
+          "package_name": "id.teknologi.teknologiid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "722131694665-ljt3b8od72d272kn1n7vtfbs3n8mgig5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAi0HzdM0Im5R9rpn7hcsEQpuIKJlMfg1w"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

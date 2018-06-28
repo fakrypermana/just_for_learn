@@ -1,6 +1,7 @@
 package id.teknologi.teknologiid.feature.pekerjaan_detail;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,23 +17,23 @@ import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.model.Pekerjaan;
 
 public class DetailPekerjaanActivity extends BaseActivity implements DetailPekerjaanView {
-
-    /*@BindView(R.id.tv_nama_job_detail)
+    @BindView(R.id.tv_nama_job_detail)
     TextView tvNamaJobDetail;
     @BindView(R.id.tv_nama_perusahaan_detail)
     TextView tvPerusahaanJobDetail;
     @BindView(R.id.tv_alamat_job_detail)
     TextView tvAlamatJobDetail;
     @BindView(R.id.tv_date_exp_job_detail)
-    TextView tvDateJobDetail;*/
+    TextView tvDateJobDetail;
     @BindView(R.id.wv_job_detail)
     WebView wvJobDetail;
+
+    ProgressDialog progressDialog;
 
     private int id;
     private String name;
     private String slug;
     private final static String ID ="ID";
-    private final static String NAME = "NAME";
     private final static String SLUG = "SLUG";
     DetailPekerjaanPresenter presenter;
     Pekerjaan pekerjaan;
@@ -46,7 +47,6 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     protected void setupData(Bundle savedInstanceState) {
         Intent intent = getIntent();
         id = intent.getIntExtra(ID, 0);
-        //name = intent.getStringExtra(NAME);
         slug = intent.getStringExtra(SLUG);
         presenter = new DetailPekerjaanPresenter(this);
         presenter.getDetailPekerjaan(id, slug);
@@ -54,10 +54,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     @Override
     protected void setupView() {
-        wvJobDetail.setWebViewClient(new WebViewClient());
-        //wvJobDetail.setPadding(50,50,50,50);
+        /*wvJobDetail.setWebViewClient(new WebViewClient());
+        wvJobDetail.setPadding(50,50,50,50);
         WebSettings webSettings = wvJobDetail.getSettings();
-        webSettings.setJavaScriptEnabled(true);
+        webSettings.setJavaScriptEnabled(true);*/
 
         /*tvNamaJobDetail.setText(pekerjaan.getName());
         tvAlamatJobDetail.setText(pekerjaan.getLocation());
@@ -67,8 +67,9 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     @Override
     public void onSuccessDetailPekerjaan(Pekerjaan pekerjaan) {
-        String desc = pekerjaan.getDesc_long();
-        wvJobDetail.loadData(desc,"text/html", "UTF-8");
+        //showProgressDialog();
+       /* String desc = pekerjaan.getDesc_long();
+        wvJobDetail.loadData(desc,"text/html", "UTF-8");*/
     }
 
     @Override
@@ -86,5 +87,25 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
         intent.putExtra(ID, id);
         intent.putExtra(SLUG, slug);
         activity.startActivity(intent);
+    }
+
+    /* Show progress dialog. */
+    private void showProgressDialog()
+    {
+        // Set progress dialog display message.
+        progressDialog.setMessage("Please Wait");
+
+        // The progress dialog can not be cancelled.
+        progressDialog.setCancelable(true);
+
+        // Show it.
+        progressDialog.show();
+    }
+
+    /* Hide progress dialog. */
+    private void hideProgressDialog()
+    {
+        // Close it.
+        progressDialog.hide();
     }
 }
