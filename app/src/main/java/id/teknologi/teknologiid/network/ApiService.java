@@ -5,9 +5,11 @@ import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.DetileThread;
+import id.teknologi.teknologiid.model.PostNewThread;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
@@ -30,4 +32,14 @@ public interface ApiService {
             @Path("slug") String slug,
             @Path("comments") String comments
     );
+
+    @POST("threads/post")
+    Observable<ResponseArray<PostNewThread>> postNewThread(
+            @Path("title") String title,
+            @Path("post") String post,
+            @Path("id_topik") String slug,
+            @Path("url_cover") String url_cover
+    );
+
+
 }

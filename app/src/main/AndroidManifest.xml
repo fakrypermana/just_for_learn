@@ -22,8 +22,7 @@
         </activity>
         <activity android:name=".feature.thread_detail.ThreadDetailActivity" />
         <activity android:name=".feature.thread.ThreadActivity" />
-        <activity android:name=".feature.thread_new.ThreadNewActivity"></activity>
-
+        <activity android:name=".feature.thread_new.ThreadNewActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -33,7 +32,7 @@
         <activity android:name=".dummy_activity.Pertanyaan" />
         <activity android:name=".dummy_activity.Pekerjaan" />
         <activity android:name=".dummy_activity.Notifikasi" />
-
+        <activity android:name=".feature.thread_new.ThreadNewActivity2"></activity>
     </application>
 
 </manifest>
