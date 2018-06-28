@@ -3,30 +3,38 @@ package id.teknologi.teknologiid.feature.Question;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import butterknife.BindView;
 import id.teknologi.teknologiid.R;
-import id.teknologi.teknologiid.adapter.QuestionDetailAdapter;
-import id.teknologi.teknologiid.adapter.QuestionListAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
-import id.teknologi.teknologiid.model.QuestionListModel;
-
-import static android.os.Build.ID;
 
 public class QuestionDetailActivity extends BaseActivity implements QuestionDetailView {
 
     QuestionDetailPresenter detailPresenter;
-    QuestionDetailAdapter detailAdapter;
-    List<QuestionDetailModel> detailModels = new ArrayList<>();
+
+    //QuestionDetailModel detailModels;
     private final static String ID = "ID";
     private final static String SLUG = "SLUG";
     private int id;
     private String slug;
+    QuestionDetailModel questionDetailModel;
+    @BindView(R.id.wv_question)
+    WebView wvQuestion;
+    @BindView(R.id.tvdetail_voted)
+    TextView tvVoted;
+    @BindView(R.id.tvdetail_tag)
+    TextView tvTag;
+    @BindView(R.id.tvdetail_date)
+    TextView tvDate;
+    @BindView(R.id.tvdetail_user_name)
+    TextView tvTittle;
 
     @Override
     protected int contentView() {
@@ -40,12 +48,15 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         id = intent.getIntExtra(ID, 0);
         slug = intent.getStringExtra(SLUG);
         detailPresenter.getQuestionDetail(id, slug);
-        detailAdapter= new QuestionDetailAdapter(this, detailModels,this);
+//        detailAdapter= new QuestionDetailAdapter(this, detailModels,this);
 
     }
 
     @Override
     protected void setupView() {
+
+
+
 
     }
 
@@ -66,8 +77,29 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
 
     }
 
+//    @Override
+//    public void onSuccessQuestionDetail(List<QuestionDetailModel> questionDetailModels) {
+//
+//    }
+
     @Override
-    public void onSuccessQuestionDetail(List<QuestionDetailModel> questionDetailModels) {
+    public void onSuccessQuestionDetail(QuestionDetailModel questionDetailModels) {
+        Log.d("QUESTION Detail", new Gson().toJson(questionDetailModels));
+        this.questionDetailModel=questionDetailModels;
+        setDetailView();
+        String data = questionDetailModels.getQuestion();
+        wvQuestion.loadData(data,"text/html", "UTF-8");
+    }
+    public void setDetailView(){
+        tvTittle.setText(questionDetailModel.getTitle());
+        tvDate.setText(questionDetailModel.getCreated_at());
+        tvTag.setText(questionDetailModel.getTags().toArray().toString());
+//        tvTag.setText(questionDetailModel.getTags());
+        tvVoted.setText(""+questionDetailModel.getUpvote());
+        wvQuestion.setWebViewClient(new WebViewClient());
+        wvQuestion.setPadding(50,50,50,50);
+        WebSettings webSettings = wvQuestion.getSettings();
+        webSettings.setJavaScriptEnabled(true);
 
     }
 }
