@@ -16,6 +16,8 @@ public class QuestionDetailModel {
             private String updated_at;
             private int views;
             private List<String>tags;
+            private String user_name;
+            private String user_url_photo;
 
     public int getId(){
         return id;
@@ -57,4 +59,11 @@ public class QuestionDetailModel {
         return tags;
     }
 
+    public String getUser_url_photo() {
+        return user_url_photo;
+    }
+
+    public String getUser_name() {
+        return user_name;
+    }
 }
