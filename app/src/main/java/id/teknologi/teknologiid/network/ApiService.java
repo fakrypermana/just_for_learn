@@ -1,6 +1,8 @@
 package id.teknologi.teknologiid.network;
 
 
+import java.util.List;
+
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.Pekerjaan;
@@ -47,12 +49,11 @@ public interface ApiService {
 
     //login dan register
     @FormUrlEncoded
-    @POST("/login.php")
-    public Call<ResponseBody> registUser(
-            @Field("username") String username,
+    @POST("register")
+    Call<ResponseBody> registUser(
             @Field("name") String name,
             @Field("email") String email,
-            @Field("password") String password
-            //Callback<Response> callback
+            @Field("password") String password,
+            @Field("tag[0]") String tag
     );
 }

@@ -7,8 +7,11 @@ import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by galihgasur on 10/1/17.
@@ -16,9 +19,10 @@ import retrofit2.Retrofit;
 
 public class DataManager {
     private final ApiService apiService;
-
+    private static Retrofit Retrofit = null;
     //baseURL
-    private static String baseUrl = "https://dev.teknologi.id/";
+    //private static String baseUrl = "https://dev.teknologi.id/";
+    private static String testUrl = "https://dev.teknologi.id/api/";
 
 
     public DataManager(ApiService apiService){
@@ -53,7 +57,7 @@ public class DataManager {
         Retrofit.Builder retrofitBuilder = new Retrofit.Builder();
 
         // Set base url. All the @POST @GET url is relative to this url.
-        retrofitBuilder.baseUrl(baseUrl);
+        retrofitBuilder.baseUrl(testUrl);
 
         /* The converter factory can be GsonConverterFactory( Convert response text to json object. ),
            if the value is null then convert response text okhttp3.ResponseBody. */
@@ -67,5 +71,9 @@ public class DataManager {
         //Create instance for user manager interface and return it.
         ApiService userManagerService = retrofit.create(ApiService.class);
         return userManagerService;
+    }
+
+    public static ApiService getApiService(){
+        return RetrofitClient.getClient(testUrl).create(ApiService.class);
     }
 }
