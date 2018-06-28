@@ -1,27 +1,71 @@
 {
   "project_info": {
-    "project_number": "722131694665",
-    "firebase_url": "https://teknologiid-12f5a.firebaseio.com",
-    "project_id": "teknologiid-12f5a",
-    "storage_bucket": "teknologiid-12f5a.appspot.com"
+    "project_number": "164174464853",
+    "firebase_url": "https://teknologiid-forum.firebaseio.com",
+    "project_id": "teknologiid-forum",
+    "storage_bucket": "teknologiid-forum.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:722131694665:android:f801116966cc1e94",
+        "mobilesdk_app_id": "1:164174464853:android:f3a39661ddc1cb2d",
         "android_client_info": {
           "package_name": "id.teknologi.teknologiid"
         }
       },
       "oauth_client": [
         {
-          "client_id": "722131694665-ljt3b8od72d272kn1n7vtfbs3n8mgig5.apps.googleusercontent.com",
+          "client_id": "164174464853-51710skmsdutkjhb29m7aob3afv84ied.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "id.teknologi.teknologiid",
+            "certificate_hash": "2ab43cf7acfdefc73a00f1d60422dddfaf2d7032"
+          }
+        },
+        {
+          "client_id": "164174464853-r6fiarq4s63e9a2fdc5k0mamq3klijji.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAi0HzdM0Im5R9rpn7hcsEQpuIKJlMfg1w"
+          "current_key": "AIzaSyDs00Ov5OHGyi64bODM-HQETe9D4UlO5-4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "164174464853-r6fiarq4s63e9a2fdc5k0mamq3klijji.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:164174464853:android:e57e89aa21cdc24b",
+        "android_client_info": {
+          "package_name": "id.teknologi.teknologiidapps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "164174464853-r6fiarq4s63e9a2fdc5k0mamq3klijji.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDs00Ov5OHGyi64bODM-HQETe9D4UlO5-4"
         }
       ],
       "services": {

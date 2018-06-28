@@ -18,8 +18,7 @@ import id.teknologi.teknologiid.base.BaseViewHolder;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
-public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAdapter.PekerjaanVH>
-{
+public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAdapter.PekerjaanVH> {
     public PekerjaanAdapter(Context context, List<Pekerjaan> pekerjaanList, RecyclerInterface recyclerCallBack) {
         super(context, pekerjaanList, recyclerCallBack);
     }
@@ -34,7 +33,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         return new PekerjaanVH(initView(viewType, parent), getRecyclerCallback());
     }
 
-    class PekerjaanVH extends BaseViewHolder<Pekerjaan>{
+    class PekerjaanVH extends BaseViewHolder<Pekerjaan> {
 
         @BindView(R.id.iv_cover_job)
         ImageView ivCoverJob;

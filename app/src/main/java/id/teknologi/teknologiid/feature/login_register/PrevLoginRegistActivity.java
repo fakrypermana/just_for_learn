@@ -118,6 +118,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG_FACE, "facebook:onSuccess:" + loginResult);
                 handleFacebookAccessToken(loginResult.getAccessToken());
+                Log.d(TAG_FACE, "token facebook" + loginResult.getAccessToken());
             }
 
             @Override
@@ -171,6 +172,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
     }
 
     private void signIn() {
+        Auth.GoogleSignInApi.signOut(mGoogleSignInClient);
         Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleSignInClient);
         startActivityForResult(signInIntent, RC_SIGN_IN);
     }
