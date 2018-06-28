@@ -7,6 +7,6 @@ import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 
 public interface QuestionDetailView extends BaseView {
-        void onSuccessQuestionDetail(List<QuestionDetailModel> questionDetailModels);
+        void onSuccessQuestionDetail(QuestionDetailModel questionDetailModels);
 }
 

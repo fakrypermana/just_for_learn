@@ -27,19 +27,19 @@
             android:orientation="vertical">
 
             <ImageButton
-                android:id="@+id/ib_upvote"
+                android:id="@+id/ibdetail_upvote"
                 android:layout_width="50dp"
                 android:layout_height="48dp"
                 app:srcCompat="@android:drawable/arrow_up_float" />
 
             <TextView
-                android:id="@+id/tv_voted"
+                android:id="@+id/tvdetail_voted"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:text="TextView" />
 
             <ImageButton
-                android:id="@+id/ib_downvote"
+                android:id="@+id/ibdetail_downvote"
                 android:layout_width="match_parent"
                 android:layout_height="53dp"
                 app:srcCompat="@android:drawable/arrow_down_float" />
@@ -56,11 +56,10 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <TextView
-                android:id="@+id/tv_question"
+            <WebView
+                android:id="@+id/wv_question"
                 android:layout_width="match_parent"
-                android:layout_height="185dp"
-                android:text="TextView" />
+                android:layout_height="match_parent" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -74,14 +73,14 @@
                     android:orientation="horizontal"></LinearLayout>
 
                 <ImageButton
-                    android:id="@+id/ib_share"
+                    android:id="@+id/ibdetail_share"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     app:srcCompat="@android:drawable/ic_menu_share" />
 
                 <ImageButton
-                    android:id="@+id/ib_favorite"
+                    android:id="@+id/ibdetail_favorite"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -103,7 +102,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/iv_user_profpict"
+            android:id="@+id/ivdetail_user_profpict"
             android:layout_width="226dp"
             android:layout_height="match_parent"
             android:layout_alignParentLeft="true"
@@ -125,7 +124,7 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:id="@+id/tv_user_name"
+                    android:id="@+id/tvdetail_user_name"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -133,13 +132,13 @@
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tv_tag"
+                android:id="@+id/tvdetail_tag"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/tv_date"
+                android:id="@+id/tvdetail_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />

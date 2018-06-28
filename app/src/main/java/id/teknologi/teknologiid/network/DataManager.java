@@ -26,7 +26,7 @@ public class DataManager {
         return apiService.getQuestionList();
     }
 
-    public Observable<ResponseArray<QuestionDetailModel>> getQuestionDetail(int id, String slug) {
+    public Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(int id, String slug) {
         return apiService.getQuestionDetail(id,slug);
     }
 

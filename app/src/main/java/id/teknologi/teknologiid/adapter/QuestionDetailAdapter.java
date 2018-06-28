@@ -33,8 +33,8 @@ public class QuestionDetailAdapter extends BaseRecyclerAdapter<QuestionDetailMod
     }
 
     public class QuestionDetailVH extends BaseViewHolder<QuestionDetailModel> {
-        @BindView(R.id.iv_user_profpict)
-        ImageView iv_userProfpict;
+//        @BindView(R.id.iv_user_profpict)
+//        ImageView iv_userProfpict;
         @BindView(R.id.tv_user_name)
         TextView tvUserName;
         @BindView(R.id.tv_date)

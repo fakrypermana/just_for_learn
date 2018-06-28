@@ -30,7 +30,7 @@ public interface ApiService {
 
 
     @GET("question/{id}/{slug}")
-    Observable<ResponseArray<QuestionDetailModel>> getQuestionDetail(
+    Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(
             @Path("id") int id,
             @Path("slug") String slug
     );
