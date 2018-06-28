@@ -56,4 +56,11 @@ public interface ApiService {
             @Field("password") String password,
             @Field("tag[0]") String tag
     );
+
+    @FormUrlEncoded
+    @POST("login")
+    Call<ResponseBody> loginUser(
+            @Field("email") String email,
+            @Field("password") String password
+    );
 }

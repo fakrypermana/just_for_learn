@@ -2,6 +2,7 @@ package id.teknologi.teknologiid.feature.login_register;
 
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.UserManager;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -43,6 +45,8 @@ public class RegisterActivity extends BaseActivity {
     EditText edtconfpass = null;
     @BindView(R.id.btn_register)
     Button btnRegist = null;
+    @BindView(R.id.link_login)
+    TextView linkToLogin;
     Context mContext;
     ApiService mApiService;
     private ProgressDialog progressDialog;
@@ -57,6 +61,14 @@ public class RegisterActivity extends BaseActivity {
         mApiService = DataManager.getApiService();
         initControls();
         mContext = this;
+        linkToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
