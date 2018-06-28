@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".feature.pekerjaan_detail.DetailPekerjaanActivity">
 
-    <!--<FrameLayout
+    <FrameLayout
         android:id="@+id/detail_header_job"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -121,7 +121,6 @@
         </LinearLayout>
 
     </FrameLayout>
--->
     <WebView
         android:id="@+id/wv_job_detail"
         android:layout_width="wrap_content"

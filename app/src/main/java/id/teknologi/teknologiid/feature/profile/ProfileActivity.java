@@ -1,11 +1,14 @@
 package id.teknologi.teknologiid.feature.profile;
 
 import android.content.Intent;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
@@ -18,6 +21,9 @@ import id.teknologi.teknologiid.model.Profile;
 public class ProfileActivity extends BaseActivity implements ProfileView{
     ProfilePresenter presenter;
     Profile profile;
+
+    private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mAuthListener;
 
     @BindView(R.id.tv_nama_profile)
     TextView tvNamaProfile;
@@ -32,7 +38,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     @BindView(R.id.tv_peringkat_profile)
     TextView tvPeringkatProfile;
     @BindView(R.id.btn_to_login_profile)
-    Button btnToLogin;
+    Button btnToLogout;
 
     @Override
     protected int contentView() {
@@ -44,13 +50,32 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         presenter = new ProfilePresenter(this);
         presenter.getProfile();
 
-        btnToLogin.setOnClickListener(new View.OnClickListener() {
+        mAuth = FirebaseAuth.getInstance();
+        mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+
+                if (firebaseAuth.getCurrentUser() == null){
+                    startActivity(new Intent(ProfileActivity.this, PrevLoginRegistActivity.class));
+                }
+
+            }
+        };
+
+        btnToLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(ProfileActivity.this, RegisterActivity.class);
-                startActivity(intent);
+
+                mAuth.signOut();
+
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(mAuthListener);
     }
 
     @Override
