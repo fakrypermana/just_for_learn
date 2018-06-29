@@ -52,7 +52,7 @@ public class ThreadNewActivity2 extends AppCompatActivity {
                 String spinner = sTags.getSelectedItem().toString();
 
 
-                POSTAPI = DataManager.PostNewThread();
+                POSTAPI = DataManager.getApiService();
                 POSTAPI.postNewThread(title, "coba", "2", "");
             }
         });

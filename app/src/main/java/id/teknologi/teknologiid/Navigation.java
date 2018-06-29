@@ -37,27 +37,24 @@ public class Navigation extends TabActivity{
 
         //Thread
         spec = tabHost.newTabSpec("Thread");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
+        spec.setIndicator("", getResources().getDrawable(R.drawable.thread)); // set the “HOME” as an indicator
         intent = new Intent(this, ThreadActivity.class);
         spec.setContent(intent);
-        tabHost.addTab(spec);
         tabHost.addTab(spec);
 
         //Pekerjaan
         spec = tabHost.newTabSpec("Pekerjaan");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan));
+        spec.setIndicator("", getResources().getDrawable(R.drawable.pekerjaan));
         intent = new Intent(this, PekerjaanActivity.class);
         spec.setContent(intent);
-        tabHost.addTab(spec);
         tabHost.addTab(spec);
 
         //Profil
         spec = tabHost.newTabSpec("profil");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
+        spec.setIndicator("", getResources().getDrawable(R.drawable.profil)); // set the “HOME” as an indicator
         //intent = new Intent(this, PrevLoginRegistActivity.class);
         intent = new Intent(this, PrevLoginRegistActivity.class);
         spec.setContent(intent);
-        tabHost.addTab(spec);
         tabHost.addTab(spec);
 
         //Notif
@@ -66,7 +63,7 @@ public class Navigation extends TabActivity{
         intent = new Intent(this, ThreadActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
-        tabHost.addTab(spec);
+
 
         tabHost.setCurrentTab(1);
         tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {

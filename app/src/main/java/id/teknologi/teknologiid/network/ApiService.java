@@ -5,6 +5,7 @@ import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Pekerjaan;
+import id.teknologi.teknologiid.model.PostNewThread;
 import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
@@ -59,5 +60,13 @@ public interface ApiService {
     Call<ResponseBody> loginUser(
             @Field("email") String email,
             @Field("password") String password
+    );
+
+    @POST("threads/post")
+    Observable<ResponseArray<PostNewThread>> postNewThread(
+            @Path("title") String title,
+            @Path("post") String post,
+            @Path("id_topik") String slug,
+            @Path("url_cover") String url_cover
     );
 }
