@@ -4,9 +4,16 @@ package id.teknologi.teknologiid.network;
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
+import id.teknologi.teknologiid.model.Pekerjaan;
+import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 
 /**
