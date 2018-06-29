@@ -5,6 +5,11 @@ import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Profile;
+import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.CobaModel;
+import id.teknologi.teknologiid.model.DetileThread;
+import id.teknologi.teknologiid.model.QuestionDetailModel;
+import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
@@ -31,6 +36,13 @@ public class DataManager {
 
     public Observable<ResponseArray<Thread>> getThreads() {
         return apiService.getThreads();
+    }
+    public Observable<ResponseArray<QuestionListModel>> getQuestionList() {
+        return apiService.getQuestionList();
+    }
+
+    public Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(int id, String slug) {
+        return apiService.getQuestionDetail(id,slug);
     }
 
     public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
@@ -76,4 +88,12 @@ public class DataManager {
     public static ApiService getApiService(){
         return RetrofitClient.getClient(testUrl).create(ApiService.class);
     }
+
+
+    public Observable<ResponseObject<DetileThread>> getThreadDetail(int id, String slug, String comment) {
+        return apiService.getThreadDetail(id, slug, comment);
+    }
+//    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
+//        return apiService.getThreadDetail(id,slug);
+//    }
 }

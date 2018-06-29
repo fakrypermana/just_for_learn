@@ -7,4 +7,5 @@ package id.teknologi.teknologiid.base;
 public interface BaseView {
     void onLoading(boolean isLoading);
     void onFailed(String message);
+
 }

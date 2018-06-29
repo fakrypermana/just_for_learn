@@ -8,6 +8,7 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import id.teknologi.teknologiid.dummy_activity.Pekerjaan;
+import id.teknologi.teknologiid.feature.Question.QuestionListActivity;
 import id.teknologi.teknologiid.feature.login_register.LoginActivity;
 import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
 import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity_ViewBinding;
@@ -34,7 +35,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pertanyaan"); // Create a new TabSpec using tab host
         spec.setIndicator("",getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent(this, ThreadNewActivity.class);
+        intent = new Intent(this, QuestionListActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
