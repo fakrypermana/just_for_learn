@@ -1,12 +1,12 @@
 package id.teknologi.teknologiid.feature.thread;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.View;
+
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -19,7 +19,6 @@ import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.ThreadsAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.thread_detail.ThreadDetailActivity;
-import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity;
 import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -29,16 +28,13 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     ThreadPresenter presenter;
     ThreadsAdapter threadsAdapter;
     List<Thread> threadList = new ArrayList<>();
-    int scrollDist = 0;
-    boolean isVisible = true;
-
-//    @BindView(R.id.rv_threads)
-//    RecyclerView rvThreads;
-
-//    @BindView(R.id.floating_action_button)
-//    FloatingActionButton floatingActionButton;
 
 
+    @BindView(R.id.rv_threads)
+    RecyclerView rvThreads;
+
+    @BindView(R.id.fab_threadNew)
+    FloatingActionButton fab_threadnew;
 
     @Override
     protected int contentView() {
@@ -54,8 +50,8 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
 
     @Override
     protected void setupView() {
-//        rvThreads.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
-//        rvThreads.setAdapter(threadsAdapter);
+        rvThreads.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
+        rvThreads.setAdapter(threadsAdapter);
     }
 
     @Override
@@ -81,30 +77,7 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
         ThreadDetailActivity.start(this, thread.getId(), thread.getSlug());
     }
 
-    static final float MINIMUM = 25;
-//    public abstract void show();
-//    public abstract void hide();
 
-//    protected void setFloatingActionButton(){
-//        rvThreads.addOnScrollListener(new RecyclerView.OnScrollListener() {
-//            @Override
-//            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
-//                super.onScrolled(recyclerView, dx, dy);
-//                if (isVisible && scrollDist > MINIMUM) {
-////                    hide();
-//                    scrollDist = 0;
-//                    isVisible = false;
-//                }
-//                else if (!isVisible && scrollDist < -MINIMUM) {
-////                    show();
-//                    scrollDist = 0;
-//                    isVisible = true;
-//                }
-//
-//                if ((isVisible && dy > 0) || (!isVisible && dy < 0)) {
-//                    scrollDist += dy;
-//                }
-//            }
-//        });
-//    }
+
+
 }
