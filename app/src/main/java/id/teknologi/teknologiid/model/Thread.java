@@ -24,7 +24,6 @@ public class Thread {
     private int id_user;
     private int post;
 
-
     //getter di Thread
     public int getId() {
         return id;

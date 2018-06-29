@@ -1,8 +1,12 @@
 package id.teknologi.teknologiid.feature.thread;
 
+
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -25,8 +29,12 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     ThreadsAdapter threadsAdapter;
     List<Thread> threadList = new ArrayList<>();
 
+
     @BindView(R.id.rv_threads)
     RecyclerView rvThreads;
+
+    @BindView(R.id.fab_threadNew)
+    FloatingActionButton fab_threadnew;
 
     @Override
     protected int contentView() {
@@ -48,12 +56,12 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
 
     @Override
     public void onLoading(boolean isLoading) {
-        Log.d("THREADS","LOADING "+isLoading);
+        Log.d("THREADS", "LOADING " + isLoading);
     }
 
     @Override
     public void onFailed(String message) {
-        Log.d("THREADS","ERROR");
+        Log.d("THREADS", "ERROR");
     }
 
     @Override
@@ -65,7 +73,11 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
     @Override
     public void onRecyclerItemClicked(int position) {
         Thread thread = threadList.get(position);
-        Toast.makeText(this, "Clicked "+threadList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Clicked " + threadList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
         ThreadDetailActivity.start(this, thread.getId(), thread.getSlug());
     }
+
+
+
+
 }
