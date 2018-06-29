@@ -43,7 +43,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("berita"); // Create a new TabSpec using tab host
         spec.setIndicator("",getResources().getDrawable(R.drawable.berita)); // set the “ABOUT” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent(this, Thread.class);
+        intent = new Intent(this, ThreadNewActivity2.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
         //set tab which one you want to open first time 0 or 1 or 2
