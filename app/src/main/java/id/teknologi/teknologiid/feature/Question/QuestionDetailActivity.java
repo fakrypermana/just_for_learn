@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuView;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
@@ -14,15 +15,24 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
+import id.teknologi.teknologiid.adapter.QuestionAnsweredAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
+import id.teknologi.teknologiid.model.QuestionAnsweredModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
+import id.teknologi.teknologiid.utils.AppUtils;
+import id.teknologi.teknologiid.utils.RecyclerInterface;
 
-public class QuestionDetailActivity extends BaseActivity implements QuestionDetailView {
+public class QuestionDetailActivity extends BaseActivity implements QuestionDetailView, RecyclerInterface {
 
     QuestionDetailPresenter detailPresenter;
+    QuestionAnsweredAdapter answeredAdapter;
+    List<QuestionAnsweredModel> answeredModels = new ArrayList<>();
 
     //QuestionDetailModel detailModels;
     private final static String ID = "ID";
@@ -42,6 +52,8 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     TextView tvTittle;
     @BindView(R.id.ivdetail_user_profpict)
     ImageView ivUserProfilePict;
+    @BindView(R.id.rv_answered)
+    RecyclerView rvAnswered;
     
 
     @Override
@@ -56,13 +68,14 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         id = intent.getIntExtra(ID, 0);
         slug = intent.getStringExtra(SLUG);
         detailPresenter.getQuestionDetail(id, slug);
-//        detailAdapter= new QuestionDetailAdapter(this, detailModels,this);
+        answeredAdapter= new QuestionAnsweredAdapter(this, answeredModels,this);
 
     }
 
     @Override
     protected void setupView() {
-
+        rvAnswered.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
+        rvAnswered.setAdapter(answeredAdapter);
 
 
 
@@ -85,11 +98,6 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
 
     }
 
-//    @Override
-//    public void onSuccessQuestionDetail(List<QuestionDetailModel> questionDetailModels) {
-//
-//    }
-
     @Override
     public void onSuccessQuestionDetail(QuestionDetailModel questionDetailModels) {
         Log.d("QUESTION Detail", new Gson().toJson(questionDetailModels));
@@ -97,10 +105,8 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         setDetailView();
         String data = questionDetailModels.getQuestion();
         wvQuestion.loadData(data,"text/html", "UTF-8");
+        answeredAdapter.insertAndNotify(answeredModels);
 
-//        Glide.with()
-//                .load(questionDetailModels.getUser_url_photo())
-//                .into(ivUserProfilePict);
     }
     public void setDetailView(){
         tvTittle.setText(questionDetailModel.getTitle());
@@ -113,8 +119,15 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         wvQuestion.setPadding(50,50,50,50);
         WebSettings webSettings = wvQuestion.getSettings();
         webSettings.setJavaScriptEnabled(true);
-
+        Glide.with(this)
+                .load(questionDetailModel.getUser_url_photo())
+                .into(ivUserProfilePict);
         
+
+    }
+
+    @Override
+    public void onRecyclerItemClicked(int position) {
 
     }
 }

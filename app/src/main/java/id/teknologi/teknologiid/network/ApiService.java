@@ -5,6 +5,7 @@ import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.DetileThread;
+import id.teknologi.teknologiid.model.QuestionAnsweredModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
@@ -31,6 +32,11 @@ public interface ApiService {
 
     @GET("question/{id}/{slug}")
     Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(
+            @Path("id") int id,
+            @Path("slug") String slug
+    );
+    @GET("question/{id}/{slug}")
+    Observable<ResponseArray<QuestionAnsweredModel>> getAnswerList(
             @Path("id") int id,
             @Path("slug") String slug
     );
