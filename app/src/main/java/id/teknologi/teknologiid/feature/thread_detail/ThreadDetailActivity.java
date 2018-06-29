@@ -103,6 +103,7 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
         Intent intent = new Intent(activity, ThreadDetailActivity.class);
         intent.putExtra(ID, id);
         intent.putExtra(SLUG, slug);
+        Log.d("slug",slug);
         activity.startActivity(intent);
     }
 

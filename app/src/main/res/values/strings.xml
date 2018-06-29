@@ -2,6 +2,11 @@
     <string name="app_name">Teknologi.id</string>
     <string name="please_choose_other_image">Harap pilih gambar lain</string>
     <string name="choose_profile_photo">Pilih foto profil</string>
+    <string name="dibuka_sampai">Dibuka sampai :</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
+    <string name="facebook_app_id">230976734380057</string>
+    <string name="fb_login_protocol_scheme">fb230976734380057</string>
 
     <string-array name="country_arrays">
         <item>Malaysia</item>
@@ -24,4 +29,13 @@
         <item>New Zealand</item>
         <item>India</item>
     </string-array>
+    <string name="textview">TextView</string>
+    <!--<string name="textview">TextView</string>-->
+    <!--<string name="textview">TextView</string>-->
+    <string name="todo">TODO</string>
+    <!--<string name="textview">TextView</string>-->
+    <!--<string name="textview">TextView</string>-->
+    <!--<string name="todo">TODO</string>-->
+    <!--<string name="textview">TextView</string>-->
+    <!--<string name="todo">TODO</string>-->
 </resources>

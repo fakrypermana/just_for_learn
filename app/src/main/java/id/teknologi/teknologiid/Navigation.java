@@ -1,5 +1,6 @@
 package id.teknologi.teknologiid;
 
+import android.app.ProgressDialog;
 import android.app.TabActivity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,13 +8,14 @@ import android.widget.TabHost;
 import android.widget.Toast;
 
 import id.teknologi.teknologiid.dummy_activity.Pekerjaan;
+import id.teknologi.teknologiid.feature.Question.QuestionListActivity;
+import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
-import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity;
-import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity2;
 import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity3;
-import id.teknologi.teknologiid.model.Thread;
 
 public class Navigation extends TabActivity{
+
+    ProgressDialog progress;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,7 +28,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pertanyaan"); // Create a new TabSpec using tab host
         spec.setIndicator("",getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent(this, ThreadNewActivity.class);
+        intent = new Intent(this, QuestionListActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
@@ -43,7 +45,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("berita"); // Create a new TabSpec using tab host
         spec.setIndicator("",getResources().getDrawable(R.drawable.berita)); // set the “ABOUT” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent(this, ThreadNewActivity2.class);
+        intent = new Intent(this,Pekerjaan.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
         //set tab which one you want to open first time 0 or 1 or 2
@@ -58,7 +60,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pekerjaan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pekerjaan));
 
-        intent = new Intent(this, Pekerjaan.class);
+        intent = new Intent(this, PekerjaanActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
