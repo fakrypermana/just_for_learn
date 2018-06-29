@@ -55,7 +55,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("profil");  //Create a new TabSpec using tab host
         spec.setIndicator("", getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
         //intent = new Intent(this, PrevLoginRegistActivity.class);
-        intent = new Intent(this, PrevLoginRegistActivity.class)
+        intent = new Intent(this, PrevLoginRegistActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
         tabHost.addTab(spec);

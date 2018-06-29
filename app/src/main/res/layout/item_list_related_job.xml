@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="170dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_nama_related_job"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:text="Nama Pekerjaan"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold"
+            android:textSize="16sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="20dp"
+            android:orientation="horizontal"
+            android:gravity="start"
+            android:layout_marginBottom="3dp">
+
+            <ImageView
+                android:id="@+id/iv_cover_related_job"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/com_facebook_profile_picture_blank_square"
+                android:layout_gravity="start"
+                android:layout_marginRight="5dp"/>
+
+            <TextView
+                android:id="@+id/tv_nama_perusahaan_related_job"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nama Perusahaan"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_tag_related_job"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tag"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="10"
+            android:layout_marginTop="5dp">
+
+            <Button
+                android:id="@+id/btn_simpan_related_job"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Simpan"
+                android:background="@drawable/shape_button_black_border"
+                android:textColor="@color/colorPrimaryDark"
+                android:layout_weight="5"
+                android:textAllCaps="false"
+                android:layout_marginLeft="3dp"/>
+
+            <Button
+                android:id="@+id/btn_daftar_related_job"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="Daftar"
+                android:background="@drawable/shape_buttin_facebook_blue"
+                android:textColor="@color/LightGray"
+                android:textAllCaps="false"
+                android:layout_weight="5"
+                android:layout_marginRight="2dp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

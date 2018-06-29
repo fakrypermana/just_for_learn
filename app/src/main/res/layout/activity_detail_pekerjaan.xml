@@ -23,7 +23,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:cardElevation="1px"
-            android:paddingBottom="6dp">
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -56,13 +56,13 @@
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:layout_marginBottom="20dp"/>
+                    android:textAlignment="center" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="20dp">
 
                     <TextView
                         android:layout_centerVertical="true"
@@ -93,46 +93,45 @@
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            app:cardElevation="1px">
 
-            <!--<LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:gravity="start">
 
-                <ScrollView
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:textAlignment="textStart"
+                    android:layout_gravity="start"
+                    android:text="Deskripsi Singkat"
+                    android:layout_marginLeft="16dp"
+                    android:textStyle="bold"/>
 
-                    <com.ms.square.android.expandabletextview.ExpandableTextView
-                        android:id="@+id/expandable_text_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        app:maxCollapsedLines="5"
-                        app:animDuration="200">
-                        
-                        <TextView
-                            android:id="@+id/tv_descexpandable_detail"
-                            android:layout_marginLeft="10dp"
-                            android:layout_marginRight="10dp"
-                            android:layout_marginTop="8dp"
-                            android:layout_marginBottom="8dp"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content" />
+                <WebView
+                    android:id="@+id/wv_job_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp">
 
-                        <Button
-                            android:id="@+id/btn_view_more"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:background="@drawable/shape_button_black_border"/>
-                        
-                    </com.ms.square.android.expandabletextview.ExpandableTextView>
+                </WebView>
 
-                </ScrollView>
-
-            </LinearLayout>-->
+            </LinearLayout>
 
         </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_related_job"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="60dp"
+            android:layout_marginTop="10dp"
+            tools:listitem="@layout/item_list_related_job">
+
+        </android.support.v7.widget.RecyclerView>
 
     </LinearLayout>
 
