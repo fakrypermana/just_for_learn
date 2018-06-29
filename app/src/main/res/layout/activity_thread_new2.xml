@@ -8,8 +8,6 @@
     android:layout_marginLeft="10dp"
     tools:context=".feature.thread_new.ThreadNewActivity2">
 
-
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -34,55 +32,72 @@
 
     </LinearLayout>
 
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Cover Thread      "
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"/>
+
+            <Button
+                android:id="@+id/btn_take_image"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:text="Upload"/>
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:id="@+id/image_view_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/ic_launcher_background"
+            android:scaleType="fitCenter"/>
+
+    </LinearLayout>
+
+
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:text="Cover Thread       "
+            android:text="Judul             "
             android:layout_marginLeft="5dp"
             android:textSize="16dp"
             />
 
         <EditText
-            android:id="@+id/et_unggahfoto"
+            android:id="@+id/et_tittle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint=""
+            android:layout_gravity="right"
             android:textSize="16dp"
-            />
+            ></EditText>
 
     </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Judul Pertanyaan  "
-            android:layout_gravity="center_horizontal"
-            android:textSize="16dp"/>
-
-
-        <EditText
-            android:id="@+id/et_title"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint=""
-            android:textSize="16dp"
-            />
-
-    </LinearLayout>
-
-
-
 
     <HorizontalScrollView
         android:layout_width="match_parent"

@@ -1,19 +1,17 @@
 package id.teknologi.teknologiid.feature.thread_new;
 
-import android.content.SharedPreferences;
+
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
-import id.teknologi.teknologiid.base.BasePresenter;
-import id.teknologi.teknologiid.model.PostNewThread;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import jp.wasabeef.richeditor.RichEditor;
@@ -25,7 +23,14 @@ public class ThreadNewActivity2 extends AppCompatActivity {
     private ApiService POSTAPI;
 
 
-    @BindView(R.id.et_title)
+
+    @BindView(R.id.image_view_image)
+    ImageView ivImage;
+
+    @BindView(R.id.btn_take_image)
+    EditText btnTakeImage;
+
+    @BindView(R.id.et_tittle)
     EditText etTitle;
 
     @BindView(R.id.s_tags)
@@ -41,7 +46,6 @@ public class ThreadNewActivity2 extends AppCompatActivity {
         mEditor.setEditorFontColor(Color.BLACK);
         mEditor.setPadding(10, 10, 10, 10);
         mEditor.setPlaceholder("Tulis Konten...");
-
 
         //Button b_create
         b_create = findViewById(R.id.b_create);
@@ -225,10 +229,11 @@ public class ThreadNewActivity2 extends AppCompatActivity {
             }
         });
 
-
-
-
     }
+
+
+
+
 
 }
 

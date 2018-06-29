@@ -123,4 +123,8 @@ dependencies {
 
     // native editor
     implementation 'jp.wasabeef:richeditor-android:1.2.2'
+
+    // Easy Image
+    implementation 'com.github.jkwiecien:EasyImage:1.3.1'
+
 }
