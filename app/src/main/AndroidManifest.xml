@@ -20,6 +20,8 @@
         </activity>
         <activity android:name=".feature.thread_detail.ThreadDetailActivity" />
         <activity android:name=".feature.thread.ThreadActivity" />
+        <activity android:name=".feature.thread_new.ThreadNewActivity"/>
+        <activity android:name=".feature.thread_new.ThreadNewActivity2"/>
         <activity android:name=".feature.pekerjaan.PekerjaanActivity" />
         <activity android:name=".feature.pekerjaan_detail.DetailPekerjaanActivity" />
         <activity android:name=".feature.login_register.RegisterActivity" />
