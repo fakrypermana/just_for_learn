@@ -1,11 +1,14 @@
 package id.teknologi.teknologiid.feature.Question;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MotionEvent;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -72,12 +75,17 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
 
     }
 
+//    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setupView() {
         rvAnswered.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvAnswered.setAdapter(answeredAdapter);
-
-
+//        wvQuestion.setOnTouchListener(new View.OnTouchListener() {
+//            @Override
+//            public boolean onTouch(View view, MotionEvent event) {
+//                return (event.getAction() == MotionEvent.ACTION_MOVE);
+//            }
+//        });
 
     }
 
@@ -105,7 +113,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         setDetailView();
         String data = questionDetailModels.getQuestion();
         wvQuestion.loadData(data,"text/html", "UTF-8");
-        answeredAdapter.insertAndNotify(answeredModels);
+        answeredAdapter.insertAndNotify(questionDetailModel.getAnswered());
 
     }
     public void setDetailView(){
@@ -122,7 +130,6 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         Glide.with(this)
                 .load(questionDetailModel.getUser_url_photo())
                 .into(ivUserProfilePict);
-        
 
     }
 

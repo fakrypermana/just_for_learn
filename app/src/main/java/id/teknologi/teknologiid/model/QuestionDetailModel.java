@@ -18,6 +18,8 @@ public class QuestionDetailModel {
             private List<String>tags;
             private String user_name;
             private String user_url_photo;
+            private List<QuestionAnsweredModel> answers;
+            private List<QuestionCommentModel> comments;
 
     public int getId(){
         return id;
@@ -65,5 +67,13 @@ public class QuestionDetailModel {
 
     public String getUser_name() {
         return user_name;
+    }
+
+    public List<QuestionAnsweredModel> getAnswered() {
+        return answers;
+    }
+
+    public List<QuestionCommentModel> getComments() {
+        return comments;
     }
 }

@@ -2,8 +2,12 @@ package id.teknologi.teknologiid.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +21,7 @@ import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
 import id.teknologi.teknologiid.model.QuestionAnsweredModel;
+import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnsweredModel,QuestionAnsweredAdapter.QuestionAnsweredVH> {
@@ -34,13 +39,10 @@ public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnswere
         return new QuestionAnsweredVH(initView(viewType, parent),getRecyclerCallback());
     }
 
-
-
-
     public class QuestionAnsweredVH extends BaseViewHolder<QuestionAnsweredModel> {
 
-        @BindView(R.id.tvaq_answer_question)
-        TextView tvAnswer;
+        @BindView(R.id.wvaq_answer_question)
+        WebView wvAnswer;
         @BindView(R.id.tvaq_date)
         TextView tvDate;
         @BindView(R.id.tvaq_user_name)
@@ -56,12 +58,21 @@ public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnswere
 
         @Override
         public void onBind(QuestionAnsweredModel questionAnsweredModel) {
-            tvAnswer.setText(questionAnsweredModel.getAnswer());
-            tvDate.setText(questionAnsweredModel.getCreated_at());
-            tvUsername.setText(questionAnsweredModel.getUser_name());
+            Log.d("answer masuk","answer masuk"+questionAnsweredModel.getAnswer());
+//            wvAnswer.setText(questionDetailModel.getAnswer());
+//            tvDate.setText(questionAnsweredModel.getCreated_at());
+//            tvUsername.setText(questionAnsweredModel.getUser_name());
             Glide.with(itemView).
                     load(questionAnsweredModel.getUser_url_photo()).
                     into(ivAnswerProfpict);
+            String data = questionAnsweredModel.getAnswer();
+            wvAnswer.loadData(data,"text/html", "UTF-8");
+            wvAnswer.setWebViewClient(new WebViewClient());
+            wvAnswer.setPadding(50,50,50,50);
+            WebSettings webSettings = wvAnswer.getSettings();
+            webSettings.setJavaScriptEnabled(true);
+            tvUsername.setText(questionAnsweredModel.getUser_name());
+            tvDate.setText(questionAnsweredModel.getCreated_at());
 
         }
     }
