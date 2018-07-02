@@ -7,7 +7,6 @@ import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.model.PostNewThread;
 import id.teknologi.teknologiid.model.Profile;
-import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.DetileThread;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
@@ -15,6 +14,7 @@ import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -76,22 +76,26 @@ public interface ApiService {
             @Field("password") String password
     );
 
-    @POST("threads/post")
-    Observable<ResponseArray<PostNewThread>> postNewThread(
-            @Path("title") String title,
-            @Path("post") String post,
-            @Path("id_topik") String slug,
-            @Path("url_cover") String url_cover
-    );
 
     @FormUrlEncoded
     @POST("threads/post")
-    Observable<ResponseBody> postThread(
-            @Field("title") String title,
-            @Field("post") String post,
-            @Field("id_topic") String id_topic,
-            @Field("browsePhoto") String browsePhoto
+    Call<ResponseBody> PostNewThread(
+            @Path("title") String title,
+            @Path("post") String post,
+            @Path("id_topiC") String slug,
+            @Path("browsePhoto") String url_cover
     );
+
+
+//    @FormUrlEncoded
+//    @POST("threads/post")
+//    Observable<ResponseBody> postThread(
+//            @Field("title") String title,
+//            @Field("post") String post,
+//            @Field("id_topic") String id_topic,
+//            @Field("browsePhoto") String browsePhoto
+//    );
+
 
     @GET("threads/{id}/{slug}/{comments}")
     Observable<ResponseObject<DetileThread>> getThreadDetail(
