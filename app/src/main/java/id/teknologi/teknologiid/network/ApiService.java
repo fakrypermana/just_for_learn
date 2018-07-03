@@ -26,14 +26,47 @@ import retrofit2.http.Path;
  */
 
 public interface ApiService {
+
+    //Threads
     @GET("threads")
     Observable<ResponseArray<Thread>> getThreads();
 
+    //Detail Threads
     @GET("threads/{id}/{slug}")
     Observable<ResponseObject<CobaModel>> getThreadDetail(
             @Path("id") int id,
             @Path("slug") String slug
     );
+
+    //Post Thread
+    @FormUrlEncoded
+    @POST("threads/post")
+    Call<ResponseBody> PostNewThread(
+            @Path("title") String title,
+            @Path("post") String post,
+            @Path("id_topiC") String slug,
+            @Path("browsePhoto") String url_cover
+    );
+
+
+//    @FormUrlEncoded
+//    @POST("threads/post")
+//    Observable<ResponseBody> postThread(
+//            @Field("title") String title,
+//            @Field("post") String post,
+//            @Field("id_topic") String id_topic,
+//            @Field("browsePhoto") String browsePhoto
+//    );
+
+
+
+    @GET("threads/{id}/{slug}/{comments}")
+    Observable<ResponseObject<DetileThread>> getThreadDetail(
+            @Path("id") int id,
+            @Path("slug") String slug,
+            @Path("comments") String comments
+    );
+
 
     //Pekerjaan
     @GET("jobs")
@@ -77,30 +110,5 @@ public interface ApiService {
     );
 
 
-    @FormUrlEncoded
-    @POST("threads/post")
-    Call<ResponseBody> PostNewThread(
-            @Path("title") String title,
-            @Path("post") String post,
-            @Path("id_topiC") String slug,
-            @Path("browsePhoto") String url_cover
-    );
 
-
-//    @FormUrlEncoded
-//    @POST("threads/post")
-//    Observable<ResponseBody> postThread(
-//            @Field("title") String title,
-//            @Field("post") String post,
-//            @Field("id_topic") String id_topic,
-//            @Field("browsePhoto") String browsePhoto
-//    );
-
-
-    @GET("threads/{id}/{slug}/{comments}")
-    Observable<ResponseObject<DetileThread>> getThreadDetail(
-            @Path("id") int id,
-            @Path("slug") String slug,
-            @Path("comments") String comments
-    );
 }

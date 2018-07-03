@@ -64,7 +64,7 @@ public class ThreadNewActivity3 extends AppCompatActivity {
 
         //Image dari gallery atau camera
         btnLoadImage = (Button) findViewById(R.id.btn_take_image);
-        ivImage = (ImageView) findViewById(R.id.iv_browsePhoto);
+        ivImage = (ImageView) findViewById(R.id.iv_browsePhoto;
         tvPath = (TextView) findViewById(R.id.textview_image_path);
 
         //Editor

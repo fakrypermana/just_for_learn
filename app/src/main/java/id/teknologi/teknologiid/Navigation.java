@@ -67,7 +67,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pemberitahuan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pemberitahuan));
 
-        intent = new Intent(this, ThreadNewActivity3.class);
+        intent = new Intent(this, Pekerjaan.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
