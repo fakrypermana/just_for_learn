@@ -1,5 +1,7 @@
 package id.teknologi.teknologiid.network;
 
+import java.util.Map;
+
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.base.ResponseObject;
@@ -12,8 +14,12 @@ import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -63,6 +69,9 @@ public class DataManager {
         return apiService.getProfile();
     }
 
+    public Call<ResponseBody> uploadPost(MultipartBody.Part body, Map<String, RequestBody> text){
+        return apiService.postingTread(body, text);
+    }
     //login
     public static ApiService getUserManagerService(Converter.Factory converterFactory){
         // Create retrofit builder.
