@@ -1,6 +1,8 @@
 package id.teknologi.teknologiid.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -20,8 +23,11 @@ import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
+import id.teknologi.teknologiid.feature.Question.QuestionDetailPresenter;
 import id.teknologi.teknologiid.model.QuestionAnsweredModel;
+import id.teknologi.teknologiid.model.QuestionCommentModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
+import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnsweredModel,QuestionAnsweredAdapter.QuestionAnsweredVH> {
@@ -39,7 +45,7 @@ public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnswere
         return new QuestionAnsweredVH(initView(viewType, parent),getRecyclerCallback());
     }
 
-    public class QuestionAnsweredVH extends BaseViewHolder<QuestionAnsweredModel> {
+    public class QuestionAnsweredVH extends BaseViewHolder<QuestionAnsweredModel> implements RecyclerInterface {
 
         @BindView(R.id.wvaq_answer_question)
         WebView wvAnswer;
@@ -49,11 +55,17 @@ public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnswere
         TextView tvUsername;
         @BindView(R.id.ivaq_user_profpict)
         ImageView ivAnswerProfpict;
+        @BindView(R.id.rv_comment_question)
+        RecyclerView rvComment;
+        QuestionCommentAdapter commentAdapter;
+        List<QuestionCommentModel> commentModels = new ArrayList<>();
+
 
 
         public QuestionAnsweredVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
             ButterKnife.bind(this,itemView);
+
         }
 
         @Override
@@ -74,6 +86,19 @@ public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnswere
             tvUsername.setText(questionAnsweredModel.getUser_name());
             tvDate.setText(questionAnsweredModel.getCreated_at());
 
+            commentAdapter= new QuestionCommentAdapter(context, commentModels,this);
+            rvComment.setLayoutManager(AppUtils.defaultLinearLayoutManager(context));
+            rvComment.setAdapter(commentAdapter);
+
+            commentAdapter.insertAndNotify(questionAnsweredModel.getComments());
+
+            }
+
+        @Override
+        public void onRecyclerItemClicked(int position) {
+
         }
     }
+
+
 }

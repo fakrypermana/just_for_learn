@@ -25,8 +25,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.QuestionAnsweredAdapter;
+import id.teknologi.teknologiid.adapter.QuestionCommentAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.model.QuestionAnsweredModel;
+import id.teknologi.teknologiid.model.QuestionCommentModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -36,6 +38,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     QuestionDetailPresenter detailPresenter;
     QuestionAnsweredAdapter answeredAdapter;
     List<QuestionAnsweredModel> answeredModels = new ArrayList<>();
+
 
     //QuestionDetailModel detailModels;
     private final static String ID = "ID";
@@ -57,6 +60,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     ImageView ivUserProfilePict;
     @BindView(R.id.rv_answered)
     RecyclerView rvAnswered;
+
     
 
     @Override
@@ -73,6 +77,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         detailPresenter.getQuestionDetail(id, slug);
         answeredAdapter= new QuestionAnsweredAdapter(this, answeredModels,this);
 
+
     }
 
 //    @SuppressLint("ClickableViewAccessibility")
@@ -80,12 +85,11 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     protected void setupView() {
         rvAnswered.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvAnswered.setAdapter(answeredAdapter);
-//        wvQuestion.setOnTouchListener(new View.OnTouchListener() {
-//            @Override
-//            public boolean onTouch(View view, MotionEvent event) {
-//                return (event.getAction() == MotionEvent.ACTION_MOVE);
-//            }
-//        });
+
+
+
+
+
 
     }
 
@@ -114,6 +118,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         String data = questionDetailModels.getQuestion();
         wvQuestion.loadData(data,"text/html", "UTF-8");
         answeredAdapter.insertAndNotify(questionDetailModel.getAnswered());
+
 
     }
     public void setDetailView(){

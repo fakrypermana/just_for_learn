@@ -19,7 +19,7 @@ public class QuestionDetailModel {
             private String user_name;
             private String user_url_photo;
             private List<QuestionAnsweredModel> answers;
-            private List<QuestionCommentModel> comments;
+
 
     public int getId(){
         return id;
@@ -73,7 +73,5 @@ public class QuestionDetailModel {
         return answers;
     }
 
-    public List<QuestionCommentModel> getComments() {
-        return comments;
-    }
+
 }
