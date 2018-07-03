@@ -1,44 +1,74 @@
 package id.teknologi.teknologiid.feature.thread_new;
 
+import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
+import android.os.Environment;
 import android.provider.ContactsContract;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
+import android.support.v13.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import jp.wasabeef.richeditor.RichEditor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
-public class ThreadNewActivity3 extends AppCompatActivity {
+public class ThreadNewActivity3 extends AppCompatActivity{
 
     public static final int REQUEST_CODE_CAMERA = 0012;
-    public static final int REQUEST_CODE_GALLERY = 0013;
+    public static final int REQUEST_CODE_GALLERY = 200;
+    public static final int PERMISSION_REQUEST = 100;
 
     //Image dari gallery atau camera
     private Button btnLoadImage;
     private ImageView ivImage;
     private TextView tvPath;
     private String [] items = {"Camera","Gallery"};
-
+    private String pathPhoto;
     //Editor
     private RichEditor mEditor;
 
@@ -51,13 +81,17 @@ public class ThreadNewActivity3 extends AppCompatActivity {
             Button bCreate;
 
     ApiService mApiService;
+
+    ProgressDialog progressDialog;
     Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_new3);
-
+        mContext = ThreadNewActivity3.this;
+        mApiService = DataManager.getApiService();
+        progressDialog = new ProgressDialog(ThreadNewActivity3.this);
         //Image dari gallery atau camera
         btnLoadImage = (Button) findViewById(R.id.btn_take_image);
         ivImage = (ImageView) findViewById(R.id.image_view_image);
@@ -75,7 +109,11 @@ public class ThreadNewActivity3 extends AppCompatActivity {
         btnLoadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openImage();
+//                String title = etTitle.getText().toString();
+//                String post = etTitle.getText().toString();
+                showProgressDialog();
+                testGalery();
+
             }
         });
 
@@ -275,26 +313,104 @@ public class ThreadNewActivity3 extends AppCompatActivity {
         dialog.show();
     }
 
+    private void testGalery(){
+        try {
+            if (ContextCompat.checkSelfPermission(ThreadNewActivity3.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ThreadNewActivity3.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
+            } else {
+                Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                startActivityForResult(i, REQUEST_CODE_GALLERY);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
+    {
+        switch (requestCode) {
+            case REQUEST_CODE_GALLERY:
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                    startActivityForResult(galleryIntent, REQUEST_CODE_GALLERY);
+                } else {
+                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
+                }
+                break;
+        }
+    }
+
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        EasyImage.handleActivityResult(requestCode, resultCode, data, this, new DefaultCallback() {
+        Uri selectedImage = data.getData();
+        String[] filePathColumn = { MediaStore.Images.Media.DATA };
+        Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        pathPhoto = cursor.getString(columnIndex);
+        uploadImage(pathPhoto,"test","test","1");
+        cursor.close();
+    }
+
+    @NonNull
+    private RequestBody createPartFromString(String descriptionString) {
+        return RequestBody.create(
+                okhttp3.MultipartBody.FORM, descriptionString);
+    }
+
+    private void showProgressDialog(){
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    public void uploadImage(String path, String tittle, String post, String id_topic) {
+        HashMap<String, RequestBody> map = new HashMap<>();
+        map.put("title", createPartFromString(tittle));
+        map.put("post", createPartFromString(post));
+        map.put("id_topic[0]", createPartFromString(id_topic));
+
+        File file = new File(path);
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("browsePhoto", file.getName(), reqFile);
+        Call<ResponseBody> call = mApiService.postingTread(body,map);
+        call.enqueue(new Callback<ResponseBody>() {
             @Override
-            public void onImagePicked(File imageFile, EasyImage.ImageSource source, int type) {
-                switch (type){
-                    case REQUEST_CODE_CAMERA:
-                        Glide.with(ThreadNewActivity3.this)
-                                .load(imageFile)
-                                .into(ivImage);
-                        tvPath.setText(imageFile.getAbsolutePath());
-                        break;
-                    case REQUEST_CODE_GALLERY:
-                        Glide.with(ThreadNewActivity3.this)
-                                .load(imageFile)
-                                .into(ivImage);
-                        tvPath.setText(imageFile.getAbsolutePath());
-                        break;
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.hide();
+                if(response.isSuccessful()){
+                    try{
+                        String returnBodyText = response.body().string();
+                        JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                        Log.d("response",jsonRESULTS.toString());
+                        if (jsonRESULTS.getString("status").equals("success")){
+                            Toast.makeText(mContext, "Upload Success", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(mContext, "upload Failure", Toast.LENGTH_SHORT).show();
+                        }
+                        progressDialog.hide();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(mContext,"Connection Error",Toast.LENGTH_SHORT).show();
+                    progressDialog.hide();
                 }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.hide();
+                Log.e("debug", "onFailure: ERROR > " + t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }

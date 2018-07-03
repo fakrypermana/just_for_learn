@@ -1,6 +1,8 @@
 package id.teknologi.teknologiid.network;
 
 
+import java.util.Map;
+
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
@@ -13,12 +15,17 @@ import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
 import io.reactivex.Observable;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
+import retrofit2.http.PartMap;
 import retrofit2.http.Path;
 
 /**
@@ -76,22 +83,21 @@ public interface ApiService {
             @Field("password") String password
     );
 
+    @Multipart
     @POST("threads/post")
-    Observable<ResponseArray<PostNewThread>> postNewThread(
-            @Path("title") String title,
-            @Path("post") String post,
-            @Path("id_topik") String slug,
-            @Path("url_cover") String url_cover
+    Observable<ResponseBody> postNewThread(
+            @Part("title") RequestBody title,
+            @Part("post") RequestBody post,
+            @Part("id_topik") RequestBody slug,
+            @Part("browsePhoto") RequestBody browsePhoto
     );
 
-    @FormUrlEncoded
+    @Multipart
     @POST("threads/post")
-    Observable<ResponseBody> postThread(
-            @Field("title") String title,
-            @Field("post") String post,
-            @Field("id_topic") String id_topic,
-            @Field("browsePhoto") String browsePhoto
-    );
+    Call<ResponseBody> postingTread(
+            @Part MultipartBody.Part photo,
+            @PartMap Map<String, RequestBody> text
+            );
 
     @GET("threads/{id}/{slug}/{comments}")
     Observable<ResponseObject<DetileThread>> getThreadDetail(
