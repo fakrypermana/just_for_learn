@@ -73,12 +73,16 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     private RichEditor mEditor;
 
     //Inisiasi
-    @BindView(R.id.et_tittle)
+    @BindView(R.id.et_title)
     EditText etTitle;
-    @BindView(R.id.s_topic)
-    Spinner s_topic;
+    @BindView(R.id.s_id_topic)
+    Spinner sIdTopic;
     @BindView(R.id.b_create)
-            Button bCreate;
+    Button bCreate;
+    @BindView(R.id.iv_browsePhoto)
+    ImageView ivBrowsePhoto;
+
+
 
     ApiService mApiService;
 
@@ -94,7 +98,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         progressDialog = new ProgressDialog(ThreadNewActivity3.this);
         //Image dari gallery atau camera
         btnLoadImage = (Button) findViewById(R.id.btn_take_image);
-        ivImage = (ImageView) findViewById(R.id.image_view_image);
+        ivImage = (ImageView) findViewById(R.id.iv_browsePhoto);
         tvPath = (TextView) findViewById(R.id.textview_image_path);
 
         //Editor

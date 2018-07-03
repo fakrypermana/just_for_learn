@@ -66,6 +66,7 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
         public void onBind(Thread thread) {
             Glide.with(itemView)
                     .load(thread.getUrl_cover())
+                    .apply(RequestOptions.centerCropTransform())
                     .into(ivCover);
             Log.d("Thread",thread.getUrl_cover());
             tvTitle.setText(thread.getTitle());
@@ -73,8 +74,8 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
             tvCreated_at.setText(thread.getCreated_at());
             tvUser_work.setText(thread.getUser_work());
             tvTopics.setText(thread.getTopics().toArray().toString());
-            tvComments.setText(String.valueOf(thread.getComments() +" jawaban ."));
-            tvViews.setText(String.valueOf(thread.getViews()+" dilihat ."));
+            tvComments.setText(String.valueOf(thread.getComments() +" jawaban"));
+            tvViews.setText(String.valueOf(thread.getViews()+" dilihat"));
             Glide.with(itemView)
                     .load(thread.getUser_url_photo())
                     .apply(RequestOptions.circleCropTransform())
