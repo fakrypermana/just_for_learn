@@ -64,33 +64,30 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     public static final int PERMISSION_REQUEST = 100;
 
     //Image dari gallery atau camera
-    private Button btnLoadImage;
+    private Button btnLoadImage, btnCreate;
+    private Spinner sIdTopic;
+    private EditText etTitle;
     private ImageView ivImage;
     private TextView tvPath;
     private String [] items = {"Camera","Gallery"};
     private String pathPhoto;
+
     //Editor
     private RichEditor mEditor;
 
     //Inisiasi
-    @BindView(R.id.et_title)
-    EditText etTitle;
-    @BindView(R.id.s_id_topic)
-    Spinner sIdTopic;
     @BindView(R.id.b_create)
     Button bCreate;
     @BindView(R.id.iv_browsePhoto)
     ImageView ivBrowsePhoto;
 
-
-
+    //Koneksi
     ApiService mApiService;
-
     ProgressDialog progressDialog;
     Context mContext;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState ) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_new3);
         mContext = ThreadNewActivity3.this;
@@ -100,6 +97,11 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         btnLoadImage = (Button) findViewById(R.id.btn_take_image);
         ivImage = (ImageView) findViewById(R.id.iv_browsePhoto);
         tvPath = (TextView) findViewById(R.id.textview_image_path);
+        btnCreate = (Button) findViewById(R.id.b_create);
+        etTitle = (EditText) findViewById(R.id.et_title);
+        sIdTopic = (Spinner) findViewById(R.id.s_id_topic);
+
+
 
         //Editor
         mEditor = (RichEditor) findViewById(R.id.editor);
@@ -113,8 +115,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         btnLoadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                String title = etTitle.getText().toString();
-//                String post = etTitle.getText().toString();
                 showProgressDialog();
                 testGalery();
 
@@ -122,10 +122,10 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         });
 
         //membuat thread
-        bCreate.setOnClickListener(new View.OnClickListener() {
+        btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uploadImage(pathPhoto,"test","test","1");
+
             }
         });
 
@@ -355,8 +355,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         }
     }
 
-
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -367,6 +365,10 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         pathPhoto = cursor.getString(columnIndex);
 
+        String title = etTitle.getText().toString();
+        String post = mEditor.getHtml().toString();
+        String topic = sIdTopic.getSelectedItem().toString();
+        uploadImage(pathPhoto,title,post,topic);
         cursor.close();
     }
 

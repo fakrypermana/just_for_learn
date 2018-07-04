@@ -62,11 +62,7 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
             }
         });
 
-
-
     }
-
-
 
     @Override
     protected void setupView() {
