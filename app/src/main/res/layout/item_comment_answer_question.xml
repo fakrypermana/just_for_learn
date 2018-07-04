@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:paddingBottom="8dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -11,6 +12,7 @@
         android:layout_height="wrap_content"
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="0dp"
+        android:paddingBottom="8dp"
         tools:ignore="MissingConstraints">
 
         <LinearLayout
@@ -20,16 +22,18 @@
 
             <ImageView
                 android:id="@+id/ivco_user_profpict"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_weight="13"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_gravity="top"
+                android:foregroundGravity="top"
+                android:layout_weight="1"
                 app:srcCompat="@mipmap/ic_launcher_round" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_weight="1"
+                android:layout_weight="9"
                 tools:ignore="WebViewLayout">
 
                 <LinearLayout
@@ -50,6 +54,7 @@
                         android:gravity="end"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:textSize="10dp"
                         android:text="TextView" />
                 </LinearLayout>
 

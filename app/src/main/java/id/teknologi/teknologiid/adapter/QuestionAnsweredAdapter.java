@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -71,12 +72,14 @@ public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnswere
         @Override
         public void onBind(QuestionAnsweredModel questionAnsweredModel) {
             Log.d("answer masuk","answer masuk"+questionAnsweredModel.getAnswer());
-//            wvAnswer.setText(questionDetailModel.getAnswer());
-//            tvDate.setText(questionAnsweredModel.getCreated_at());
-//            tvUsername.setText(questionAnsweredModel.getUser_name());
-            Glide.with(itemView).
-                    load(questionAnsweredModel.getUser_url_photo()).
-                    into(ivAnswerProfpict);
+            RequestOptions requestOptions = new RequestOptions();
+            requestOptions.placeholder(R.drawable.smile);
+            requestOptions.error(R.drawable.smile);
+
+            Glide.with(itemView)
+                    .setDefaultRequestOptions(requestOptions)
+                    .load(questionAnsweredModel.getUser_url_photo())
+                    .into(ivAnswerProfpict);
             String data = questionAnsweredModel.getAnswer();
             wvAnswer.loadData(data,"text/html", "UTF-8");
             wvAnswer.setWebViewClient(new WebViewClient());

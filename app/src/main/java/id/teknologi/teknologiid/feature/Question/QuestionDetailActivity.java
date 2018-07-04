@@ -37,6 +37,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
 
     QuestionDetailPresenter detailPresenter;
     QuestionAnsweredAdapter answeredAdapter;
+    MenuView.ItemView itemView;
     List<QuestionAnsweredModel> answeredModels = new ArrayList<>();
 
 
@@ -120,6 +121,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         answeredAdapter.insertAndNotify(questionDetailModel.getAnswered());
 
 
+
     }
     public void setDetailView(){
         tvTittle.setText(questionDetailModel.getTitle());
@@ -132,9 +134,9 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         wvQuestion.setPadding(50,50,50,50);
         WebSettings webSettings = wvQuestion.getSettings();
         webSettings.setJavaScriptEnabled(true);
-        Glide.with(this)
-                .load(questionDetailModel.getUser_url_photo())
+               Glide.with(QuestionDetailActivity.this).load(questionDetailModel.getUser_url_photo())
                 .into(ivUserProfilePict);
+        Log.d("url foto masuk","url foto masuk");
 
     }
 

@@ -1,25 +1,16 @@
 package id.teknologi.teknologiid.adapter;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.support.design.widget.FloatingActionButton;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawable;
-import android.support.v4.graphics.drawable.RoundedBitmapDrawableFactory;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SearchView;
-import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -46,6 +37,9 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         return new QuestionListVH(initView(viewType, parent),getRecyclerCallback());
     }
 
+    private List<QuestionListModel> names;
+
+
     public class QuestionListVH extends BaseViewHolder<QuestionListModel> {
 
         @BindView(R.id.iv_user_profile_pict)
@@ -71,7 +65,6 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         TextView tvVoted;
         @BindView(R.id.iv_isAnswered)
         ImageView ivIsAnswered;
-
 
 
         public QuestionListVH(View itemView, RecyclerInterface recyclerInterface) {
@@ -108,6 +101,16 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
             }
 
 
+            }
+
+
         }
+    public void updateList(List<QuestionListModel> newList){
+        names=new ArrayList<>();
+        names.addAll(newList);
+        notifyDataSetChanged();
+
     }
+
+
 }
