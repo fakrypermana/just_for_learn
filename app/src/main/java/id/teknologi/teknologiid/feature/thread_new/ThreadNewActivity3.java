@@ -310,7 +310,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(items[i].equals("Camera")){
-                    Toast.makeText(getApplicationContext(),"Camera Clicked",Toast.LENGTH_SHORT).show();
+                    openCamera();
                 }else if(items[i].equals("Gallery")){
                     openGalery();
                 }
@@ -336,8 +336,17 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     }
 
     private void openCamera(){
-        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-        startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
+        try {
+            if (ContextCompat.checkSelfPermission(ThreadNewActivity3.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ThreadNewActivity3.this, new String[]{android.Manifest.permission.CAMERA}, PERMISSION_REQUEST);
+            } else {
+                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+                startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Override
