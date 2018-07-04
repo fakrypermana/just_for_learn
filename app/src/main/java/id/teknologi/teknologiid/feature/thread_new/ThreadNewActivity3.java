@@ -370,13 +370,24 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri selectedImage = data.getData();
-        String[] filePathColumn = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        pathPhoto = cursor.getString(columnIndex);
-        cursor.close();
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
+            Bitmap mphoto = (Bitmap) data.getExtras().get("data");
+            progressDialog.hide();
+            Log.d("camera",mphoto.toString());
+        }else if(requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            pathPhoto = cursor.getString(columnIndex);
+            cursor.close();
+
+            Glide.with(mContext)
+                    .load(selectedImage)
+                    .into(ivBrowsePhoto);
+            progressDialog.hide();
+        }
     }
 
     @NonNull
@@ -391,6 +402,26 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         progressDialog.show();
     }
 
+    private File createTempFile(Bitmap bitmap) {
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                , System.currentTimeMillis() +"_image.webp");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.WEBP,0, bos);
+        byte[] bitmapdata = bos.toByteArray();
+        //write the bytes in file
+
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
     public void uploadImage(String path, String tittle, String post, String id_topic) {
         HashMap<String, RequestBody> map = new HashMap<>();
         map.put("title", createPartFromString(tittle));
@@ -398,6 +429,52 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         map.put("id_topic[0]", createPartFromString(id_topic));
 
         File file = new File(path);
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("browsePhoto", file.getName(), reqFile);
+        Call<ResponseBody> call = mApiService.postingTread(body,map);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.hide();
+                if(response.isSuccessful()){
+                    try{
+                        String returnBodyText = response.body().string();
+                        JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                        Log.d("response",jsonRESULTS.toString());
+                        if (jsonRESULTS.getString("status").equals("success")){
+                            Toast.makeText(mContext, "Upload Success", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(mContext, "upload Failure", Toast.LENGTH_SHORT).show();
+                        }
+                        progressDialog.hide();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(mContext,"Connection Error",Toast.LENGTH_SHORT).show();
+                    progressDialog.hide();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.hide();
+                Log.e("debug", "onFailure: ERROR > " + t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void uploadCamera(Bitmap bitmap, String tittle, String post, String id_topic) {
+        HashMap<String, RequestBody> map = new HashMap<>();
+        map.put("title", createPartFromString(tittle));
+        map.put("post", createPartFromString(post));
+        map.put("id_topic[0]", createPartFromString(id_topic));
+
+        File file = createTempFile(bitmap);
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("browsePhoto", file.getName(), reqFile);
         Call<ResponseBody> call = mApiService.postingTread(body,map);
