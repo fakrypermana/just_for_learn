@@ -59,14 +59,10 @@ import retrofit2.Response;
 
 public class ThreadNewActivity3 extends AppCompatActivity{
 
-    public static final int REQUEST_CODE_CAMERA = 0012;
+    public static final int REQUEST_CODE_CAMERA = 300;
     public static final int REQUEST_CODE_GALLERY = 200;
     public static final int PERMISSION_REQUEST = 100;
 
-    //Image dari gallery atau camera
-    private Button btnLoadImage;
-    private ImageView ivImage;
-    private TextView tvPath;
     private String [] items = {"Camera","Gallery"};
     private String pathPhoto;
     //Editor
@@ -81,8 +77,10 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     Button bCreate;
     @BindView(R.id.iv_browsePhoto)
     ImageView ivBrowsePhoto;
-
-
+    @BindView(R.id.btn_take_image)
+    Button btnLoadImage;
+    @BindView(R.id.textview_image_path)
+    TextView tvPath;
 
     ApiService mApiService;
 
@@ -93,13 +91,10 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_new3);
+        ButterKnife.bind(this);
         mContext = ThreadNewActivity3.this;
         mApiService = DataManager.getApiService();
         progressDialog = new ProgressDialog(ThreadNewActivity3.this);
-        //Image dari gallery atau camera
-        btnLoadImage = (Button) findViewById(R.id.btn_take_image);
-        ivImage = (ImageView) findViewById(R.id.iv_browsePhoto);
-        tvPath = (TextView) findViewById(R.id.textview_image_path);
 
         //Editor
         mEditor = (RichEditor) findViewById(R.id.editor);
@@ -116,7 +111,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 //                String title = etTitle.getText().toString();
 //                String post = etTitle.getText().toString();
                 showProgressDialog();
-                testGalery();
+                openImage();
 
             }
         });
@@ -315,9 +310,9 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(items[i].equals("Camera")){
-                    EasyImage.openCamera(ThreadNewActivity3.this,REQUEST_CODE_CAMERA);
+                    Toast.makeText(getApplicationContext(),"Camera Clicked",Toast.LENGTH_SHORT).show();
                 }else if(items[i].equals("Gallery")){
-                    EasyImage.openGallery(ThreadNewActivity3.this, REQUEST_CODE_GALLERY);
+                    openGalery();
                 }
             }
         });
@@ -326,7 +321,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         dialog.show();
     }
 
-    private void testGalery(){
+    private void openGalery(){
         try {
             if (ContextCompat.checkSelfPermission(ThreadNewActivity3.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(ThreadNewActivity3.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
@@ -339,6 +334,12 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         }
 
     }
+
+    private void openCamera(){
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
     {
@@ -349,7 +350,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(galleryIntent, REQUEST_CODE_GALLERY);
                 } else {
-                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
+                    Toast.makeText(getApplicationContext(),"Permission Denied",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
@@ -366,7 +367,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         cursor.moveToFirst();
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         pathPhoto = cursor.getString(columnIndex);
-
         cursor.close();
     }
 
