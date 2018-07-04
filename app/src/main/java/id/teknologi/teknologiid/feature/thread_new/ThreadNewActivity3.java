@@ -64,30 +64,35 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     public static final int PERMISSION_REQUEST = 100;
 
     //Image dari gallery atau camera
-    private Button btnLoadImage, btnCreate;
-    private Spinner sIdTopic;
-    private EditText etTitle;
+    private Button btnLoadImage;
     private ImageView ivImage;
     private TextView tvPath;
     private String [] items = {"Camera","Gallery"};
     private String pathPhoto;
-
     //Editor
     private RichEditor mEditor;
 
     //Inisiasi
+    @BindView(R.id.et_title)
+    EditText etTitle;
+    @BindView(R.id.s_id_topic)
+    Spinner sIdTopic;
     @BindView(R.id.b_create)
     Button bCreate;
     @BindView(R.id.iv_browsePhoto)
     ImageView ivBrowsePhoto;
+    @BindView(R.id.btn_take_image)
+    Button btnLoadImage;
+    @BindView(R.id.textview_image_path)
+    TextView tvPath;
 
-    //Koneksi
     ApiService mApiService;
+
     ProgressDialog progressDialog;
     Context mContext;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState ) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_new3);
         mContext = ThreadNewActivity3.this;
@@ -97,11 +102,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         btnLoadImage = (Button) findViewById(R.id.btn_take_image);
         ivImage = (ImageView) findViewById(R.id.iv_browsePhoto);
         tvPath = (TextView) findViewById(R.id.textview_image_path);
-        btnCreate = (Button) findViewById(R.id.b_create);
-        etTitle = (EditText) findViewById(R.id.et_title);
-        sIdTopic = (Spinner) findViewById(R.id.s_id_topic);
-
-
 
         //Editor
         mEditor = (RichEditor) findViewById(R.id.editor);
@@ -115,6 +115,8 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         btnLoadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+//                String title = etTitle.getText().toString();
+//                String post = etTitle.getText().toString();
                 showProgressDialog();
                 testGalery();
 
@@ -122,10 +124,10 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         });
 
         //membuat thread
-        btnCreate.setOnClickListener(new View.OnClickListener() {
+        bCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                uploadImage(pathPhoto,"test","test","1");
             }
         });
 
@@ -339,6 +341,12 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         }
 
     }
+
+    private void openCamera(){
+        Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
+        startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
+    }
+
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String permissions[], @NonNull int[] grantResults)
     {
@@ -349,11 +357,13 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                     Intent galleryIntent = new Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                     startActivityForResult(galleryIntent, REQUEST_CODE_GALLERY);
                 } else {
-                    //do something like displaying a message that he didn`t allow the app to access gallery and you wont be able to let him select from gallery
+                    Toast.makeText(getApplicationContext(),"Permission Denied",Toast.LENGTH_SHORT).show();
                 }
                 break;
         }
     }
+
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -364,11 +374,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         cursor.moveToFirst();
         int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
         pathPhoto = cursor.getString(columnIndex);
-
-        String title = etTitle.getText().toString();
-        String post = mEditor.getHtml().toString();
-        String topic = sIdTopic.getSelectedItem().toString();
-        uploadImage(pathPhoto,title,post,topic);
         cursor.close();
     }
 
