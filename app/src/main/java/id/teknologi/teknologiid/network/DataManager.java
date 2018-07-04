@@ -1,5 +1,8 @@
 package id.teknologi.teknologiid.network;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 import java.util.Map;
 
 import id.teknologi.teknologiid.base.ResponseArray;
@@ -13,6 +16,7 @@ import id.teknologi.teknologiid.model.DetileThread;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
+import id.teknologi.teknologiid.model.Topic;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
@@ -37,9 +41,11 @@ public class DataManager {
 
 
     public DataManager(ApiService apiService){
+
         this.apiService = apiService;
     }
 
+    //Thread
     public Observable<ResponseArray<Thread>> getThreads() {
         return apiService.getThreads();
     }
@@ -53,6 +59,17 @@ public class DataManager {
 
     public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
         return apiService.getThreadDetail(id, slug);
+    }
+
+//    public Observable<ResponseArray<Topic>> getTopic(int id, String name) {
+//        return apiService.getTopic(id,name);
+//    }
+
+    @SerializedName("topic")
+    private List<Topic> topic;
+
+    public List <Topic> getTopic(){
+        return topic;
     }
 
     //Pekerjaan

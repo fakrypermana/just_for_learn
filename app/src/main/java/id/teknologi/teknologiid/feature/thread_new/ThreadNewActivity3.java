@@ -22,15 +22,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,12 +42,19 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
+import java.util.SplittableRandom;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
+import id.teknologi.teknologiid.base.ResponseArray;
+import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.ResponseTopic;
+import id.teknologi.teknologiid.model.Topic;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import jp.wasabeef.richeditor.RichEditor;
@@ -59,6 +69,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ThreadNewActivity3 extends AppCompatActivity{
+
+
+    ApiService mApiService;
+    ProgressDialog progressDialog;
+    Context mContext;
+
 
     public static final int REQUEST_CODE_CAMERA = 300;
     public static final int REQUEST_CODE_GALLERY = 200;
@@ -82,20 +98,33 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     Button btnLoadImage;
     @BindView(R.id.textview_image_path)
     TextView tvPath;
-
-    ApiService mApiService;
-
-    ProgressDialog progressDialog;
-    Context mContext;
+    ProgressDialog loading;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_new3);
         ButterKnife.bind(this);
         mContext = ThreadNewActivity3.this;
         mApiService = DataManager.getApiService();
         progressDialog = new ProgressDialog(ThreadNewActivity3.this);
+
+        showTopic();
+
+        //Spinner
+        sIdTopic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedName = parent.getItemAtPosition(position).toString();
+                Toast.makeText(mContext, "Pilih topik dahulu" , Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         //Editor
         mEditor = (RichEditor) findViewById(R.id.editor);
@@ -124,8 +153,9 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                 String title = etTitle.getText().toString();
                 String post = mEditor.getHtml().toString();
                 String topic = sIdTopic.getSelectedItem().toString();
-
                 uploadImage(pathPhoto,title,post,topic);
+
+
             }
         });
 
@@ -333,7 +363,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             } else {
                 Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, REQUEST_CODE_GALLERY);
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -376,15 +405,24 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Uri selectedImage = data.getData();
-        String[] filePathColumn = { MediaStore.Images.Media.DATA };
-        Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
-        cursor.moveToFirst();
-        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-        pathPhoto = cursor.getString(columnIndex);
-        cursor.close();
+        if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
+            Bitmap mphoto = (Bitmap) data.getExtras().get("data");
+            progressDialog.hide();
+            Log.d("camera",mphoto.toString());
+        }else if(requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK){
+            Uri selectedImage = data.getData();
+            String[] filePathColumn = { MediaStore.Images.Media.DATA };
+            Cursor cursor = getContentResolver().query(selectedImage,filePathColumn, null, null, null);
+            cursor.moveToFirst();
+            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+            pathPhoto = cursor.getString(columnIndex);
+            cursor.close();
 
-        progressDialog.hide();
+            Glide.with(mContext)
+                    .load(selectedImage)
+                    .into(ivBrowsePhoto);
+            progressDialog.hide();
+        }
     }
 
     @NonNull
@@ -399,6 +437,26 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         progressDialog.show();
     }
 
+    private File createTempFile(Bitmap bitmap) {
+        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+                , System.currentTimeMillis() +"_image.webp");
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+
+        bitmap.compress(Bitmap.CompressFormat.WEBP,0, bos);
+        byte[] bitmapdata = bos.toByteArray();
+        //write the bytes in file
+
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            fos.write(bitmapdata);
+            fos.flush();
+            fos.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
+
     public void uploadImage(String path, String tittle, String post, String id_topic) {
         HashMap<String, RequestBody> map = new HashMap<>();
         map.put("title", createPartFromString(tittle));
@@ -406,6 +464,57 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         map.put("id_topic[0]", createPartFromString(id_topic));
 
         File file = new File(path);
+        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
+        MultipartBody.Part body = MultipartBody.Part.createFormData("browsePhoto", file.getName(), reqFile);
+        Call<ResponseBody> call = mApiService.postingTread(body,map);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                progressDialog.hide();
+                if(response.isSuccessful()){
+                    try{
+                        String returnBodyText = response.body().string();
+                        JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                        Log.d("response",jsonRESULTS.toString());
+                        if (jsonRESULTS.getString("status").equals("success")){
+                            Toast.makeText(mContext, "Upload Success", Toast.LENGTH_SHORT).show();
+
+                            //menghapus data
+                            etTitle.setText(null);
+                            mEditor.setHtml(null);
+
+                        } else {
+                            Toast.makeText(mContext, "upload Failure", Toast.LENGTH_SHORT).show();
+                        }
+                        progressDialog.hide();
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }else{
+                    Toast.makeText(mContext,"Connection Error",Toast.LENGTH_SHORT).show();
+                    progressDialog.hide();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                progressDialog.hide();
+                Log.e("debug", "onFailure: ERROR > " + t.getMessage());
+                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    public void uploadCamera(Bitmap bitmap, String tittle, String post, String id_topic) {
+        HashMap<String, RequestBody> map = new HashMap<>();
+        map.put("title", createPartFromString(tittle));
+        map.put("post", createPartFromString(post));
+        map.put("id_topic[0]", createPartFromString(id_topic));
+
+        File file = createTempFile(bitmap);
         RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part body = MultipartBody.Part.createFormData("browsePhoto", file.getName(), reqFile);
         Call<ResponseBody> call = mApiService.postingTread(body,map);
@@ -441,6 +550,47 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                 progressDialog.hide();
                 Log.e("debug", "onFailure: ERROR > " + t.getMessage());
                 Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
+
+
+    }
+
+    //Get field spinner
+    private void showTopic(){
+
+        loading = ProgressDialog.show(mContext, null,"harap tunggu",true, false);
+
+        mApiService.getTopic().enqueue(new Callback<ResponseTopic>() {
+            @Override
+            public void onResponse(Call<ResponseTopic> call, Response<ResponseTopic> response) {
+                if (response.isSuccessful()) {
+                    loading.dismiss();
+                    List<Topic> topics = response.body().getTopics();
+                    List<String> listSpinner = new ArrayList<> ();
+                    for (int i = 0; i < topics.size(); i++) {
+                        listSpinner.add(topics.get(i).getName());
+                    }
+
+                    ArrayAdapter<String> adapter = new
+                            ArrayAdapter<String>(mContext,
+                            android.R.layout.simple_spinner_item, listSpinner);
+                    adapter.setDropDownViewResource(
+                            android.R.layout.simple_spinner_dropdown_item);
+                    sIdTopic.setAdapter(adapter);
+                    Log.d("cobacoba", listSpinner.toString());
+                } else {
+                    loading.dismiss();
+                    Toast.makeText(mContext,"gagal mengambil", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseTopic> call, Throwable t) {
+
+                loading.dismiss();
+                Toast.makeText(mContext,"koneksi bermasalah", Toast.LENGTH_SHORT).show();
             }
         });
     }

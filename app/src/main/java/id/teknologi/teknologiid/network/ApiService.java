@@ -7,13 +7,13 @@ import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Pekerjaan;
-import id.teknologi.teknologiid.model.PostNewThread;
 import id.teknologi.teknologiid.model.Profile;
-import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.DetileThread;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
+import id.teknologi.teknologiid.model.ResponseTopic;
 import id.teknologi.teknologiid.model.Thread;
+import id.teknologi.teknologiid.model.Topic;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -33,6 +33,9 @@ import retrofit2.http.Path;
  */
 
 public interface ApiService {
+
+    //THREAD
+
     @GET("threads")
     Observable<ResponseArray<Thread>> getThreads();
 
@@ -41,6 +44,34 @@ public interface ApiService {
             @Path("id") int id,
             @Path("slug") String slug
     );
+
+    @Multipart
+    @POST("threads/post")
+    Observable<ResponseBody> postNewThread(
+            @Part("title") RequestBody title,
+            @Part("post") RequestBody post,
+            @Part("id_topik") RequestBody slug,
+            @Part("browsePhoto") RequestBody browsePhoto
+    );
+
+    @Multipart
+    @POST("threads/post")
+    Call<ResponseBody> postingTread(
+            @Part MultipartBody.Part photo,
+            @PartMap Map<String, RequestBody> text
+    );
+
+    @GET("threads/{id}/{slug}/{comments}")
+    Observable<ResponseObject<DetileThread>> getThreadDetail(
+            @Path("id") int id,
+            @Path("slug") String slug,
+            @Path("comments") String comments
+    );
+
+    @GET("init/topic")
+    Call<ResponseTopic> getTopic();
+
+
 
     //Pekerjaan
     @GET("jobs")
@@ -83,26 +114,5 @@ public interface ApiService {
             @Field("password") String password
     );
 
-    @Multipart
-    @POST("threads/post")
-    Observable<ResponseBody> postNewThread(
-            @Part("title") RequestBody title,
-            @Part("post") RequestBody post,
-            @Part("id_topik") RequestBody slug,
-            @Part("browsePhoto") RequestBody browsePhoto
-    );
 
-    @Multipart
-    @POST("threads/post")
-    Call<ResponseBody> postingTread(
-            @Part MultipartBody.Part photo,
-            @PartMap Map<String, RequestBody> text
-            );
-
-    @GET("threads/{id}/{slug}/{comments}")
-    Observable<ResponseObject<DetileThread>> getThreadDetail(
-            @Path("id") int id,
-            @Path("slug") String slug,
-            @Path("comments") String comments
-    );
 }
