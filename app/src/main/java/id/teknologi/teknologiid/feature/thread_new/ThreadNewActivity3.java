@@ -332,8 +332,10 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 if(items[i].equals("Camera")){
+                    checker=true;
                     openCamera();
                 }else if(items[i].equals("Gallery")){
+                    checker=false;
                     openGalery();
                 }
             }
