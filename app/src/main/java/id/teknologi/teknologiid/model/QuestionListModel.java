@@ -86,5 +86,7 @@ public class QuestionListModel {
         return tags;
     }
 
+    public void add(QuestionListModel qlModel) {
+    }
 }
 

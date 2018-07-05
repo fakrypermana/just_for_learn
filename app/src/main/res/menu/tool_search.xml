@@ -7,6 +7,8 @@
     <item
         android:title="Search"
         android:id="@+id/action_search"
+        android:icon="@drawable/smile"
+        android:orderInCategory="300"
         app:showAsAction="ifRoom|collapseActionView"
         app:actionViewClass = "android.support.v7.widget.SearchView"/>
 

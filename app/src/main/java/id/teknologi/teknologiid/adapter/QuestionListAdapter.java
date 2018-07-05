@@ -2,6 +2,7 @@ package id.teknologi.teknologiid.adapter;
 
 import android.content.Context;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,8 +23,11 @@ import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, QuestionListAdapter.QuestionListVH>  {
+
     public QuestionListAdapter(Context context, List<QuestionListModel> questionList, RecyclerInterface recyclerCallback) {
         super(context, questionList, recyclerCallback);
+        this.names=names;
+        this.context=context;
     }
 
     @Override
@@ -33,12 +37,15 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
     @Override
     public QuestionListVH onCreateViewHolder(ViewGroup parent, int viewType) {
+        View layout= LayoutInflater.from(parent.getContext()).
+                inflate(R.layout.item_list_question,parent,false);
+//        return new Holderview(layout);
 
         return new QuestionListVH(initView(viewType, parent),getRecyclerCallback());
     }
 
     private List<QuestionListModel> names;
-
+    private Context context;
 
     public class QuestionListVH extends BaseViewHolder<QuestionListModel> {
 
@@ -111,6 +118,24 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         notifyDataSetChanged();
 
     }
+//    public void filter(String text) {
+//        List<QuestionListModel> namecopy = new ArrayList<>();
+////        namecopy=names;
+////        getNames().clear();
+//
+//            if (text.isEmpty()) {
+//                getNames().addAll(namecopy);
+//            } else {
+//                text = text.toLowerCase();
+//                for (QuestionListModel qlModel : namecopy) {
+//                    if (qlModel.getTitle().toLowerCase().contains(text) || qlModel.getUser_name().toLowerCase().contains(text)) {
+//                        qlModel.add(qlModel);
+//                    }
+//                }
+//            }
+//            notifyDataSetChanged();
+//
+//    }
 
 
 }
