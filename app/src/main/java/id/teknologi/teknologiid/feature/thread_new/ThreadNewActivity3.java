@@ -1,5 +1,6 @@
 package id.teknologi.teknologiid.feature.thread_new;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -7,20 +8,22 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
+import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v13.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -37,17 +40,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
-import id.teknologi.teknologiid.adapter.TopicAdapter;
-import id.teknologi.teknologiid.base.ResponseArray;
-import id.teknologi.teknologiid.model.Thread;
-import id.teknologi.teknologiid.model.Topic;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import jp.wasabeef.richeditor.RichEditor;
@@ -55,19 +55,13 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
+import pl.aprilapps.easyphotopicker.DefaultCallback;
+import pl.aprilapps.easyphotopicker.EasyImage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ThreadNewActivity3 extends AppCompatActivity{
-
-    ThreadTopicPresenter presenter;
-    TopicAdapter topicAdapter;
-    List<Topic> topicList = new ArrayList<>();
-
-    ApiService mApiService;
-    ProgressDialog progressDialog;
-    Context mContext;
 
     public static final int REQUEST_CODE_CAMERA = 300;
     public static final int REQUEST_CODE_GALLERY = 200;
@@ -75,6 +69,11 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 
     private String [] items = {"Camera","Gallery"};
     private String pathPhoto;
+    private String pathCamera;
+    private Bitmap mphoto;
+    private boolean checker;
+    private File tempFile = null;
+    private Uri uriCamera = null;
     //Editor
     private RichEditor mEditor;
 
@@ -91,33 +90,20 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     Button btnLoadImage;
     @BindView(R.id.textview_image_path)
     TextView tvPath;
-    ProgressDialog loading;
+
+    ApiService mApiService;
+
+    ProgressDialog progressDialog;
+    Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_thread_new3);
         ButterKnife.bind(this);
         mContext = ThreadNewActivity3.this;
         mApiService = DataManager.getApiService();
         progressDialog = new ProgressDialog(ThreadNewActivity3.this);
-
-
-
-        //Spinner
-        sIdTopic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "Kamu memilih topic " + selectedName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
 
         //Editor
         mEditor = (RichEditor) findViewById(R.id.editor);
@@ -131,7 +117,8 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         btnLoadImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+//                String title = etTitle.getText().toString();
+//                String post = etTitle.getText().toString();
                 showProgressDialog();
                 openImage();
 
@@ -143,10 +130,19 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             @Override
             public void onClick(View v) {
 
+
                 String title = etTitle.getText().toString();
                 String post = mEditor.getHtml().toString();
                 String topic = sIdTopic.getSelectedItem().toString();
-                uploadImage(pathPhoto,title,post,topic);
+                Log.d("checker",""+checker);
+                Log.d("cari title", title.toString());
+                Log.d("cari post", post.toString());
+                Log.d("cari topic", topic.toString());
+                if(checker==true){
+                    uploadImage(pathCamera,title,post,"1");
+                }else if(checker==false){
+                    uploadImage(pathPhoto,title,post,"1");
+                }
             }
         });
 
@@ -326,9 +322,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 
 
 
-
-
-
     /**
      * this method used to open image directory or open from camera
      */
@@ -369,8 +362,32 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             if (ContextCompat.checkSelfPermission(ThreadNewActivity3.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(ThreadNewActivity3.this, new String[]{android.Manifest.permission.CAMERA}, PERMISSION_REQUEST);
             } else {
-                Intent cameraIntent = new Intent(android.provider.MediaStore.ACTION_IMAGE_CAPTURE);
-                startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
+                Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+                if (cameraIntent.resolveActivity(getPackageManager()) != null) {
+                    // Create the File where the photo should go
+                    try {
+
+                        tempFile = createImageFile();
+                        Log.i("Mayank",tempFile.getAbsolutePath());
+
+                        // Continue only if the File was successfully created
+                        if (tempFile != null) {
+                            Uri photoURI = FileProvider.getUriForFile(this,
+                                    "id.teknologi.teknologiid.fileprovider",
+                                    tempFile);
+                            Log.d("uri",photoURI.toString());
+                            cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
+                            startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
+                        }
+                    } catch (Exception ex) {
+                        // Error occurred while creating the File
+                        Toast.makeText(getBaseContext(),ex.getMessage().toString(),Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }else{
+                    Toast.makeText(getBaseContext(),"NUll",Toast.LENGTH_SHORT).show();
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -400,9 +417,11 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
-            Bitmap mphoto = (Bitmap) data.getExtras().get("data");
+            Bitmap myBitmap = BitmapFactory.decodeFile(pathCamera);
+            ivBrowsePhoto.setImageBitmap(myBitmap);
+            galleryAddPic();
+            Log.d("pathCamera",pathCamera);
             progressDialog.hide();
-            Log.d("camera",mphoto.toString());
         }else if(requestCode == REQUEST_CODE_GALLERY && resultCode == RESULT_OK){
             Uri selectedImage = data.getData();
             String[] filePathColumn = { MediaStore.Images.Media.DATA };
@@ -410,6 +429,9 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             cursor.moveToFirst();
             int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
             pathPhoto = cursor.getString(columnIndex);
+            Log.d("pathPhoto",pathPhoto);
+            Bitmap myBitmap = BitmapFactory.decodeFile(pathPhoto);
+            ivBrowsePhoto.setImageBitmap(myBitmap);
             cursor.close();
 
             Glide.with(mContext)
@@ -431,24 +453,33 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         progressDialog.show();
     }
 
-    private File createTempFile(Bitmap bitmap) {
-        File file = new File(getExternalFilesDir(Environment.DIRECTORY_PICTURES)
-                , System.currentTimeMillis() +"_image.webp");
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+    private File createImageFile() throws IOException {
+        // Create an image file name
 
-        bitmap.compress(Bitmap.CompressFormat.WEBP,0, bos);
-        byte[] bitmapdata = bos.toByteArray();
-        //write the bytes in file
+        String root = Environment.getExternalStorageDirectory().toString();
+        File file = new File(root+"test");
+        file.mkdir();
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        String imageFileName = "JPEG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File image = File.createTempFile(
+                imageFileName,  /* prefix */
+                ".jpg",         /* suffix */
+                storageDir      /* directory */
+        );
 
-        try {
-            FileOutputStream fos = new FileOutputStream(file);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return file;
+        // Save a file: path for use with ACTION_VIEW intents
+        pathCamera = image.getAbsolutePath();
+        Log.d("test",pathCamera);
+        return image;
+    }
+
+    private void galleryAddPic() {
+        Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        File f = new File(pathCamera);
+        Uri contentUri = Uri.fromFile(f);
+        mediaScanIntent.setData(contentUri);
+        this.sendBroadcast(mediaScanIntent);
     }
 
     public void uploadImage(String path, String tittle, String post, String id_topic) {
@@ -472,11 +503,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                         Log.d("response",jsonRESULTS.toString());
                         if (jsonRESULTS.getString("status").equals("success")){
                             Toast.makeText(mContext, "Upload Success", Toast.LENGTH_SHORT).show();
-
-                            //menghapus data
-                            etTitle.setText(null);
-                            mEditor.setHtml(null);
-
                         } else {
                             Toast.makeText(mContext, "upload Failure", Toast.LENGTH_SHORT).show();
                         }
@@ -501,55 +527,5 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             }
         });
     }
-
-    public void uploadCamera(Bitmap bitmap, String tittle, String post, String id_topic) {
-        HashMap<String, RequestBody> map = new HashMap<>();
-        map.put("title", createPartFromString(tittle));
-        map.put("post", createPartFromString(post));
-        map.put("id_topic[0]", createPartFromString(id_topic));
-
-        File file = createTempFile(bitmap);
-        RequestBody reqFile = RequestBody.create(MediaType.parse("image/*"), file);
-        MultipartBody.Part body = MultipartBody.Part.createFormData("browsePhoto", file.getName(), reqFile);
-        Call<ResponseBody> call = mApiService.postingTread(body,map);
-        call.enqueue(new Callback<ResponseBody>() {
-            @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-                progressDialog.hide();
-                if(response.isSuccessful()){
-                    try{
-                        String returnBodyText = response.body().string();
-                        JSONObject jsonRESULTS = new JSONObject(returnBodyText);
-                        Log.d("response",jsonRESULTS.toString());
-                        if (jsonRESULTS.getString("status").equals("success")){
-                            Toast.makeText(mContext, "Upload Success", Toast.LENGTH_SHORT).show();
-                        } else {
-                            Toast.makeText(mContext, "upload Failure", Toast.LENGTH_SHORT).show();
-                        }
-                        progressDialog.hide();
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }else{
-                    Toast.makeText(mContext,"Connection Error",Toast.LENGTH_SHORT).show();
-                    progressDialog.hide();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
-                progressDialog.hide();
-                Log.e("debug", "onFailure: ERROR > " + t.getMessage());
-                Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        });
-
-    }
-
-
-
 }
 

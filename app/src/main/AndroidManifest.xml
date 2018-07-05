@@ -2,13 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="id.teknologi.teknologiid">
-
     <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-
-    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true"/>
 
     <application
         android:name=".BaseApplication"
@@ -28,35 +28,35 @@
         <activity android:name=".feature.thread_detail.ThreadDetailActivity" />
         <activity android:name=".feature.thread.ThreadActivity" />
         <activity android:name=".feature.pekerjaan.PekerjaanActivity" />
-        <activity android:name=".dummy_activity.Pekerjaan" />
+        <activity android:name=".dummy_activity.Pekerjaan"/>
         <activity android:name=".feature.pekerjaan_detail.DetailPekerjaanActivity" />
         <activity android:name=".feature.login_register.RegisterActivity" />
         <activity android:name=".feature.login_register.LoginActivity" />
         <activity android:name=".feature.login_register.PrevLoginRegistActivity" />
 
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
+        <meta-data android:name="com.facebook.sdk.ApplicationId"
+            android:value="@string/facebook_app_id"/>
 
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
+        <activity android:name="com.facebook.FacebookActivity"
+            android:configChanges=
+                "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
             android:label="@string/app_name" />
         <activity
             android:name="com.facebook.CustomTabActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
                 <data android:scheme="@string/fb_login_protocol_scheme" />
             </intent-filter>
         </activity>
-        <activity android:name=".feature.Question.QuestionListActivity"></activity>
-        <activity android:name=".feature.Question.QuestionDetailActivity"></activity>
 
+
+        <activity android:name=".feature.Question.QuestionListActivity">
+        </activity>
+        <activity android:name=".feature.Question.QuestionDetailActivity">
+        </activity>
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="5654d30e8fca327d371a3421402897bd4c58d5db" />
@@ -64,8 +64,23 @@
         <activity android:name=".dummy_activity.Profil" />
         <activity android:name=".dummy_activity.Pertanyaan" />
         <activity android:name=".dummy_activity.Notifikasi" />
-        <activity android:name=".feature.thread_new.ThreadNewActivity3" />
-        <activity android:name=".feature.profile.ProfileActivity" />
+        <activity android:name=".feature.thread_new.ThreadNewActivity3"></activity>
+
+        <activity android:name=".feature.profile.ProfileActivity"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="id.teknologi.teknologiid.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                tools:replace="android:resource"/>
+        </provider>
+
+
     </application>
 
 </manifest>

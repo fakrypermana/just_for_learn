@@ -65,10 +65,10 @@
             android:layout_marginTop="2dp"
             android:layout_weight="1"
             android:id="@+id/iv_browsePhoto"
-            android:layout_width="fill_parent"
-            android:layout_height="match_parent"
+            android:layout_width="110dp"
+            android:layout_height="65dp"
             android:background="@drawable/ic_launcher_background"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitXY"/>
 
 
     </LinearLayout>
