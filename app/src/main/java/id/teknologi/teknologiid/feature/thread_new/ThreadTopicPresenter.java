@@ -11,18 +11,4 @@ public class ThreadTopicPresenter extends BasePresenter<ThreadTopicView> {
 
     void UploadPost(){ }
 
-    void getTopic(){
-        getView().onLoading(true);
-        dataManager.getTopic()
-                .doOnTerminate(() -> getView().onLoading(false))
-                .compose(RxUtils.applyScheduler())
-                .compose(RxUtils.applyApiCall())
-                .subscribe(response -> {
-                    getView().onSuccessTopic(response.getData());
-                }, throwable -> {
-                    String message = ErrorHandler.handleError(throwable);
-                    getView().onFailed(message);
-                })
-                .isDisposed();
-    }
 }

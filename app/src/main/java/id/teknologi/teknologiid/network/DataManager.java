@@ -1,27 +1,23 @@
 package id.teknologi.teknologiid.network;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-import java.util.Map;
-
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Profile;
+import id.teknologi.teknologiid.base.ResponseObject;
+import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.DetileThread;
+import id.teknologi.teknologiid.model.QuestionAnsweredModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
-import id.teknologi.teknologiid.model.Topic;
 import io.reactivex.Observable;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by galihgasur on 10/1/17.
@@ -36,11 +32,9 @@ public class DataManager {
 
 
     public DataManager(ApiService apiService){
-
         this.apiService = apiService;
     }
 
-    //Thread
     public Observable<ResponseArray<Thread>> getThreads() {
         return apiService.getThreads();
     }
@@ -48,32 +42,13 @@ public class DataManager {
         return apiService.getQuestionList();
     }
 
-    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
-        return apiService.getThreadDetail(id, slug);
-    }
-
-    public Observable<ResponseArray<Topic>> getTopic() {
-        return apiService.getTopic();
-    }
-
-
     public Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(int id, String slug) {
         return apiService.getQuestionDetail(id,slug);
     }
 
-
-
-
-//    public Observable<ResponseArray<Topic>> getTopic(int id, String name) {
-//        return apiService.getTopic(id,name);
-//    }
-
-//    @SerializedName("topic")
-//    private List<Topic> topic;
-//
-//    public List <Topic> getTopic(){
-//        return topic;
-//    }
+    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
+        return apiService.getThreadDetail(id, slug);
+    }
 
     //Pekerjaan
     public Observable<ResponseArray<Pekerjaan>> getPekerjaan() {
@@ -89,9 +64,6 @@ public class DataManager {
         return apiService.getProfile();
     }
 
-    public Call<ResponseBody> uploadPost(MultipartBody.Part body, Map<String, RequestBody> text){
-        return apiService.postingTread(body, text);
-    }
     //login
     public static ApiService getUserManagerService(Converter.Factory converterFactory){
         // Create retrofit builder.
@@ -123,4 +95,10 @@ public class DataManager {
         return apiService.getThreadDetail(id, slug, comment);
     }
 
+    public Observable<ResponseArray<QuestionAnsweredModel>>getAnswerList(int id, String slug) {
+        return apiService.getAnswerList(id, slug);
+    }
+//    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
+//        return apiService.getThreadDetail(id,slug);
+//    }
 }
