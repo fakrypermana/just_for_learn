@@ -10,8 +10,6 @@ import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Profile;
-import id.teknologi.teknologiid.base.ResponseObject;
-import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.DetileThread;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
@@ -19,14 +17,11 @@ import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.model.Topic;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by galihgasur on 10/1/17.
@@ -53,24 +48,32 @@ public class DataManager {
         return apiService.getQuestionList();
     }
 
+    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
+        return apiService.getThreadDetail(id, slug);
+    }
+
+    public Observable<ResponseArray<Topic>> getTopic() {
+        return apiService.getTopic();
+    }
+
+
     public Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(int id, String slug) {
         return apiService.getQuestionDetail(id,slug);
     }
 
-    public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
-        return apiService.getThreadDetail(id, slug);
-    }
+
+
 
 //    public Observable<ResponseArray<Topic>> getTopic(int id, String name) {
 //        return apiService.getTopic(id,name);
 //    }
 
-    @SerializedName("topic")
-    private List<Topic> topic;
-
-    public List <Topic> getTopic(){
-        return topic;
-    }
+//    @SerializedName("topic")
+//    private List<Topic> topic;
+//
+//    public List <Topic> getTopic(){
+//        return topic;
+//    }
 
     //Pekerjaan
     public Observable<ResponseArray<Pekerjaan>> getPekerjaan() {
@@ -119,7 +122,5 @@ public class DataManager {
     public Observable<ResponseObject<DetileThread>> getThreadDetail(int id, String slug, String comment) {
         return apiService.getThreadDetail(id, slug, comment);
     }
-//    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
-//        return apiService.getThreadDetail(id,slug);
-//    }
+
 }

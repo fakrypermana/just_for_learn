@@ -11,7 +11,6 @@ import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.DetileThread;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
-import id.teknologi.teknologiid.model.ResponseTopic;
 import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.model.Topic;
 import io.reactivex.Observable;
@@ -45,6 +44,9 @@ public interface ApiService {
             @Path("slug") String slug
     );
 
+    @GET("init/topic")
+    Observable<ResponseArray<Topic>> getTopic();
+
     @Multipart
     @POST("threads/post")
     Observable<ResponseBody> postNewThread(
@@ -67,10 +69,6 @@ public interface ApiService {
             @Path("slug") String slug,
             @Path("comments") String comments
     );
-
-    @GET("init/topic")
-    Call<ResponseTopic> getTopic();
-
 
 
     //Pekerjaan

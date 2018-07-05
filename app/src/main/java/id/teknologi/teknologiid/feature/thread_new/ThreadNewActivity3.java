@@ -1,6 +1,5 @@
 package id.teknologi.teknologiid.feature.thread_new;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,10 +8,8 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.v13.app.ActivityCompat;
@@ -27,13 +24,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,15 +40,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.SplittableRandom;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
+import id.teknologi.teknologiid.adapter.TopicAdapter;
 import id.teknologi.teknologiid.base.ResponseArray;
-import id.teknologi.teknologiid.base.ResponseObject;
-import id.teknologi.teknologiid.model.ResponseTopic;
+import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.model.Topic;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
@@ -62,19 +55,19 @@ import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import pl.aprilapps.easyphotopicker.DefaultCallback;
-import pl.aprilapps.easyphotopicker.EasyImage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class ThreadNewActivity3 extends AppCompatActivity{
 
+    ThreadTopicPresenter presenter;
+    TopicAdapter topicAdapter;
+    List<Topic> topicList = new ArrayList<>();
 
     ApiService mApiService;
     ProgressDialog progressDialog;
     Context mContext;
-
 
     public static final int REQUEST_CODE_CAMERA = 300;
     public static final int REQUEST_CODE_GALLERY = 200;
@@ -110,14 +103,14 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         mApiService = DataManager.getApiService();
         progressDialog = new ProgressDialog(ThreadNewActivity3.this);
 
-        showTopic();
+
 
         //Spinner
         sIdTopic.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "Pilih topik dahulu" , Toast.LENGTH_SHORT).show();
+                Toast.makeText(mContext, "Kamu memilih topic " + selectedName, Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -154,8 +147,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                 String post = mEditor.getHtml().toString();
                 String topic = sIdTopic.getSelectedItem().toString();
                 uploadImage(pathPhoto,title,post,topic);
-
-
             }
         });
 
@@ -332,6 +323,9 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 
 
     }
+
+
+
 
 
 
@@ -553,46 +547,9 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             }
         });
 
-
-
     }
 
-    //Get field spinner
-    private void showTopic(){
 
-        loading = ProgressDialog.show(mContext, null,"harap tunggu",true, false);
 
-        mApiService.getTopic().enqueue(new Callback<ResponseTopic>() {
-            @Override
-            public void onResponse(Call<ResponseTopic> call, Response<ResponseTopic> response) {
-                if (response.isSuccessful()) {
-                    loading.dismiss();
-                    List<Topic> topics = response.body().getTopics();
-                    List<String> listSpinner = new ArrayList<> ();
-                    for (int i = 0; i < topics.size(); i++) {
-                        listSpinner.add(topics.get(i).getName());
-                    }
-
-                    ArrayAdapter<String> adapter = new
-                            ArrayAdapter<String>(mContext,
-                            android.R.layout.simple_spinner_item, listSpinner);
-                    adapter.setDropDownViewResource(
-                            android.R.layout.simple_spinner_dropdown_item);
-                    sIdTopic.setAdapter(adapter);
-                    Log.d("cobacoba", listSpinner.toString());
-                } else {
-                    loading.dismiss();
-                    Toast.makeText(mContext,"gagal mengambil", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<ResponseTopic> call, Throwable t) {
-
-                loading.dismiss();
-                Toast.makeText(mContext,"koneksi bermasalah", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 }
 
