@@ -67,9 +67,9 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
 
         @Override
         public void onBind(RelatedPekerjaan related) {
-            tvNamaRelated.setText(related.getName());
-            tvSalaryMax.setText(related.getSalary_max());
-            tvSalaryMin.setText(related.getSalary_min());
+            tvNamaRelated.setText("UHUY");
+            tvSalaryMax.setText("WASU");
+            tvSalaryMin.setText("WTF THIS BUG");
             Log.d("wadidaw","isinya"+new Gson().toJson(related.getName()));
 
         }
