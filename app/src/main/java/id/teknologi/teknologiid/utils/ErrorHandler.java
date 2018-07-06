@@ -26,9 +26,11 @@ public class ErrorHandler {
             BaseResponse baseResponse = rameException.getResponse();
             if (baseResponse != null) {
                 String message = baseResponse.getMessage();
-                if (!message.isEmpty()) {
+                if (message!=null && !message.isEmpty()) {
                     Log.d("Connection","Error other: "+message);
                     return message;
+                }else{
+                    return "Please check your network and try again.";
                 }
             }
         }

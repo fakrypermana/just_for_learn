@@ -72,6 +72,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     @Override
     public void onFailed(String message) {
         Log.d("Pekerjaan","ERROR");
+        Toast.makeText(this, message,Toast.LENGTH_SHORT).show();
     }
 
     @Override

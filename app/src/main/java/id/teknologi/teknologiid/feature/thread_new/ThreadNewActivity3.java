@@ -372,9 +372,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 
                         // Continue only if the File was successfully created
                         if (tempFile != null) {
-                            Uri photoURI = FileProvider.getUriForFile(this,
-                                    "id.teknologi.teknologiid.fileprovider",
-                                    tempFile);
+                            Uri photoURI = FileProvider.getUriForFile(this, "id.teknologi.teknologiid.fileprovider",tempFile);
                             Log.d("uri",photoURI.toString());
                             cameraIntent.putExtra(MediaStore.EXTRA_OUTPUT, photoURI);
                             startActivityForResult(cameraIntent, REQUEST_CODE_CAMERA);
@@ -454,8 +452,8 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     }
 
     private File createImageFile() throws IOException {
-        // Create an image file name
 
+        // Create an image file name
         String root = Environment.getExternalStorageDirectory().toString();
         File file = new File(root+"test");
         file.mkdir();
@@ -467,9 +465,18 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                 ".jpg",         /* suffix */
                 storageDir      /* directory */
         );
-
-        // Save a file: path for use with ACTION_VIEW intents
         pathCamera = image.getAbsolutePath();
+        //Convert bitmap to byte array
+        Bitmap myBitmap = BitmapFactory.decodeFile(pathCamera);
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        myBitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
+        byte[] bitmapdata = bos.toByteArray();
+
+        //write the bytes in file
+        FileOutputStream fos = new FileOutputStream(image);
+        fos.write(bitmapdata);
+        fos.flush();
+        fos.close();
         Log.d("test",pathCamera);
         return image;
     }
