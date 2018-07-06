@@ -5,6 +5,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,12 +24,29 @@ import id.teknologi.teknologiid.base.BaseViewHolder;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
-public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, QuestionListAdapter.QuestionListVH>  {
+public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, QuestionListAdapter.QuestionListVH> implements Filterable {
+
+    private final Context context;
+    private List<QuestionListModel> defaulList;
+    private List<QuestionListModel>filteredList;
+    public MyFilter myFilter;
 
     public QuestionListAdapter(Context context, List<QuestionListModel> questionList, RecyclerInterface recyclerCallback) {
         super(context, questionList, recyclerCallback);
-        this.names=names;
         this.context=context;
+        this.defaulList= questionList;
+        this.filteredList = new ArrayList<QuestionListModel>();
+    }
+
+    @Override
+    public Filter getFilter(){
+
+        if(myFilter == null){
+            filteredList.clear();
+            filteredList.addAll(this.defaulList);
+            myFilter=new QuestionListAdapter.MyFilter(this,filteredList);
+        }
+        return myFilter;
     }
 
     @Override
@@ -44,8 +63,8 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         return new QuestionListVH(initView(viewType, parent),getRecyclerCallback());
     }
 
-    private List<QuestionListModel> names;
-    private Context context;
+
+
 
     public class QuestionListVH extends BaseViewHolder<QuestionListModel> {
 
@@ -112,11 +131,57 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
 
         }
-    public void updateList(List<QuestionListModel> newList){
-        names=new ArrayList<>();
-        names.addAll(newList);
-        notifyDataSetChanged();
+//    public void updateList(List<QuestionListModel> newList){
+//        names=new ArrayList<>();
+//        names.addAll(newList);
+//        notifyDataSetChanged();
+//
+//    }
 
+    private static class MyFilter extends Filter {
+
+        private final QuestionListAdapter adapter;
+        private final List<QuestionListModel> originalList;
+        private final List<QuestionListModel> filteredList;
+
+
+        private MyFilter(QuestionListAdapter adapter, List<QuestionListModel> originalList) {
+
+            this.adapter = adapter;
+            this.originalList = originalList;
+            this.filteredList = new ArrayList<QuestionListModel>();
+
+        }
+
+        @Override
+        protected FilterResults performFiltering(CharSequence charSequence) {
+            filteredList.clear();
+            final FilterResults results = new FilterResults();
+            if (charSequence.length() == 0){
+                filteredList.addAll(originalList);
+            }else {
+                final String filterPattern = charSequence.toString().toLowerCase().trim();
+                for ( QuestionListModel qlModel : originalList){
+                    if (qlModel.getUser_name().toLowerCase().contains(filterPattern)||
+                            qlModel.getTitle().toLowerCase().contains(filterPattern)){
+                        filteredList.add(qlModel);
+                    }
+                }
+            }
+
+            results.values = filteredList;
+            results.count = filteredList.size();
+            return results;
+        }
+
+        @Override
+        protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+
+            adapter.defaulList.clear();
+            adapter.defaulList.addAll((ArrayList<QuestionListModel>)filterResults.values);
+            adapter.notifyDataSetChanged();
+
+        }
     }
 //    public void filter(String text) {
 //        List<QuestionListModel> namecopy = new ArrayList<>();

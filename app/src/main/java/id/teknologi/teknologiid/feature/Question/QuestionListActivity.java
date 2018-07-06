@@ -10,7 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.ViewGroup;
 import android.widget.EditText;
-import android.support.v7.widget.SearchView;
+
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -35,8 +36,9 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
     @BindView(R.id.rv_QuestionList)
     RecyclerView rvQuestionList;
 
-//    @BindView(R.id.action_search);
+    @BindView(R.id.action_search_view)
     SearchView searchView;
+
 
 
     @Override
@@ -56,6 +58,23 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
     protected void setupView() {
         rvQuestionList.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvQuestionList.setAdapter(questionListAdapter);
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                questionListAdapter.getFilter().filter(query);
+
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+
+                questionListAdapter.getFilter().filter(newText);
+                return true;
+            }
+        });
 
     }
 
@@ -152,57 +171,57 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
 //    }
 
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//
+//        getMenuInflater().inflate(R.menu.tool_search,menu);
+//        final MenuItem actionMenuItem = menu.findItem(R.id.action_search);
+//        searchView = (SearchView) actionMenuItem.getActionView();
+//        ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(getResources().getColor(R.color.LightGray));
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                if(!searchView.isIconified()){
+//                    searchView.setIconified(true);
+//                }
+//                actionMenuItem.collapseActionView();
+//                final List<QuestionListModel> filterList=filter(questionListModels,query);
+//                Log.d("query Masuk", "onQueryTextChange: "+query);
+//                questionListAdapter.updateList(filterList);
+//                return true;
+//            }
 
-        getMenuInflater().inflate(R.menu.tool_search,menu);
-        final MenuItem actionMenuItem = menu.findItem(R.id.action_search);
-        searchView = (SearchView) actionMenuItem.getActionView();
-        ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(getResources().getColor(R.color.LightGray));
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                if(!searchView.isIconified()){
-                    searchView.setIconified(true);
-                }
-                actionMenuItem.collapseActionView();
-                final List<QuestionListModel> filterList=filter(questionListModels,query);
-                Log.d("query Masuk", "onQueryTextChange: "+query);
-                questionListAdapter.updateList(filterList);
-                return true;
-            }
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                List<QuestionListModel> qlmodel = new ArrayList<>();
+//                for(QuestionListModel questionListModel : qlmodel){
+//                    if(questionListModel.getUser_name().toLowerCase().contains(newText)||
+//                            questionListModel.getTitle().toLowerCase().contains(newText)){
+//                        final List<QuestionListModel> filterList=filter(questionListModels,newText);
+//                        questionListAdapter.updateList(filterList);
+//
+//
+//                    }
+//                }Log.d("newTextMasuk", "onQueryTextChange: "+newText);
+//                return true;
+//
+//            }
+//        });
+//
+//        return true;
+//    }
 
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                List<QuestionListModel> qlmodel = new ArrayList<>();
-                for(QuestionListModel questionListModel : qlmodel){
-                    if(questionListModel.getUser_name().toLowerCase().contains(newText)||
-                            questionListModel.getTitle().toLowerCase().contains(newText)){
-                        final List<QuestionListModel> filterList=filter(questionListModels,newText);
-                        questionListAdapter.updateList(filterList);
-
-
-                    }
-                }Log.d("newTextMasuk", "onQueryTextChange: "+newText);
-                return true;
-
-            }
-        });
-
-        return true;
-    }
-
-    private List<QuestionListModel> filter (List<QuestionListModel> pl, String query){
-
-        query=query.toLowerCase();
-        final List<QuestionListModel> filteredList = new ArrayList<>();
-        for (QuestionListModel model : pl){
-            final String text= model.getUser_name().toLowerCase();
-            if(text.startsWith(query)){
-                filteredList.add(model);
-            }
-
-        }
-        return filteredList;
-    }
+//    private List<QuestionListModel> filter (List<QuestionListModel> pl, String query){
+//
+//        query=query.toLowerCase();
+//        final List<QuestionListModel> filteredList = new ArrayList<>();
+//        for (QuestionListModel model : pl){
+//            final String text= model.getUser_name().toLowerCase();
+//            if(text.startsWith(query)){
+//                filteredList.add(model);
+//            }
+//
+//        }
+//        return filteredList;
+//    }
 }
