@@ -83,21 +83,6 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
         Log.d("QUESTION LIST", new Gson().toJson(questionListModels));
         questionListAdapter.insertAndNotify(questionListModels);
 
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String s) {
-//                questionListAdapter.filter(s);
-//                return true;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String s) {
-//                questionListAdapter.filter(s);
-//                return true;
-//            }
-//        });
-
-
 
     }
 
@@ -121,107 +106,5 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
 
     }
 
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        getLayoutInflater().inflate(R.menu.tool_search, (ViewGroup) menu);
-//
-//        MenuItem menuItem = menu.findItem(R.id.action_search);
-//        SearchView searchView = (SearchView) MenuItemCompat.getActionView(menuItem);
-//        searchView.setOnQueryTextListener(
-//                new SearchView.OnQueryTextListener() {
-//                    @Override
-//                    public boolean onQueryTextSubmit(String s) {
-//
-//                        String userInput = s.toLowerCase();
-//                        List<QuestionListModel> newList = new ArrayList<>();
-//
-//                        for(QuestionListModel qlmodel : questionListModels){
-//
-//                            if(qlmodel.getTitle().toLowerCase().contains(userInput)){
-//                                newList.add(qlmodel);
-//                            }
-//                            questionListAdapter.updateList(newList);
-//                        }
-//
-//                        return true;
-//                    }
-//
-//                    @Override
-//                    public boolean onQueryTextChange(String s) {
-//
-//                        String userInput = s.toLowerCase();
-//                        List<QuestionListModel> newList = new ArrayList<>();
-//
-//                        for (QuestionListModel qlModel : questionListModels) {
-//
-//                            if (qlModel.getTitle().toLowerCase().contains(userInput)) {
-//
-//                                newList.add(qlModel);
-//
-//                            }
-//
-//                        }
-//                        questionListAdapter.updateList(newList);
-//                        return true;
-//                    }
-//                });
-//
-//
-//        return true;
-//    }
 
-
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//
-//        getMenuInflater().inflate(R.menu.tool_search,menu);
-//        final MenuItem actionMenuItem = menu.findItem(R.id.action_search);
-//        searchView = (SearchView) actionMenuItem.getActionView();
-//        ((EditText) searchView.findViewById(android.support.v7.appcompat.R.id.search_src_text)).setHintTextColor(getResources().getColor(R.color.LightGray));
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//                if(!searchView.isIconified()){
-//                    searchView.setIconified(true);
-//                }
-//                actionMenuItem.collapseActionView();
-//                final List<QuestionListModel> filterList=filter(questionListModels,query);
-//                Log.d("query Masuk", "onQueryTextChange: "+query);
-//                questionListAdapter.updateList(filterList);
-//                return true;
-//            }
-
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                List<QuestionListModel> qlmodel = new ArrayList<>();
-//                for(QuestionListModel questionListModel : qlmodel){
-//                    if(questionListModel.getUser_name().toLowerCase().contains(newText)||
-//                            questionListModel.getTitle().toLowerCase().contains(newText)){
-//                        final List<QuestionListModel> filterList=filter(questionListModels,newText);
-//                        questionListAdapter.updateList(filterList);
-//
-//
-//                    }
-//                }Log.d("newTextMasuk", "onQueryTextChange: "+newText);
-//                return true;
-//
-//            }
-//        });
-//
-//        return true;
-//    }
-
-//    private List<QuestionListModel> filter (List<QuestionListModel> pl, String query){
-//
-//        query=query.toLowerCase();
-//        final List<QuestionListModel> filteredList = new ArrayList<>();
-//        for (QuestionListModel model : pl){
-//            final String text= model.getUser_name().toLowerCase();
-//            if(text.startsWith(query)){
-//                filteredList.add(model);
-//            }
-//
-//        }
-//        return filteredList;
-//    }
 }

@@ -87,12 +87,12 @@ public class QuestionAnsweredAdapter extends BaseRecyclerAdapter<QuestionAnswere
             WebSettings webSettings = wvAnswer.getSettings();
             webSettings.setJavaScriptEnabled(true);
             tvUsername.setText(questionAnsweredModel.getUser_name());
+            Log.d("username answer", "onBind: "+questionAnsweredModel.getUser_name());
             tvDate.setText(questionAnsweredModel.getCreated_at());
 
             commentAdapter= new QuestionCommentAdapter(context, commentModels,this);
             rvComment.setLayoutManager(AppUtils.defaultLinearLayoutManager(context));
             rvComment.setAdapter(commentAdapter);
-
             commentAdapter.insertAndNotify(questionAnsweredModel.getComments());
 
             }

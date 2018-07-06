@@ -131,12 +131,6 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
 
         }
-//    public void updateList(List<QuestionListModel> newList){
-//        names=new ArrayList<>();
-//        names.addAll(newList);
-//        notifyDataSetChanged();
-//
-//    }
 
     private static class MyFilter extends Filter {
 
@@ -183,24 +177,6 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
         }
     }
-//    public void filter(String text) {
-//        List<QuestionListModel> namecopy = new ArrayList<>();
-////        namecopy=names;
-////        getNames().clear();
-//
-//            if (text.isEmpty()) {
-//                getNames().addAll(namecopy);
-//            } else {
-//                text = text.toLowerCase();
-//                for (QuestionListModel qlModel : namecopy) {
-//                    if (qlModel.getTitle().toLowerCase().contains(text) || qlModel.getUser_name().toLowerCase().contains(text)) {
-//                        qlModel.add(qlModel);
-//                    }
-//                }
-//            }
-//            notifyDataSetChanged();
-//
-//    }
 
 
 }
