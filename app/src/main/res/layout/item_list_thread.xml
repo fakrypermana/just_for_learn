@@ -24,8 +24,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_alignParentStart="true"
-            android:background="@drawable/gradient_hitam_abu"
+            android:layout_alignParentLeft="true"
+            android:background="#10000000"
             android:orientation="vertical">
 
             <TextView
@@ -68,17 +68,28 @@
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/tv_user_work"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginRight="10dp"
-                android:layout_toRightOf="@+id/daftar_icon"
-                android:layout_marginLeft="14dp"
-                android:text="Posisi"
-                android:textColor="@color/LightGray"
-                android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/hanyatitik"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_toRightOf="@+id/daftar_icon"
+                    android:text="."
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/tv_user_work"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@+id/daftar_icon"
+                    android:text="Posisi"
+                    android:textColor="@color/colorDarkGray"
+                    android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_topics"
@@ -108,7 +119,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Komentar"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorDarkGray"
                     android:textSize="12sp" />
 
 
@@ -122,7 +133,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Dilihat"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorDarkGray"
                     android:textSize="12sp" />
 
 
@@ -137,7 +148,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Waktu Posting"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorDarkGray"
                     android:textSize="12sp" />
             </LinearLayout>
 

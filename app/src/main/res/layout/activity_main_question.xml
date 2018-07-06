@@ -18,15 +18,12 @@
             android:layout_height="61dp"
             android:orientation="horizontal">
 
-            <SearchView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:title="Search"
-                android:id="@+id/action_search"
-                app:showAsAction="ifRoom|collapseActionView"
-                app:actionViewClass = "android.support.v7.widget.SearchView"
 
-                tools:ignore="MissingPrefix" />
+            <SearchView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:id="@+id/action_search_view"/>
 
             <Spinner
                 android:id="@+id/spinner2"

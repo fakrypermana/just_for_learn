@@ -57,9 +57,8 @@
                     android:layout_gravity="left"
                     android:layout_marginLeft="2dp"
                     android:text="Login"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:textAlignment="textStart"
-                    android:textStyle="bold"
                     tools:ignore="RtlCompat"
                     android:layout_weight="5"/>
 
@@ -71,9 +70,8 @@
                     android:layout_gravity="right"
                     android:layout_marginRight="2dp"
                     android:text="Register"
-                    android:textColor="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
                     android:textAlignment="textEnd"
-                    android:textStyle="bold"
                     android:layout_weight="5"
                     tools:ignore="RtlCompat" />
 

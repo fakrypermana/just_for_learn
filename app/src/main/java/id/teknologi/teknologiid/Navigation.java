@@ -7,11 +7,17 @@ import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.Toast;
 
-import id.teknologi.teknologiid.dummy_activity.Pekerjaan;
+
 import id.teknologi.teknologiid.feature.Question.QuestionListActivity;
+import id.teknologi.teknologiid.feature.login_register.LoginActivity;
+import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
+import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity_ViewBinding;
+import id.teknologi.teknologiid.feature.login_register.RegisterActivity;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
+import id.teknologi.teknologiid.feature.profile.ProfileActivity;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
 import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity3;
+import id.teknologi.teknologiid.model.Thread;
 
 public class Navigation extends TabActivity{
 
@@ -42,10 +48,10 @@ public class Navigation extends TabActivity{
         spec.setContent(intent);
         tabHost.addTab(spec);
 
-        spec = tabHost.newTabSpec("berita"); // Create a new TabSpec using tab host
-        spec.setIndicator("",getResources().getDrawable(R.drawable.berita)); // set the “ABOUT” as an indicator
+        spec = tabHost.newTabSpec("pekerjaan"); // Create a new TabSpec using tab host
+        spec.setIndicator("",getResources().getDrawable(R.drawable.pekerjaan)); // set the “ABOUT” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
-        intent = new Intent(this,Pekerjaan.class);
+        intent = new Intent(this, PekerjaanActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
         //set tab which one you want to open first time 0 or 1 or 2
@@ -57,19 +63,20 @@ public class Navigation extends TabActivity{
                 Toast.makeText(getApplicationContext(), tabId, Toast.LENGTH_SHORT).show();
             }
         });
-        spec = tabHost.newTabSpec("pekerjaan");
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pekerjaan));
-
-        intent = new Intent(this, PekerjaanActivity.class);
-        spec.setContent(intent);
-        tabHost.addTab(spec);
-
         spec = tabHost.newTabSpec("pemberitahuan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pemberitahuan));
+        intent = new Intent(this, ThreadNewActivity3.class);
 
-        intent = new Intent(this, Pekerjaan.class);
+        intent = new Intent(this, PrevLoginRegistActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
+
+        spec = tabHost.newTabSpec("profil");  //Create a new TabSpec using tab host
+        spec.setIndicator("", getResources().getDrawable(R.drawable.profil)); // set the “HOME” as an indicator
+        //intent = new Intent(this, PrevLoginRegistActivity.class);
+        intent = new Intent(this, PrevLoginRegistActivity.class);
+        spec.setContent(intent);
+        tabHost.addTab(spec);
     }
 }
