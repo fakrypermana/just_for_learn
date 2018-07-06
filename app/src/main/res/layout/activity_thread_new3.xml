@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_marginRight="10dp"
     android:layout_marginLeft="10dp"
-    tools:context=".feature.thread_new.ThreadNewActivity2">
-
+    android:orientation="vertical"
+    >
 
 
     <LinearLayout
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
@@ -25,7 +26,7 @@
             />
 
         <Spinner
-            android:id="@+id/s_tags"
+            android:id="@+id/s_id_topic"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="right"
@@ -35,54 +36,70 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Cover Thread       "
-            android:layout_marginLeft="5dp"
-            android:textSize="16dp"
-            />
-
-        <EditText
-            android:id="@+id/et_unggahfoto"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint=""
-            android:textSize="16dp"
-            />
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:textSize="16dp"
+                android:text="Cover Thread"/>
+
+            <Button
+                android:id="@+id/btn_take_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:textColor="@android:color/white"
+                android:text="Open Image" />
+
+        </LinearLayout>
+
+        <ImageView
+            android:layout_marginTop="2dp"
+            android:layout_weight="1"
+            android:id="@+id/iv_browsePhoto"
+            android:layout_width="110dp"
+            android:layout_height="65dp"
+            android:background="@drawable/ic_launcher_background"
+            android:scaleType="fitXY"/>
+
 
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textview_image_path"
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:textColor="@android:color/black"
+        android:text="The Image path"/>
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Judul Pertanyaan  "
-            android:layout_gravity="center_horizontal"
-            android:textSize="16dp"/>
-
+            android:textSize="16dp"
+            android:text="Judul             "/>
 
         <EditText
-            android:id="@+id/et_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:hint=""
             android:textSize="16dp"
-            />
+            android:id="@+id/et_title"/>
 
     </LinearLayout>
-
-
-
 
     <HorizontalScrollView
         android:layout_width="match_parent"
@@ -349,7 +366,6 @@
         android:layout_height="wrap_content"
         />
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -370,6 +386,5 @@
             android:text="Buat" />
 
     </LinearLayout>
-
 
 </LinearLayout>

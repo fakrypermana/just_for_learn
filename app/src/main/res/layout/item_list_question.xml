@@ -8,104 +8,160 @@
 
     <android.support.v7.widget.CardView
         android:layout_width="345dp"
-        android:layout_height="115dp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="4dp"
+        android:foregroundGravity="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        android:paddingBottom="10dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="115dp"
+            android:layout_height="wrap_content"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:layout_width="148dp"
-                android:layout_height="114dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:paddingLeft="5dp"
                 android:layout_weight="1"
                 android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/ib_answered"
-                    android:layout_width="match_parent"
-                    android:layout_height="44dp"
-                    android:contentDescription="@string/todo"
-                    app:srcCompat="?android:attr/textCheckMark" />
+                <ImageView
+                    android:id="@+id/iv_isAnswered"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:visibility="visible"
+                    app:srcCompat="@drawable/circle_check" />
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:foregroundGravity="top"
+                    app:srcCompat="@drawable/seen" />
 
                 <TextView
                     android:id="@+id/tv_voted"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/textview" />
+                    android:layout_gravity="center"
+                    android:gravity="top"
+                    android:text="@string/textview"
+                    android:textAlignment="center"
+                    android:textColor="#BDBDBD"
+
+                    android:textSize="10dp" />
 
             </LinearLayout>
 
-            <ImageView
-                android:id="@+id/iv_user_profile_pict"
-                android:layout_width="182dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:contentDescription="@string/todo"
-                app:srcCompat="@mipmap/ic_launcher_round" />
-
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="113dp"
-                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:paddingLeft="8dp"
+                android:layout_weight="14"
                 android:orientation="vertical">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="41dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="horizontal">
 
-                    <TextView
-                        android:id="@+id/tv_user_name"
-                        android:layout_width="wrap_content"
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/iv_user_profile_pict"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/textview" />
+                        android:layout_weight="150"
+                        android:contentDescription="@string/todo"
+                        android:paddingRight="6dp"
+                        app:srcCompat="@drawable/profil" />
 
-                    <TextView
-                        android:id="@+id/tv_date"
-                        android:layout_width="wrap_content"
+                    <LinearLayout
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/textview" />
+                        android:layout_weight="20"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_user_name"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
+                                android:layout_weight="1"
+                                android:gravity="top"
+                                android:paddingBottom="8dp"
+                                android:paddingTop="8dp"
+                                android:text="@string/textview"
+                                android:textColor="#000000"
+                                android:textSize="10dp" />
+
+                            <TextView
+                                android:id="@+id/tv_date"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="top"
+                                android:layout_weight="1"
+                                android:gravity="end"
+                                android:paddingRight="8dp"
+                                android:text="@string/textview"
+                                android:textColor="#000000"
+                                android:textSize="10dp" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_tag"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="@string/textview"
+                                android:textSize="10dp" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
                 </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="33dp"
-                    android:orientation="horizontal">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/tv_tag"
-                        android:layout_width="186dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:text="@string/textview" />
-
-                    <ImageButton
-                        android:id="@+id/ib_favorite"
-                        android:layout_width="18dp"
+                        android:id="@+id/tv_question"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:contentDescription="@string/todo"
-                        app:srcCompat="@android:drawable/btn_star_big_off" />
-
+                        android:paddingTop="8dp"
+                        android:layout_weight="150"
+                        android:paddingBottom="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/textview"
+                        android:textColor="#000000" />
                 </LinearLayout>
-
-                <TextView
-                    android:id="@+id/tv_question"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:text="@string/textview" />
 
             </LinearLayout>
 

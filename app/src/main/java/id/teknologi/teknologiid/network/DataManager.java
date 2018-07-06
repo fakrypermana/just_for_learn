@@ -8,6 +8,7 @@ import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.DetileThread;
+import id.teknologi.teknologiid.model.QuestionAnsweredModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
@@ -92,6 +93,10 @@ public class DataManager {
 
     public Observable<ResponseObject<DetileThread>> getThreadDetail(int id, String slug, String comment) {
         return apiService.getThreadDetail(id, slug, comment);
+    }
+
+    public Observable<ResponseArray<QuestionAnsweredModel>>getAnswerList(int id, String slug) {
+        return apiService.getAnswerList(id, slug);
     }
 //    public Observable<ResponseArray<Thread>> getThreadDetile(int id, String slug) {
 //        return apiService.getThreadDetail(id,slug);

@@ -16,8 +16,7 @@ import id.teknologi.teknologiid.feature.login_register.RegisterActivity;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
-import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity;
-import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity2;
+import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity3;
 import id.teknologi.teknologiid.model.Thread;
 
 public class Navigation extends TabActivity{
@@ -67,7 +66,7 @@ public class Navigation extends TabActivity{
         spec = tabHost.newTabSpec("pekerjaan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pekerjaan));
 
-        intent = new Intent(this, ThreadNewActivity2.class);
+        intent = new Intent(this, PekerjaanActivity.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 

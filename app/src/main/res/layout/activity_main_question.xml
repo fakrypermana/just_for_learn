@@ -2,6 +2,7 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -9,7 +10,8 @@
         android:layout_width="352dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="32dp">
+        tools:layout_editor_absoluteX="32dp"
+        tools:ignore="MissingConstraints">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -17,8 +19,14 @@
             android:orientation="horizontal">
 
             <SearchView
-                android:layout_width="208dp"
-                android:layout_height="match_parent" />
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:title="Search"
+                android:id="@+id/action_search"
+                app:showAsAction="ifRoom|collapseActionView"
+                app:actionViewClass = "android.support.v7.widget.SearchView"
+
+                tools:ignore="MissingPrefix" />
 
             <Spinner
                 android:id="@+id/spinner2"

@@ -20,10 +20,7 @@ public class QuestionListModel {
     private String user_url_photo;
     private String user_work;
     private List<String> tags;
-//            "tags": [
-//            "html",
-//            "css"
-//            ],
+
     private int answer_count;
 
 //    QUESTION LIST GETTER

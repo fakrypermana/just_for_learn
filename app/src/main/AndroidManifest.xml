@@ -3,6 +3,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="id.teknologi.teknologiid">
     <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera"
+        android:required="true"/>
+
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
@@ -20,8 +27,6 @@
         </activity>
         <activity android:name=".feature.thread_detail.ThreadDetailActivity" />
         <activity android:name=".feature.thread.ThreadActivity" />
-        <activity android:name=".feature.thread_new.ThreadNewActivity"/>
-        <activity android:name=".feature.thread_new.ThreadNewActivity2"/>
         <activity android:name=".feature.pekerjaan.PekerjaanActivity" />
         <activity android:name=".dummy_activity.Pekerjaan"/>
         <activity android:name=".feature.pekerjaan_detail.DetailPekerjaanActivity" />
@@ -56,7 +61,26 @@
             android:name="io.fabric.ApiKey"
             android:value="5654d30e8fca327d371a3421402897bd4c58d5db" />
 
+        <activity android:name=".dummy_activity.Profil" />
+        <activity android:name=".dummy_activity.Pertanyaan" />
+        <activity android:name=".dummy_activity.Notifikasi" />
+        <activity android:name=".feature.thread_new.ThreadNewActivity3"></activity>
+
         <activity android:name=".feature.profile.ProfileActivity"/>
+
+        <provider
+            android:name="android.support.v4.content.FileProvider"
+            android:authorities="id.teknologi.teknologiid.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true"
+            tools:replace="android:authorities">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"
+                tools:replace="android:resource"/>
+        </provider>
+
+
     </application>
 
 </manifest>

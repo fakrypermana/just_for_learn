@@ -1,6 +1,7 @@
 package id.teknologi.teknologiid.model;
 
 import java.security.PublicKey;
+import java.util.List;
 
 public class QuestionAnsweredModel {
             private int id;
@@ -14,6 +15,7 @@ public class QuestionAnsweredModel {
             private int block;
             private String user_name;
             private String user_url_photo;
+            private List<QuestionCommentModel> comments;
 
     public int getId(){
         return id;
@@ -49,4 +51,7 @@ public class QuestionAnsweredModel {
         return user_url_photo;
     }
 
+    public List<QuestionCommentModel> getComments() {
+        return comments;
+    }
 }

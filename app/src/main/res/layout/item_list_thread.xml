@@ -3,12 +3,11 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/card_view"
     android:clickable="true"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
+    android:layout_width="325dp"
+    android:layout_height="260dp"
     android:layout_marginBottom="8dp"
-    android:layout_marginLeft="16dp"
-    android:layout_marginRight="16dp"
-
+    android:layout_marginLeft="18dp"
+    android:layout_marginRight="18dp"
     >
 
     <RelativeLayout
@@ -17,8 +16,8 @@
 
         <ImageView
             android:id="@+id/iv_cover"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
@@ -26,7 +25,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
-            android:background="#10000000"
+            android:background="@drawable/gradient_hitam_abu"
             android:orientation="vertical">
 
             <TextView
@@ -38,8 +37,8 @@
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@+id/daftar_icon"
                 android:text="Judul Thread"
-                android:textColor="#000000"
-                android:textSize="14sp" />
+                android:textColor="@color/LightGray"
+                android:textSize="20dp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -48,8 +47,8 @@
 
                 <ImageView
                     android:id="@+id/iv_user_url_photo"
-                    android:layout_width="12dp"
-                    android:layout_height="12dp"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="14dp"
@@ -64,35 +63,22 @@
                     android:layout_marginLeft="2dp"
                     android:layout_toRightOf="@+id/daftar_icon"
                     android:text="Username"
-                    android:textColor="#000000"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/hanyatitik"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:layout_toRightOf="@+id/daftar_icon"
-                    android:text="."
-                    android:textColor="@color/Gray"
-                    android:textSize="12sp" />
-
-                <TextView
-                    android:id="@+id/tv_user_work"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="2dp"
-                    android:layout_marginRight="10dp"
-                    android:layout_toRightOf="@+id/daftar_icon"
-                    android:text="Posisi"
-                    android:textColor="@color/Gray"
-                    android:textSize="12sp" />
-
+                    android:textColor="@color/LightGray"
+                    android:textSize="16dp" />
 
             </LinearLayout>
 
+            <TextView
+                android:id="@+id/tv_user_work"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@+id/daftar_icon"
+                android:layout_marginLeft="14dp"
+                android:text="Posisi"
+                android:textColor="@color/LightGray"
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/tv_topics"
@@ -104,7 +90,7 @@
                 android:ellipsize="end"
                 android:singleLine="true"
                 android:text="tag"
-                android:textColor="#000000"
+                android:textColor="@color/LightGray"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -122,7 +108,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Komentar"
-                    android:textColor="@color/Gray"
+                    android:textColor="#000000"
                     android:textSize="12sp" />
 
 
@@ -136,7 +122,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Dilihat"
-                    android:textColor="@color/Gray"
+                    android:textColor="#000000"
                     android:textSize="12sp" />
 
 
@@ -151,7 +137,7 @@
                     android:ellipsize="end"
                     android:singleLine="true"
                     android:text="Waktu Posting"
-                    android:textColor="@color/Gray"
+                    android:textColor="#000000"
                     android:textSize="12sp" />
             </LinearLayout>
 
