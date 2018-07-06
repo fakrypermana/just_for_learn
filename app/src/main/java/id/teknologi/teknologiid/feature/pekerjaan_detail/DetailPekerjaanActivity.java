@@ -34,6 +34,7 @@ import android.widget.Toast;
 import android.widget.Toolbar;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
@@ -105,6 +106,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
      */
     RelatedJobAdapter adapter;
     List<RelatedPekerjaan> relatedList = new ArrayList<>();
+    Pekerjaan pekerjaan;
     @BindView(R.id.rv_related_job)
     RecyclerView rvRelated;
     //PekerjaanPresenter pekerjaanPresenter;
@@ -225,8 +227,8 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
             }
         });
 
-        LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        /*LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);*/
 
         rvRelated.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvRelated.setAdapter(adapter);
@@ -235,9 +237,11 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     @Override
     public void onSuccessDetailPekerjaan(Pekerjaan pekerjaan) {
-
+        Log.d("pekerjaan Detail", new Gson().toJson(pekerjaan.getRelatedJob()));
+        this.pekerjaan=pekerjaan;
         setTextView(pekerjaan);
-        adapter.insertAndNotify(relatedList);
+        adapter.insertAndNotify(pekerjaan.getRelatedJob());
+        Log.d("related","isinya"+pekerjaan.getRelatedJob());
     }
 
 
