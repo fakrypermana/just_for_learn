@@ -9,7 +9,7 @@ public class PekerjaanPresenter extends BasePresenter<PekerjaanView> {
         super(pekerjaanView);
     }
 
-    void getPekerjaan(){
+    public void getPekerjaan(){
         getView().onLoading(true);
         dataManager.getPekerjaan()
                 .doOnTerminate(() -> getView().onLoading(false))

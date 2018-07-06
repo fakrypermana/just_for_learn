@@ -41,7 +41,7 @@
                     android:layout_toRightOf="@+id/daftar_icon"
                     android:text="Nama pekerjaan"
                     android:textAppearance="?attr/textAppearanceListItem"
-                    android:textColor="#000000"
+                    android:textColor="@color/colorDarkBlack"
                     android:textSize="20sp"
                     android:textStyle="bold"/>
 
@@ -87,7 +87,7 @@
                 android:layout_toRightOf="@+id/daftar_icon"
                 android:text="Alamat Perusahaan"
                 android:textAppearance="?attr/textAppearanceListItem"
-                android:textColor="@color/Gray"
+                android:textColor="@color/colorDarkGray"
                 android:textSize="12sp" />
 
             <LinearLayout
@@ -113,14 +113,18 @@
                     android:layout_toRightOf="@+id/daftar_icon"
                     android:text="Tanggal expired"
                     android:textAppearance="?attr/textAppearanceListItem"
-                    android:textColor="#d50000"
+                    android:textColor="@color/colorAccentRed"
                     android:textSize="12sp"/>
-
-
 
             </LinearLayout>
 
-
+            <com.plumillonforge.android.chipview.ChipView
+                android:id="@+id/chip_tags_job"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="5dp"
+                app:chip_background="@color/colorLightGray" />
 
         </LinearLayout>
 

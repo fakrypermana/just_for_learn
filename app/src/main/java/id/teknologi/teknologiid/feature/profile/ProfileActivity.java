@@ -25,20 +25,22 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
 
-    @BindView(R.id.tv_nama_profile)
+    @BindView(R.id.tv_nama_user_profil)
     TextView tvNamaProfile;
-    @BindView(R.id.tv_alamat_profile)
+    @BindView(R.id.tv_alamat_user_profil)
     TextView tvAlamatProfile;
-    @BindView(R.id.tv_email_profile)
+    @BindView(R.id.tv_email_user_profil)
     TextView tvEmailProfile;
-    @BindView(R.id.tv_kontak_profile)
+    @BindView(R.id.tv_nomor_user_profil)
     TextView tvKontakProfile;
-    @BindView(R.id.tv_point_profile)
+    @BindView(R.id.tv_point_profil)
     TextView tvPointProfile;
-    @BindView(R.id.tv_peringkat_profile)
-    TextView tvPeringkatProfile;
-    @BindView(R.id.btn_to_login_profile)
-    Button btnToLogout;
+    @BindView(R.id.tv_pertanyaan_profil)
+    TextView tvPertanyaanProfile;
+    @BindView(R.id.tv_jawaban_profil)
+    TextView tvJawabanProfile;
+    @BindView(R.id.tv_vote_profil)
+    TextView tvVoteProfile;
 
     @Override
     protected int contentView() {
@@ -62,14 +64,6 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
             }
         };
 
-        btnToLogout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                mAuth.signOut();
-
-            }
-        });
     }
 
     @Override
@@ -84,12 +78,16 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         tvAlamatProfile.setText(profile.getAdress());
         tvEmailProfile.setText(profile.getEmail());
         tvKontakProfile.setText(profile.getPhone_number());*/
+
+        tvNamaProfile.setText(profile.getName());
     }
 
     @Override
-    public void onSuccessProfile(Profile profileList) {
+    public void onSuccessProfile(Profile profile) {
 
     }
+
+
 
     @Override
     public void onLoading(boolean isLoading) {

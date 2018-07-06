@@ -26,6 +26,11 @@ public class Pekerjaan {
     private List<String> tags;
     private Company company;
 
+    private List<RelatedPekerjaan> relatedJob;
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
 
     //getter pekerjaan list
     public int getId() {
@@ -88,6 +93,10 @@ public class Pekerjaan {
     //getter detail pekerjaan
     public String getDesc_long() {
         return desc_long;
+    }
+
+    public List<RelatedPekerjaan> getRelatedJob() {
+        return relatedJob;
     }
 
     public int getId_company() {
