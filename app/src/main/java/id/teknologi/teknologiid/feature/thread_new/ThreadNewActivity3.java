@@ -38,6 +38,7 @@ import org.json.JSONObject;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -380,6 +381,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
                     } catch (Exception ex) {
                         // Error occurred while creating the File
                         Toast.makeText(getBaseContext(),ex.getMessage().toString(),Toast.LENGTH_SHORT).show();
+                        Log.e("camera error",ex.getMessage().toString());
                     }
 
 
@@ -416,7 +418,26 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE_CAMERA && resultCode == RESULT_OK) {
             Bitmap myBitmap = BitmapFactory.decodeFile(pathCamera);
+            Bitmap rescale = myBitmap.createScaledBitmap(myBitmap,400,320,true);
             ivBrowsePhoto.setImageBitmap(myBitmap);
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            myBitmap.compress(Bitmap.CompressFormat.JPEG, 30 /*ignored for PNG*/, bos);
+            byte[] bitmapdata = bos.toByteArray();
+
+            //write the bytes in file
+            FileOutputStream fos = null;
+            try {
+                fos = new FileOutputStream(tempFile.getAbsolutePath());
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            try {
+                fos.write(bitmapdata);
+                fos.close();
+                fos.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             galleryAddPic();
             Log.d("pathCamera",pathCamera);
             progressDialog.hide();
@@ -467,17 +488,7 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         );
         pathCamera = image.getAbsolutePath();
         //Convert bitmap to byte array
-        Bitmap myBitmap = BitmapFactory.decodeFile(pathCamera);
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        myBitmap.compress(Bitmap.CompressFormat.PNG, 0 /*ignored for PNG*/, bos);
-        byte[] bitmapdata = bos.toByteArray();
 
-        //write the bytes in file
-        FileOutputStream fos = new FileOutputStream(image);
-        fos.write(bitmapdata);
-        fos.flush();
-        fos.close();
-        Log.d("test",pathCamera);
         return image;
     }
 
