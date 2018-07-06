@@ -308,9 +308,9 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        /*RelatedPekerjaan pekerjaan = relatedList.get(position);
+        RelatedPekerjaan pekerjaan = relatedList.get(position);
         Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
-        DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());*/
+        DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
     }
 
 

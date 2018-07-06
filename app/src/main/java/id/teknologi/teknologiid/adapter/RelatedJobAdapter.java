@@ -24,6 +24,7 @@ import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanPresenter;
 import id.teknologi.teknologiid.feature.pekerjaan_detail.DetailPekerjaanActivity;
+import id.teknologi.teknologiid.feature.profile.ProfileActivity;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.model.RelatedPekerjaan;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -67,10 +68,18 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
 
         @Override
         public void onBind(RelatedPekerjaan related) {
-            tvNamaRelated.setText("UHUY");
-            tvSalaryMax.setText("WASU");
-            tvSalaryMin.setText("WTF THIS BUG");
+            tvNamaRelated.setText(related.getName());
+            tvSalaryMax.setText(String.valueOf(related.getSalary_max()));
+            tvSalaryMin.setText(String.valueOf(related.getSalary_min()));
             Log.d("wadidaw","isinya"+new Gson().toJson(related.getName()));
+
+            /*btnSimpanRelated.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(v.getContext(), ProfileActivity.class);
+
+                }
+            });*/
 
         }
 

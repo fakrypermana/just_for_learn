@@ -3,7 +3,10 @@
     android:layout_width="220dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardElevation="3px">
+    app:cardElevation="3px"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginBottom="10dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +23,7 @@
 
             <TextView
                 android:id="@+id/tv_nama_related_job"
-                android:layout_width="wrap_content"
+                android:layout_width="150dp"
                 android:layout_height="70dp"
                 android:text="Nama Pekerjaan"
                 android:layout_gravity="start"
