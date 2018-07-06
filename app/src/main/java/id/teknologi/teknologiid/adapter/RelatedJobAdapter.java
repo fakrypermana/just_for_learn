@@ -11,6 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.gson.Gson;
 import com.plumillonforge.android.chipview.ChipView;
 
 import java.util.ArrayList;
@@ -69,6 +70,7 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
             tvNamaRelated.setText(related.getName());
             tvSalaryMax.setText(related.getSalary_max());
             tvSalaryMin.setText(related.getSalary_min());
+            Log.d("wadidaw","isinya"+new Gson().toJson(related));
 
         }
 
