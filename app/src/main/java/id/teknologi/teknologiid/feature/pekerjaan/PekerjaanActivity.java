@@ -1,11 +1,15 @@
 package id.teknologi.teknologiid.feature.pekerjaan;
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.gson.Gson;
 
@@ -35,17 +39,21 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
         return R.layout.activity_pekerjaan;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void setupData(Bundle savedInstanceState) {
         presenter = new PekerjaanPresenter(this);
         presenter.getPekerjaan();
         adapter = new PekerjaanAdapter(this, pekerjaanList, this);
+
     }
 
+    @SuppressLint("NewApi")
     @Override
     protected void setupView() {
         rvPekerjaan.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvPekerjaan.setAdapter(adapter);
+
     }
 
     @Override

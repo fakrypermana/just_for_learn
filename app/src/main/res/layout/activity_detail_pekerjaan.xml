@@ -4,180 +4,271 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".feature.pekerjaan_detail.DetailPekerjaanActivity">
+    tools:context=".feature.pekerjaan_detail.DetailPekerjaanActivity"
+    android:background="@color/colorPrimaryLight">
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-        <android.support.v7.widget.Toolbar
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-
-
-        </android.support.v7.widget.Toolbar>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:cardElevation="1px"
-            android:layout_marginBottom="10dp">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="center">
-
-                <ImageView
-                    android:id="@+id/iv_cover_job_detail"
-                    android:src="@drawable/com_facebook_profile_picture_blank_square"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginTop="20dp"/>
-
-                <TextView
-                    android:id="@+id/tv_nama_perusahan_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Perusahaan"
-                    android:textAlignment="center"
-                    android:layout_margin="3dp"
-                    android:textSize="11sp"
-                    android:textStyle="bold"/>
-
-                <TextView
-                    android:id="@+id/tv_nama_job_detail"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nama Job"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textAlignment="center" />
+                android:layout_height="wrap_content"
+                app:cardElevation="3px"
+                android:layout_marginBottom="10dp">
 
                 <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginBottom="20dp">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp">
+
+                    <ImageView
+                        android:id="@+id/iv_cover_job_detail"
+                        android:src="@drawable/com_facebook_profile_picture_blank_square"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:layout_marginTop="20dp"/>
 
                     <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="5dp"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_nama_perusahan_detail"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:text="@string/dibuka_sampai"/>
+                        android:text="Nama Perusahaan"
+                        android:textAlignment="center"
+                        android:layout_margin="3dp"
+                        android:textSize="11sp"
+                        android:textStyle="bold"/>
 
                     <TextView
-                        android:id="@+id/tv_date_exp_job_detail"
+                        android:id="@+id/tv_nama_job_detail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Nama Job"
+                        android:textColor="@color/colorDarkBlack"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textAlignment="center" />
+
+                    <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_toRightOf="@+id/daftar_icon"
-                        android:text="Tanggal expired"
-                        android:textAppearance="?attr/textAppearanceListItem"
-                        android:textColor="#d50000"
-                        android:textSize="12sp"/>
+                        android:orientation="horizontal"
+                        android:id="@+id/detail_header_wrap">
+
+                        <TextView
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="16dp"
+                            android:layout_marginRight="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/dibuka_sampai"/>
+
+                        <TextView
+                            android:id="@+id/tv_date_exp_job_detail"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_toRightOf="@+id/daftar_icon"
+                            android:text="Tanggal expired"
+                            android:textAppearance="?attr/textAppearanceListItem"
+                            android:textColor="@color/colorAccentRed"
+                            android:textSize="12sp"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:layout_marginBottom="20dp">
+
+                        <com.plumillonforge.android.chipview.ChipView
+                            android:id="@+id/chip_tags_detail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            app:chip_background="@color/colorLightGray"
+                            android:layout_gravity="center"
+                            android:textAlignment="center"
+                            android:layout_marginLeft="16dp"/>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </android.support.v7.widget.CardView>
 
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:cardElevation="1px">
-
-            <LinearLayout
+            <android.support.v7.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:gravity="start">
+                android:layout_height="wrap_content"
+                app:cardElevation="3px">
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAlignment="textStart"
-                    android:layout_gravity="start"
-                    android:text="Deskripsi Singkat"
-                    android:layout_marginLeft="16dp"
-                    android:textStyle="bold"/>
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:gravity="center"
+                    android:layout_margin="10dp">
 
-                <WebView
-                    android:id="@+id/wv_job_detail"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="16dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="center"
+                        android:text="Deskripsi Pekerjaan"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorPrimary"/>
 
-                </WebView>
+                    <WebView
+                        android:id="@+id/wv_job_desc_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp">
 
-            </LinearLayout>
+                    </WebView>
 
-        </android.support.v7.widget.CardView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="start"
+                        android:text="Deskripsi Singkat"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorPrimary"/>
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_related_job"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="60dp"
-            android:layout_marginTop="10dp"
-            tools:listitem="@layout/item_list_related_job">
+                    <WebView
+                        android:id="@+id/wv_short_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp">
+                    </WebView>
 
-        </android.support.v7.widget.RecyclerView>
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="start"
+                        android:text="Kebutuhan Skill"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorPrimary"/>
 
-    </LinearLayout>
+                    <WebView
+                        android:id="@+id/wv_skill"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp"
+                        android:layout_gravity="center">
+                    </WebView>
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:layout_gravity="start"
+                        android:text="Salary"
+                        android:textStyle="bold"
+                        android:textSize="16dp"
+                        android:textColor="@color/colorPrimary"/>
 
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/collapsing_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        android:layout_gravity="center">
 
-        </android.support.design.widget.CollapsingToolbarLayout>
+                        <TextView
+                            android:id="@+id/tv_gaji_min"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textColor="@color/colorAccentGreen">
+                        </TextView>
 
-    </android.support.design.widget.AppBarLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/colorAccentGreen"
+                            android:layout_margin="16dp"
+                            android:text=" - "/>
+
+                        <TextView
+                            android:id="@+id/tv_gaji_max"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_margin="16dp"
+                            android:textColor="@color/colorAccentGreen">
+                        </TextView>
+
+                    </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_related_job"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="40dp"
+                    android:layout_marginTop="10dp"
+                    tools:listitem="@layout/item_list_related_job">
+
+                </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="10"
-        android:layout_gravity="bottom">
+        android:layout_gravity="bottom"
+        android:layout_margin="16dp">
 
         <Button
             android:id="@+id/btn_simpan_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="3"
             android:text="Simpan"
-            android:textColor="@color/colorPrimaryDark"
-            android:background="@drawable/shape_button_google"
+            android:textColor="@color/colorPrimaryLight"
+            android:background="@drawable/shape_rounded_button_gray"
             android:layout_gravity="bottom"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="4">
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btn_daftar_detail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="5"
+            android:layout_weight="3"
             android:text="Daftar"
             android:textAllCaps="false"
-            android:textColor="@color/LightGray"
-            android:background="@drawable/shape_buttin_facebook_blue"
+            android:textColor="@color/colorPrimaryLight"
+            android:background="@drawable/shape_rounded_botton_red"
             android:layout_gravity="bottom"/>
 
     </LinearLayout>

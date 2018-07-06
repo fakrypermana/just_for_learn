@@ -2,13 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="id.teknologi.teknologiid">
-
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    
+    
     <application
         android:name=".BaseApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/logo"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -22,7 +23,10 @@
         </activity>
         <activity android:name=".feature.thread_detail.ThreadDetailActivity" />
         <activity android:name=".feature.thread.ThreadActivity" />
+        <activity android:name=".feature.thread_new.ThreadNewActivity"/>
+        <activity android:name=".feature.thread_new.ThreadNewActivity2"/>
         <activity android:name=".feature.pekerjaan.PekerjaanActivity" />
+        <activity android:name=".dummy_activity.Pekerjaan"/>
         <activity android:name=".feature.pekerjaan_detail.DetailPekerjaanActivity" />
         <activity android:name=".feature.login_register.RegisterActivity" />
         <activity android:name=".feature.login_register.LoginActivity" />
@@ -49,12 +53,16 @@
             </intent-filter>
         </activity>
 
+        <activity android:name=".feature.Question.QuestionListActivity"/>
+
+        <activity android:name=".feature.Question.QuestionDetailActivity"/>
+
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="5654d30e8fca327d371a3421402897bd4c58d5db" />
 
         <activity android:name=".feature.profile.ProfileActivity" />
-        <activity android:name=".feature.pekerjaan_detail.FormDaftarJobActivity"></activity>
+        <activity android:name=".feature.pekerjaan_detail.FormDaftarJobActivity"/>
     </application>
 
 </manifest>
