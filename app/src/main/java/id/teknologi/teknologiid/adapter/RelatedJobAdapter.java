@@ -70,7 +70,7 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
             tvNamaRelated.setText(related.getName());
             tvSalaryMax.setText(related.getSalary_max());
             tvSalaryMin.setText(related.getSalary_min());
-            Log.d("wadidaw","isinya"+new Gson().toJson(related));
+            Log.d("wadidaw","isinya"+new Gson().toJson(related.getName()));
 
         }
 
