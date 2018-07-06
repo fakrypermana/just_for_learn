@@ -98,6 +98,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
+                            android:layout_marginTop="5dp"
                             android:layout_marginLeft="16dp"
                             android:textAlignment="center"
                             app:chip_background="@color/colorLightGray" />
@@ -189,10 +190,20 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:layout_marginLeft="16dp"
+                            android:textColor="@color/colorAccentGreen"/>
+
+                        <TextView
                             android:id="@+id/tv_gaji_min"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
+                            android:text="Gaji Min"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
                             android:textColor="@color/colorAccentGreen"/>
 
                         <TextView
@@ -203,10 +214,20 @@
                             android:textColor="@color/colorAccentGreen" />
 
                         <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Rp."
+                            android:layout_marginLeft="16dp"
+                            android:textColor="@color/colorAccentGreen"/>
+
+                        <TextView
                             android:id="@+id/tv_gaji_max"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_margin="16dp"
+                            android:text="Gaji Max"
+                            android:layout_marginRight="16dp"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="16dp"
                             android:textColor="@color/colorAccentGreen"/>
 
                     </LinearLayout>
@@ -219,7 +240,7 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_margin="5dp"
                 android:text="Related Job"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"
@@ -229,8 +250,7 @@
                 android:id="@+id/rv_related_job"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="40dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="45dp"
                 tools:listitem="@layout/item_list_related_job">
 
             </android.support.v7.widget.RecyclerView>

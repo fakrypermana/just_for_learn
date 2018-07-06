@@ -33,7 +33,7 @@ public class Navigation extends TabActivity{
         Intent intent; // Reusable Intent for each tab
 
         spec = tabHost.newTabSpec("pertanyaan"); // Create a new TabSpec using tab host
-        spec.setIndicator("",getResources().getDrawable(R.drawable.pertanyaan)); // set the “HOME” as an indicator
+        spec.setIndicator("",getResources().getDrawable(R.drawable.ic_question_answer_black_24dp)); // set the “HOME” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent(this, QuestionListActivity.class);
         spec.setContent(intent);
@@ -42,7 +42,7 @@ public class Navigation extends TabActivity{
         // Do the same for the other tabs
 
         spec = tabHost.newTabSpec("thread"); // Create a new TabSpec using tab host
-        spec.setIndicator("",getResources().getDrawable(R.drawable.thread)); // set the “CONTACT” as an indicator
+        spec.setIndicator("",getResources().getDrawable(R.drawable.ic_explore_black_24dp)); // set the “CONTACT” as an indicator
 
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent(this, ThreadActivity.class);
@@ -50,7 +50,7 @@ public class Navigation extends TabActivity{
         tabHost.addTab(spec);
 
         spec = tabHost.newTabSpec("pekerjaan"); // Create a new TabSpec using tab host
-        spec.setIndicator("",getResources().getDrawable(R.drawable.pekerjaan)); // set the “ABOUT” as an indicator
+        spec.setIndicator("",getResources().getDrawable(R.drawable.ic_work_black_24dp)); // set the “ABOUT” as an indicator
         // Create an Intent to launch an Activity for the tab (to be reused)
         intent = new Intent(this, PekerjaanActivity.class);
         spec.setContent(intent);
@@ -65,14 +65,14 @@ public class Navigation extends TabActivity{
             }
         });
         spec = tabHost.newTabSpec("pemberitahuan");
-        spec.setIndicator("", getResources().getDrawable(R.drawable.pemberitahuan));
+        spec.setIndicator("", getResources().getDrawable(R.drawable.ic_notifications_black_24dp));
         intent = new Intent(this, ThreadNewActivity2.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
 
         spec = tabHost.newTabSpec("profil");  //Create a new TabSpec using tab host
-        spec.setIndicator("", getResources().getDrawable(R.drawable.profil)); // set the “HOME” as an indicator
+        spec.setIndicator("", getResources().getDrawable(R.drawable.ic_person_black_24dp)); // set the “HOME” as an indicator
         //intent = new Intent(this, PrevLoginRegistActivity.class);
         intent = new Intent(this, PrevLoginRegistActivity.class);
         spec.setContent(intent);

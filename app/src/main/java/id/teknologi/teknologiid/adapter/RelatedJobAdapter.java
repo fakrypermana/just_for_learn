@@ -1,5 +1,6 @@
 package id.teknologi.teknologiid.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -71,15 +72,16 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
             tvNamaRelated.setText(related.getName());
             tvSalaryMax.setText(String.valueOf(related.getSalary_max()));
             tvSalaryMin.setText(String.valueOf(related.getSalary_min()));
-            Log.d("wadidaw","isinya"+new Gson().toJson(related.getName()));
+            //Log.d("wadidaw","isinya"+new Gson().toJson(related.getName()));
 
-            /*btnSimpanRelated.setOnClickListener(new View.OnClickListener() {
+            btnSimpanRelated.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(v.getContext(), ProfileActivity.class);
-
+                    v.getContext().startActivity(intent);
+                    ((Activity)context).finish();
                 }
-            });*/
+            });
 
         }
 
