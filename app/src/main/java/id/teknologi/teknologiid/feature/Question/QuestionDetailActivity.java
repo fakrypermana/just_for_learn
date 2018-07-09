@@ -1,6 +1,7 @@
 package id.teknologi.teknologiid.feature.Question;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -39,7 +41,7 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     QuestionAnsweredAdapter answeredAdapter;
     MenuView.ItemView itemView;
     List<QuestionAnsweredModel> answeredModels = new ArrayList<>();
-
+    private ProgressDialog progressDialog ;
 
     //QuestionDetailModel detailModels;
     private final static String ID = "ID";
@@ -62,7 +64,6 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     @BindView(R.id.rv_answered)
     RecyclerView rvAnswered;
 
-    
 
     @Override
     protected int contentView() {
@@ -71,26 +72,21 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
 
     @Override
     protected void setupData(Bundle savedInstanceState) {
+        showProgressDialog();
         detailPresenter=new QuestionDetailPresenter(this);
         Intent intent = getIntent();
         id = intent.getIntExtra(ID, 0);
         slug = intent.getStringExtra(SLUG);
         detailPresenter.getQuestionDetail(id, slug);
         answeredAdapter= new QuestionAnsweredAdapter(this, answeredModels,this);
-
-
     }
 
 //    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setupView() {
+        rvAnswered.setNestedScrollingEnabled(false);
         rvAnswered.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvAnswered.setAdapter(answeredAdapter);
-
-
-
-
-
 
     }
 
@@ -103,7 +99,12 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
 
     @Override
     public void onLoading(boolean isLoading) {
-
+//        if(isLoading == true){
+//            showProgressDialog();
+//        }
+//        else {
+//            hideProgressDialog();
+//        }
     }
 
     @Override
@@ -113,15 +114,14 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
 
     @Override
     public void onSuccessQuestionDetail(QuestionDetailModel questionDetailModels) {
+
         Log.d("QUESTION Detail", new Gson().toJson(questionDetailModels));
         this.questionDetailModel=questionDetailModels;
         setDetailView();
         String data = questionDetailModels.getQuestion();
         wvQuestion.loadData(data,"text/html", "UTF-8");
         answeredAdapter.insertAndNotify(questionDetailModel.getAnswered());
-
-
-
+        hideProgressDialog();
     }
     public void setDetailView(){
         tvTittle.setText(questionDetailModel.getTitle());
@@ -143,5 +143,15 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
     @Override
     public void onRecyclerItemClicked(int position) {
 
+    }
+
+    private void showProgressDialog(){
+        progressDialog = new ProgressDialog(QuestionDetailActivity.this);
+        progressDialog.setMessage("Mohon Menunggu..");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+    private void hideProgressDialog(){
+        progressDialog.hide();
     }
 }

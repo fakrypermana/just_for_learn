@@ -103,7 +103,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Comment.."
+                        android:text="Komentar.."
                         android:clickable="true"
                         android:textColor="#0000FF" />
                 </LinearLayout>
@@ -111,6 +111,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_comment_question"
                     android:layout_width="match_parent"
+                    android:nestedScrollingEnabled="false"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 

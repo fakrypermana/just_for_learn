@@ -1,12 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <ScrollView
+
+
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -58,24 +61,24 @@
                                 android:id="@+id/tvdetail_tittle"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:textColor="#000000"
                                 android:layout_weight="1"
-                                android:text="@string/textview" />
+                                android:text="@string/textview"
+                                android:textColor="#000000" />
                         </LinearLayout>
 
                         <TextView
                             android:id="@+id/tvdetail_username"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="15dp"
-                            android:text="@string/textview" />
+                            android:text="@string/textview"
+                            android:textSize="15dp" />
 
                         <TextView
                             android:id="@+id/tvdetail_date"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:textSize="10dp"
-                            android:text="@string/textview" />
+                            android:text="@string/textview"
+                            android:textSize="10dp" />
 
                     </LinearLayout>
 
@@ -170,7 +173,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:text="Answer"
+                            android:text="Jawaban"
                             android:textColor="#000000"
                             android:textSize="20sp" />
 
@@ -180,7 +183,7 @@
                             android:layout_height="wrap_content"
                             android:layout_weight="1"
                             android:clickable="true"
-                            android:text="Click to Answer.."
+                            android:text="Ketuk Untuk Menjawab.."
                             android:textColor="#0000FF" />
 
                     </LinearLayout>
@@ -195,10 +198,11 @@
                             android:layout_width="24dp"
                             android:layout_height="24dp"
                             android:layout_weight="100"
-                            android:paddingRight="5dp"
                             android:background="@null"
                             android:contentDescription="@string/todo"
+                            android:paddingRight="5dp"
                             app:srcCompat="@drawable/share18" />
+
                         <LinearLayout
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -225,5 +229,5 @@
                     app:layout_constraintTop_toBottomOf="@+id/induk" />
             </LinearLayout>
         </LinearLayout>
-    </ScrollView>
-</android.support.v7.widget.LinearLayoutCompat>
+    </android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>
