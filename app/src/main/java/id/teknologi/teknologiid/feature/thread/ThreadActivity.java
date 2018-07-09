@@ -24,6 +24,8 @@ import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.ThreadsAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.thread_detail.ThreadDetailActivity;
+import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity;
+import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity2;
 import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity3;
 import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.utils.AppUtils;
@@ -57,7 +59,7 @@ public class ThreadActivity extends BaseActivity implements ThreadView, Recycler
         fab_threadnew.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ThreadActivity.this, ThreadNewActivity3.class);
+                Intent intent = new Intent(ThreadActivity.this, ThreadNewActivity.class);
                 startActivity(intent);
             }
         });

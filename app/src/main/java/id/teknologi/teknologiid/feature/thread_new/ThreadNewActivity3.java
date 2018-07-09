@@ -31,6 +31,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.afollestad.materialdialogs.DialogAction;
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
@@ -41,13 +43,17 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
+import id.teknologi.teknologiid.model.Thread;
+import id.teknologi.teknologiid.model.Topic;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import jp.wasabeef.richeditor.RichEditor;
@@ -75,11 +81,17 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     //Editor
     private RichEditor mEditor;
 
+    //MultiChoice
+    TextView mItemSelected;
+    String[] listItems;
+    boolean[] checkedItems;
+    ArrayList<Integer> mUserItems = new ArrayList<>();
+
     //Inisiasi
     @BindView(R.id.et_title)
     EditText etTitle;
-    @BindView(R.id.s_id_topic)
-    Spinner sIdTopic;
+    @BindView(R.id.btn_topik)
+    Button btnTopik;
     @BindView(R.id.b_create)
     Button bCreate;
     @BindView(R.id.iv_browsePhoto)
@@ -88,6 +100,9 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     Button btnLoadImage;
     @BindView(R.id.textview_image_path)
     TextView tvPath;
+    @BindView(R.id.topik)
+            TextView topik;
+
 
     ApiService mApiService;
 
@@ -131,11 +146,9 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 
                 String title = etTitle.getText().toString();
                 String post = mEditor.getHtml().toString();
-                String topic = sIdTopic.getSelectedItem().toString();
                 Log.d("checker",""+checker);
                 Log.d("cari title", title.toString());
                 Log.d("cari post", post.toString());
-                Log.d("cari topic", topic.toString());
                 if(checker==true){
                     uploadImage(pathCamera,title,post,"1");
                 }else if(checker==false){
@@ -310,6 +323,71 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         findViewById(R.id.action_insert_checkbox).setOnClickListener(new View.OnClickListener() {
             @Override public void onClick(View v) {
                 mEditor.insertTodo();
+            }
+        });
+
+
+
+        //MultiChoice
+
+        listItems = getResources().getStringArray(R.array.country_arrays);
+        checkedItems = new boolean[listItems.length];
+
+        btnTopik.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ThreadNewActivity3.this);
+                mBuilder.setTitle("Topik");
+                mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int position, boolean isChecked) {
+                      if (isChecked) {
+                          if (!mUserItems.contains(position)) {
+                              mUserItems.add(position);
+                          }
+                      }else if(mUserItems.contains(position)){
+                              mUserItems.remove(position);
+                          }
+                      }
+                });
+
+                mBuilder.setCancelable(false);
+                mBuilder.setPositiveButton("pilih", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        String item = "";
+                        for (int i = 0; i < mUserItems.size(); i++){
+                            item = item + listItems[mUserItems.get(i)];
+                            if(i != mUserItems.size() -1){
+                                item = item + ", ";
+
+                            }
+                        }
+                        mItemSelected.setText(item);
+                    }
+                });
+
+                mBuilder.setNegativeButton("batal", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.dismiss();
+                    }
+                });
+
+                mBuilder.setNeutralButton("Hapus Pilihan", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        for (int i = 0; i < checkedItems.length; i++){
+                            checkedItems[i]=false;
+                            mUserItems.clear();
+                            mItemSelected.setText("");
+                        }
+                    }
+                });
+
+                AlertDialog mDialog = mBuilder.create();
+                mDialog.show();
             }
         });
 
@@ -527,5 +605,8 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             }
         });
     }
+
+
+
 }
 
