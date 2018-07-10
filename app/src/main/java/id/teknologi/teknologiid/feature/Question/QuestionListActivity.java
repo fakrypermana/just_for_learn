@@ -1,13 +1,16 @@
 package id.teknologi.teknologiid.feature.Question;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
@@ -23,6 +26,8 @@ import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.QuestionListAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
+import id.teknologi.teknologiid.feature.thread.ThreadActivity;
+import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity3;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -38,6 +43,8 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
 
     @BindView(R.id.action_search_view)
     SearchView searchView;
+    @BindView(R.id.fab_question_create)
+    FloatingActionButton fabCreateQuestion;
 
 
 
@@ -51,6 +58,13 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
         questionListPresenter = new QuestionListPresenter(this);
         questionListPresenter.getQuestionList();
         questionListAdapter = new QuestionListAdapter(this, questionListModels, this);
+        fabCreateQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(QuestionListActivity.this, QuestionCreateActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -77,6 +91,7 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
         });
 
     }
+
 
     @Override
     public void onSuccessQuestion(List<QuestionListModel> questionListModels) {
@@ -105,6 +120,7 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
         QuestionDetailActivity.start(this, question.getId(), question.getSlug());
 
     }
+
 
 
 }

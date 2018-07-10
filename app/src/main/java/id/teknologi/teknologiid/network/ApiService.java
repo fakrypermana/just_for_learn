@@ -64,6 +64,13 @@ public interface ApiService {
             @PartMap Map<String, RequestBody> text
     );
 
+    @Multipart
+    @POST("forum/question/store")
+    Call<ResponseBody> QuestionCreate(
+//            @Part MultipartBody.Part photo,
+            @PartMap Map<String,RequestBody> text
+    );
+
     @GET("threads/{id}/{slug}/{comments}")
     Observable<ResponseObject<DetileThread>> getThreadDetail(
             @Path("id") int id,

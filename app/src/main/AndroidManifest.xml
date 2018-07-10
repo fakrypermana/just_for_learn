@@ -33,6 +33,7 @@
         <activity android:name=".feature.login_register.LoginActivity" />
         <activity android:name=".feature.pekerjaan_detail.FormDaftarJobActivity"/>
         <activity android:name=".feature.login_register.PrevLoginRegistActivity" />
+        <activity android:name=".feature.Question.QuestionCreateActivity" />
 
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"

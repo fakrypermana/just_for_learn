@@ -81,7 +81,6 @@ public class QuestionDetailActivity extends BaseActivity implements QuestionDeta
         answeredAdapter= new QuestionAnsweredAdapter(this, answeredModels,this);
     }
 
-//    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void setupView() {
         rvAnswered.setNestedScrollingEnabled(false);
