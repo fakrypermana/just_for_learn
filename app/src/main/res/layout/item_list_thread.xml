@@ -63,7 +63,7 @@
                     android:layout_toRightOf="@+id/daftar_icon"
                     android:text="Username"
                     android:textColor="@color/LightGray"
-                    android:textSize="26dp" />
+                    android:textSize="16dp" />
 
             </LinearLayout>
 

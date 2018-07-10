@@ -4,8 +4,11 @@ import java.util.List;
 
 import id.teknologi.teknologiid.base.BaseView;
 import id.teknologi.teknologiid.model.Profile;
+import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.model.Topic;
 
 public interface ThreadTopicView extends BaseView {
-    void onSuccessTopic(List<Topic> topicList);
+    //void onSuccessTopic(List<Topic> topicList);
+
+    void onSuccessTopic(List<Thread> data);
 }
