@@ -5,17 +5,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.View;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.ThreadsDetailAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
@@ -34,6 +40,21 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
     @BindView(R.id.rv_detileThreads)
     RecyclerView rvDetileThreads;
 
+    @BindView(R.id.iv_image_user)
+    ImageView ivImageUser;
+    @BindView(R.id.tv_username)
+    TextView tvUsername;
+    @BindView(R.id.tv_job)
+    TextView tvJob;
+    @BindView(R.id.tv_createAt)
+    TextView tvCreateAt;
+    @BindView(R.id.tv_title)
+    TextView tvTilte;
+    @BindView(R.id.tv_comment)
+    TextView tvComment;
+    @BindView(R.id.tv_read)
+    TextView tvRead;
+
     private final static String ID = "ID";
     private final static String SLUG = "SLUG";
     private int id;
@@ -41,6 +62,7 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
     ThreadDetailPresenter presenter;
     ThreadsDetailAdapter threadsDetailAdapter;
     List<Thread> threadDetailList = new ArrayList<>();
+
 
     @Override
     protected int contentView() {
@@ -73,6 +95,7 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
 
     @Override
     public void onSuccessThreadDetail(CobaModel model) {
+
         String data = model.getPost();
         webView.loadData(data,"text/html", "UTF-8");
         for (Comment coba:model.getComments()){
@@ -82,6 +105,18 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
         //rv
         Log.d("DETAIL THREADS", new Gson().toJson(threadDetailList));
         threadsDetailAdapter.insertAndNotify(threadDetailList);
+
+//        Glide.with(View)
+//                .load(model.getUser_url_photo())
+//                .apply(RequestOptions.circleCropTransform())
+//                .into(ivImageUser);
+        tvUsername.setText(model.getUsername().toString());
+        //tvJob.setText(model.getUser_work().toString());
+        tvCreateAt.setText(model.getCreated_at().toString());
+//        tvComment.setText(model.getComments());
+        tvRead.setText(String.valueOf(model.getViews()+" dilihat"));
+        tvTilte.setText(model.getTitle().toString());
+//        tvComment.setText(String.valueOf(model.getComments()));
     }
 
     @Override

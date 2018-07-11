@@ -22,6 +22,7 @@ import java.util.List;
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.ThreadsAdapter;
+import id.teknologi.teknologiid.adapter.ThreadsAdapter2;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.thread_detail.ThreadDetailActivity;
 import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity;

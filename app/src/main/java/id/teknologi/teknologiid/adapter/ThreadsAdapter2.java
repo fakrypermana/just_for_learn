@@ -24,23 +24,24 @@ import id.teknologi.teknologiid.feature.Tag;
 import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
-public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.ThreadVH>{
+public class ThreadsAdapter2 extends BaseRecyclerAdapter<Thread, ThreadsAdapter2.ThreadVH2> {
 
-    public ThreadsAdapter(Context context, List<Thread> threadList, RecyclerInterface recyclerCallback) {
+    public ThreadsAdapter2(Context context, List<Thread> threadList, RecyclerInterface recyclerCallback) {
         super(context, threadList, recyclerCallback);
     }
 
     @Override
     protected int getResLayout(int type) {
-        return R.layout.item_list_thread;
+        return R.layout.item_list_thread2;
     }
 
     @Override
-    public ThreadVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new ThreadVH(initView(viewType, parent), getRecyclerCallback());
+    public ThreadsAdapter2.ThreadVH2 onCreateViewHolder(ViewGroup parent, int viewType) {
+        return new ThreadsAdapter2.ThreadVH2(initView(viewType, parent), getRecyclerCallback());
     }
 
-    class ThreadVH extends BaseViewHolder<Thread> {
+    class ThreadVH2 extends BaseViewHolder<Thread> {
+
 
         @BindView(R.id.tv_upvote)
         TextView tvUpvote;
@@ -60,11 +61,10 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
         ImageView ivUser_url_photo;
         @BindView(R.id.chip_tags_thread)
         ChipView chipView;
-
         ChipAdapter adapter;
 
 
-        public ThreadVH(View itemView, RecyclerInterface recyclerInterface) {
+        public ThreadVH2(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
             ButterKnife.bind(this, itemView);
         }
@@ -73,15 +73,15 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
         public void onBind(Thread thread) {
 
 
-            Log.d("Thread",thread.getUrl_cover());
-            tvUpvote.setText(String.valueOf(thread.getUpvote()));
+            Log.d("Thread",thread.getUser_url_photo());
+            tvUpvote.setText(thread.getUpvote());
             tvTitle.setText(thread.getTitle());
             tvUser_name.setText(thread.getUsername());
             tvCreated_at.setText(thread.getCreated_at());
             tvUser_work.setText(thread.getUser_work());
 
-            tvComments.setText(String.valueOf(thread.getComments() +" komentar . "));
-            tvViews.setText(String.valueOf(thread.getViews()+" dilihat . "));
+            tvComments.setText(String.valueOf(thread.getComments() +" jawaban"));
+            tvViews.setText(String.valueOf(thread.getViews()+" dilihat"));
             Glide.with(itemView)
                     .load(thread.getUser_url_photo())
                     .apply(RequestOptions.circleCropTransform())
@@ -98,8 +98,6 @@ public class ThreadsAdapter extends BaseRecyclerAdapter<Thread, ThreadsAdapter.T
                     listChip.add(new Tag(tag));
                 }
 
-                //chipView.setAdapter(adapter);
-                //chipView.setChipBackgroundColor(R.color.colorAccent);
                 chipView.setChipList(listChip);
             } else {
                 chipView.setVisibility(View.GONE);
