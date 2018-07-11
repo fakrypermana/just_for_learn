@@ -90,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
                         <com.plumillonforge.android.chipview.ChipView
@@ -105,41 +105,8 @@
 
                     </LinearLayout>
 
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardElevation="3px">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_margin="10dp"
-                    android:gravity="center"
-                    android:orientation="vertical">
-
                     <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:text="Deskripsi Pekerjaan"
-                        android:textAlignment="center"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="16dp"
-                        android:textStyle="bold" />
-
-                    <WebView
-                        android:id="@+id/wv_job_desc_detail"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp">
-
-                    </WebView>
-
-                    <TextView
+                        android:id="@+id/label_desc"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -149,13 +116,14 @@
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
-                    <WebView
-                        android:id="@+id/wv_short_desc"
+                    <TextView
+                        android:id="@+id/tv_short_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="16dp"/>
 
                     <TextView
+                        android:id="@+id/label_skill"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"
@@ -165,8 +133,8 @@
                         android:textSize="16dp"
                         android:textStyle="bold" />
 
-                    <WebView
-                        android:id="@+id/wv_skill"
+                    <TextView
+                        android:id="@+id/tv_skill"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
@@ -187,7 +155,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:gravity="center"
-                        android:orientation="horizontal">
+                        android:orientation="horizontal"
+                        android:layout_marginBottom="20dp">
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -231,6 +200,42 @@
                             android:textColor="@color/colorAccentGreen"/>
 
                     </LinearLayout>
+
+
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="3px">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="Deskripsi Pekerjaan"
+                        android:textAlignment="center"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="16dp"
+                        android:textStyle="bold" />
+
+                    <WebView
+                        android:id="@+id/wv_job_desc_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="16dp">
+
+                    </WebView>
 
 
                 </LinearLayout>

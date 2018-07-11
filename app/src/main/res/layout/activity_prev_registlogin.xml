@@ -16,7 +16,7 @@
             android:layout_margin="10dp"
             android:layout_width="350dp"
             android:layout_height="300dp"
-            android:src="@drawable/img_depan"
+            android:src="@drawable/landing"
             android:layout_gravity="center"/>
 
         <ImageView

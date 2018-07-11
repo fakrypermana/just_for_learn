@@ -50,8 +50,8 @@ public class DataManager {
     }
 
     //Pekerjaan
-    public Observable<ResponseArray<Pekerjaan>> getPekerjaan() {
-        return apiService.getPekerjaan();
+    public Observable<ResponseArray<Pekerjaan>> getPekerjaan(String path, int page) {
+        return apiService.getPekerjaan(path,page);
     }
 
     public Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(int id, String slug) {

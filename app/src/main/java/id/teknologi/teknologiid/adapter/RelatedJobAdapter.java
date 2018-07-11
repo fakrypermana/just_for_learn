@@ -3,6 +3,7 @@ package id.teknologi.teknologiid.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
+import com.plumillonforge.android.chipview.Chip;
 import com.plumillonforge.android.chipview.ChipView;
 
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
+import id.teknologi.teknologiid.feature.Tag;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanPresenter;
 import id.teknologi.teknologiid.feature.pekerjaan_detail.DetailPekerjaanActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
@@ -31,8 +34,18 @@ import id.teknologi.teknologiid.model.RelatedPekerjaan;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, RelatedJobAdapter.RelatedVH> {
+    private OnItemClickListener mListener;
+
     public RelatedJobAdapter(Context context, List<RelatedPekerjaan> relatedList, RecyclerInterface recyclerCallBack) {
         super(context, relatedList, recyclerCallBack);
+    }
+
+    public interface OnItemClickListener{
+        void OnBtnClick(int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener){
+        mListener = listener;
     }
 
     @Override
@@ -42,7 +55,7 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
 
     @Override
     public RelatedJobAdapter.RelatedVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RelatedVH(initView(viewType, parent), getRecyclerCallback());
+        return new RelatedVH(initView(viewType, parent), getRecyclerCallback(), mListener);
     }
 
     public class RelatedVH extends BaseViewHolder<RelatedPekerjaan> {
@@ -60,11 +73,24 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
         @BindView(R.id.btn_simpan_related_job)
         Button btnSimpanRelated;
 
+
         //List<RelatedPekerjaan> relatedPekerjaanList = new ArrayList<>();
 
-        public RelatedVH(View itemView, RecyclerInterface recyclerInterface) {
+        public RelatedVH(View itemView, RecyclerInterface recyclerInterface, final OnItemClickListener listener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            btnDetailRelated.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null){
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION){
+                            listener.OnBtnClick(position);
+                        }
+                    }
+                }
+            });
+
         }
 
         @Override
@@ -73,6 +99,8 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
             tvSalaryMax.setText(String.valueOf(related.getSalary_max()));
             tvSalaryMin.setText(String.valueOf(related.getSalary_min()));
             //Log.d("wadidaw","isinya"+new Gson().toJson(related.getName()));
+            Glide.with(itemView).load(related.getPhoto())
+                    .into(ivCoverRelated);
 
             btnSimpanRelated.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -82,6 +110,24 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
                     ((Activity)context).finish();
                 }
             });
+
+            //chip
+            /*List<Chip> listChip = new ArrayList<>();
+            if (related.getTags() != null)
+            {
+
+                List<String> listTags = new ArrayList<>(related.getTags());
+                for (String tag : listTags
+                        ) {
+                    listChip.add(new Tag(tag));
+                }
+
+                //chipView.setAdapter(adapter);
+                //chipView.setChipBackgroundColor(R.color.colorAccent);
+                chipView.setChipList(listChip);
+            } else {
+                chipView.setVisibility(View.GONE);
+            }*/
 
         }
 

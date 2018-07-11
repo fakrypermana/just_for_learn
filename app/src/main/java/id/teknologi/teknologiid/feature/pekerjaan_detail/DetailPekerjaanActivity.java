@@ -70,16 +70,20 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     TextView tvDateJobDetail;
     @BindView(R.id.wv_job_desc_detail)
     WebView wvJobDetail;
-    @BindView(R.id.wv_skill)
-    WebView wvSkill;
-    @BindView(R.id.wv_short_desc)
-    WebView wvShortDesc;
+    @BindView(R.id.tv_skill)
+    TextView tvSkill;
+    @BindView(R.id.tv_short_desc)
+    TextView tvShortDesc;
     @BindView(R.id.tv_gaji_min)
     TextView tvGajiPekerjaanMin;
     @BindView(R.id.tv_gaji_max)
     TextView tvGajiPekerjaanMax;
     @BindView(R.id.iv_cover_job_detail)
     ImageView ivCoverJobDetail;
+    @BindView(R.id.label_desc)
+    TextView labelDesc;
+    @BindView(R.id.label_skill)
+    TextView labelSkill;
 
 
 
@@ -136,6 +140,14 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
         pekerjaanPresenter.getPekerjaan();*/
 
         adapter = new RelatedJobAdapter(this, relatedList, this);
+        adapter.setOnItemClickListener(new RelatedJobAdapter.OnItemClickListener() {
+            @Override
+            public void OnBtnClick(int position) {
+                RelatedPekerjaan pekerjaan = relatedList.get(position);
+                //Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                DetailPekerjaanActivity.start(DetailPekerjaanActivity.this, pekerjaan.getId(), pekerjaan.getSlug());
+            }
+        });
 
         btnDaftarDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,10 +250,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
             }
         });
 
-        /*LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);*/
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        rvRelated.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
+        rvRelated.setLayoutManager(layoutManager);
         rvRelated.setAdapter(adapter);
 
     }
@@ -278,12 +290,21 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
 
         String descJob = pekerjaan.getDesc_long();
-        String descSingkat = pekerjaan.getDescription();
-        String skill = pekerjaan.getSkills();
 
         wvJobDetail.loadData(descJob, "text/html", "UTF-8");
-        wvShortDesc.loadData(descSingkat, "text/html", "UTF-8");
-        wvSkill.loadData(skill, "text/html", "UTF-8");
+        if (pekerjaan.getDescription() != null) {
+            tvShortDesc.setText(pekerjaan.getDescription());
+        } else{
+            tvShortDesc.setVisibility(View.GONE);
+            labelDesc.setVisibility(View.GONE);
+        }
+
+        if (pekerjaan.getSkills() != null){
+            tvSkill.setText(pekerjaan.getSkills());
+        } else{
+            tvSkill.setVisibility(View.GONE);
+            labelSkill.setVisibility(View.GONE);
+        }
         tvGajiPekerjaanMin.setText(String.valueOf(pekerjaan.getSalary_min()));
         tvGajiPekerjaanMax.setText(String.valueOf(pekerjaan.getSalary_max()));
 
@@ -319,12 +340,12 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        RelatedPekerjaan pekerjaan = relatedList.get(position);
+        /*RelatedPekerjaan pekerjaan = relatedList.get(position);
         Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
-        //DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
+        DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
         Intent intent = new Intent(DetailPekerjaanActivity.this, ProfileActivity.class);
         startActivity(intent);
-        finish();
+        finish();*/
     }
 
 

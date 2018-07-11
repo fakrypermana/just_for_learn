@@ -59,7 +59,6 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
 
                 if (firebaseAuth.getCurrentUser() == null){
                     startActivity(new Intent(ProfileActivity.this, PrevLoginRegistActivity.class));
-                    finish();
                 }
 
             }

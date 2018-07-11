@@ -92,7 +92,7 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         hideProgressDialog();
-                        StringBuffer messageBuffer   = new StringBuffer();
+                        StringBuffer messageBuffer = new StringBuffer();
                         int statusCode = response.code();
                         if(response.isSuccessful())
                         {

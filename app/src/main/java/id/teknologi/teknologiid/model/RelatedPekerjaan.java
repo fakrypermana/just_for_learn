@@ -1,5 +1,7 @@
 package id.teknologi.teknologiid.model;
 
+import java.util.List;
+
 public class RelatedPekerjaan {
 
     private int id;
@@ -19,13 +21,21 @@ public class RelatedPekerjaan {
     private int views;
     private int point_min;
     private String date_exp;
+    private String photo;
+    private List<String> rtags;
 
     public int getId() {
         return id;
     }
 
+    public String getPhoto() {return photo;}
+
     public String getName() {
         return name;
+    }
+
+    public List<String> getTags() {
+        return rtags;
     }
 
     public int getId_company() {

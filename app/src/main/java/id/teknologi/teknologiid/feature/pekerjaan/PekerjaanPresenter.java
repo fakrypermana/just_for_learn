@@ -9,9 +9,9 @@ public class PekerjaanPresenter extends BasePresenter<PekerjaanView> {
         super(pekerjaanView);
     }
 
-    public void getPekerjaan(){
+    public void getPekerjaan(String path, int page){
         getView().onLoading(true);
-        dataManager.getPekerjaan()
+        dataManager.getPekerjaan(path,page)
                 .doOnTerminate(() -> getView().onLoading(false))
                 .compose(RxUtils.applyScheduler())
                 .compose(RxUtils.applyApiCall())

@@ -2,8 +2,13 @@ package id.teknologi.teknologiid.feature.pekerjaan;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
@@ -30,6 +35,8 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     PekerjaanAdapter adapter;
     List<Pekerjaan> pekerjaanList = new ArrayList<>();
     ProgressDialog progressDialog;
+    private final static String PATH = "PATH";
+    private final static int PAGE = 0;
 
     @BindView(R.id.rv_pekerjaan)
     RecyclerView rvPekerjaan;
@@ -39,16 +46,15 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
         return R.layout.activity_pekerjaan;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+
     @Override
     protected void setupData(Bundle savedInstanceState) {
         presenter = new PekerjaanPresenter(this);
-        presenter.getPekerjaan();
+        presenter.getPekerjaan(PATH,PAGE);
         adapter = new PekerjaanAdapter(this, pekerjaanList, this);
 
     }
 
-    @SuppressLint("NewApi")
     @Override
     protected void setupView() {
         rvPekerjaan.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
@@ -65,7 +71,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
 
     @Override
     public void onLoading(boolean isLoading) {
-        Log.d("Pekerjaan","LOADING "+isLoading);
+        //Log.d("Pekerjaan","LOADING "+isLoading);
         //showProgressDialog();
     }
 
