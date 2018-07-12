@@ -3,6 +3,7 @@ package id.teknologi.teknologiid.feature.thread_detail;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.view.menu.MenuView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -23,22 +24,34 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
+import id.teknologi.teknologiid.adapter.ThreadsCommentAdapter;
 import id.teknologi.teknologiid.adapter.ThreadsDetailAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.model.CobaModel;
 import id.teknologi.teknologiid.model.Comment;
 import id.teknologi.teknologiid.model.Thread;
+import id.teknologi.teknologiid.model.ThreadCommentModel;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailView, RecyclerInterface {
 
+    private final static String ID = "ID";
+    private final static String SLUG = "SLUG";
+    private int id;
+    private String slug;
+    ThreadDetailPresenter presenter;
+    ThreadsCommentAdapter threadsCommentAdapter;
+    List<ThreadCommentModel> threadCommentList = new ArrayList<>();
+    MenuView.ItemView itemView;
 
+    //Webview
     @BindView(R.id.wv_detileThread)
     WebView webView;
 
-    @BindView(R.id.rv_detileThreads)
-    RecyclerView rvDetileThreads;
+    //RecyclerViwe
+    @BindView(R.id.rv_comment)
+    RecyclerView rvComment;
 
     @BindView(R.id.iv_image_user)
     ImageView ivImageUser;
@@ -55,15 +68,6 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
     @BindView(R.id.tv_read)
     TextView tvRead;
 
-    private final static String ID = "ID";
-    private final static String SLUG = "SLUG";
-    private int id;
-    private String slug;
-    ThreadDetailPresenter presenter;
-    ThreadsDetailAdapter threadsDetailAdapter;
-    List<Thread> threadDetailList = new ArrayList<>();
-
-
     @Override
     protected int contentView() {
         return R.layout.activity_detail_thread;
@@ -76,9 +80,10 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
         slug = intent.getStringExtra(SLUG);
         presenter = new ThreadDetailPresenter(this);
         presenter.getThreadDetail(id, slug);
+        threadsCommentAdapter = new ThreadsCommentAdapter(this, threadCommentList, this);
 
-        //rv
-        threadsDetailAdapter = new ThreadsDetailAdapter(this, threadDetailList, this);
+//        //rv
+//        threadsCommentAdapter = new ThreadsCommentAdapter(this, threadCommentList, this);
     }
 
     @Override
@@ -89,13 +94,12 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
         webSettings.setJavaScriptEnabled(true);
 
         //rv
-        rvDetileThreads.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
-        rvDetileThreads.setAdapter(threadsDetailAdapter);
+        rvComment.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
+        rvComment.setAdapter(threadsCommentAdapter);
     }
 
     @Override
     public void onSuccessThreadDetail(CobaModel model) {
-
         String data = model.getPost();
         webView.loadData(data,"text/html", "UTF-8");
         for (Comment coba:model.getComments()){
@@ -103,21 +107,25 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
         }
 
         //rv
-        Log.d("DETAIL THREADS", new Gson().toJson(threadDetailList));
-        threadsDetailAdapter.insertAndNotify(threadDetailList);
+//        Log.d("DETAIL THREADS", new Gson().toJson(threadCommentList));
+//        threadsCommentAdapter.insertAndNotify(threadCommentList);
 
-//        Glide.with(View)
-//                .load(model.getUser_url_photo())
-//                .apply(RequestOptions.circleCropTransform())
-//                .into(ivImageUser);
         tvUsername.setText(model.getUsername().toString());
-        //tvJob.setText(model.getUser_work().toString());
         tvCreateAt.setText(model.getCreated_at().toString());
-//        tvComment.setText(model.getComments());
         tvRead.setText(String.valueOf(model.getViews()+" dilihat"));
         tvTilte.setText(model.getTitle().toString());
-//        tvComment.setText(String.valueOf(model.getComments()));
+
+//        onSuccessComment();
+
+
     }
+
+    private void onSuccessComment() {
+        Log.d("Comment", new Gson().toJson(threadCommentList));
+        threadsCommentAdapter.insertAndNotify(threadCommentList);
+
+    }
+
 
     @Override
     public void onLoading(boolean isLoading) {
@@ -144,8 +152,8 @@ public class  ThreadDetailActivity extends BaseActivity implements ThreadDetailV
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        Thread thread = threadDetailList.get(position);
-        Toast.makeText(this, "Clicked " + threadDetailList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
-        ThreadDetailActivity.start(this, thread.getId(), thread.getSlug());
+//        Thread thread = threadDetailList.get(position);
+//        Toast.makeText(this, "Clicked " + threadDetailList.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+//        ThreadDetailActivity.start(this, thread.getId(), thread.getSlug());
     }
 }

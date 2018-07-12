@@ -3,11 +3,7 @@ package id.teknologi.teknologiid.adapter;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -28,7 +24,7 @@ public class ThreadsDetailAdapter extends BaseRecyclerAdapter<Thread, ThreadsDet
 
     @Override
     protected int getResLayout(int type){
-        return R.layout.list_comment;
+        return R.layout.item_comment_thread;
     }
 
     @Override
@@ -37,12 +33,6 @@ public class ThreadsDetailAdapter extends BaseRecyclerAdapter<Thread, ThreadsDet
     }
 
     class ThreadDetailVH extends BaseViewHolder<Thread> {
-        @BindView(R.id.tv_user_name)
-        TextView tv_username;
-        @BindView(R.id.tv_user_work)
-        TextView tvUserwork;
-
-
 
 
         public ThreadDetailVH(View itemView, RecyclerInterface recyclerInterface){
@@ -52,11 +42,6 @@ public class ThreadsDetailAdapter extends BaseRecyclerAdapter<Thread, ThreadsDet
 
         @Override
         public void onBind(Thread thread){
-
-
-
-            tv_username.setText(thread.getUsername());
-            tvUserwork.setText(thread.getUser_work());
 
         }
     }

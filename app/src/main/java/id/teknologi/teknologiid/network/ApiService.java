@@ -13,6 +13,7 @@ import id.teknologi.teknologiid.model.QuestionAnsweredModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
+import id.teknologi.teknologiid.model.ThreadCommentModel;
 import id.teknologi.teknologiid.model.Topic;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -41,6 +42,12 @@ public interface ApiService {
 
     @GET("threads/{id}/{slug}")
     Observable<ResponseObject<CobaModel>> getThreadDetail(
+            @Path("id") int id,
+            @Path("slug") String slug
+    );
+
+    @GET("threads/{id}/{slug}")
+    Observable<ResponseObject<ThreadCommentModel>> getThreadComment(
             @Path("id") int id,
             @Path("slug") String slug
     );
