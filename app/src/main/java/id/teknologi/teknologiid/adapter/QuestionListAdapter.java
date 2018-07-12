@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindFont;
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
@@ -97,6 +98,12 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         ImageView ivIsAnswered;
         @BindView(R.id.chv_tag)
         ChipView chvTag;
+        @BindView(R.id.tv_user_work)
+        TextView tvUserwork;
+        @BindView(R.id.tv_views)
+        TextView tvView;
+        @BindView(R.id.tv_answer_count)
+        TextView tvAnswerCount;
 
         ChipAdapter chipAdapter;
 
@@ -123,8 +130,17 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
             tvDate.setText(questionList.getCreated_at());
             tvQuestion.setText(questionList.getTitle());
 //            tvTag.setText(questionList.getTags().toArray().toString());
-            tvUserName.setText(questionList.getUser_name());
+            tvUserName.setText(questionList.getUser_name()+",");
             tvVoted.setText(""+questionList.getUpvote());
+            if(questionList.getUser_work()!=null){
+            tvUserwork.setText(questionList.getUser_work());
+            }
+            else {
+                tvUserwork.setText("Common Programmer");
+            }
+
+            tvAnswerCount.setText(questionList.getAnswer_count()+" Jawaban");
+            tvView.setText(questionList.getViews()+" dilihat");
 //            for (List<String> i = questionList.getTags(); i.hasNext();) {
 //                String item = i.next();
 //                System.out.println(item);
@@ -133,7 +149,7 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
             if(isAnswered==false){
                 ivIsAnswered.setVisibility(View.INVISIBLE);
             }
-
+//            chvTag.setBackgroundColor(getResources().getColor(R.color.transparent));
             List<Chip> listChip = new ArrayList<>();
             if (questionList.getTags() != null)
             {

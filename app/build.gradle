@@ -139,5 +139,8 @@ dependencies {
 
     //attach file (file picker)
     implementation 'com.nbsp:library:1.8'
+
+    //floating action menu
+    implementation 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
 }
 apply plugin: 'com.google.gms.google-services'
