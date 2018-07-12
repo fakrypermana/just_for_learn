@@ -13,7 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseActivity;
-import id.teknologi.teknologiid.feature.login_register.LoginActivity;
+
 import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
 import id.teknologi.teknologiid.feature.login_register.RegisterActivity;
 import id.teknologi.teknologiid.model.Profile;

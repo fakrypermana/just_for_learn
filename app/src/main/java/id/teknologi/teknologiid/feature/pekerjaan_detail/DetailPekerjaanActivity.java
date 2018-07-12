@@ -38,8 +38,7 @@ import com.google.gson.Gson;
 import com.ms.square.android.expandabletextview.ExpandableTextView;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.nbsp.materialfilepicker.ui.FilePickerActivity;
-import com.plumillonforge.android.chipview.Chip;
-import com.plumillonforge.android.chipview.ChipView;
+import com.robertlevonyan.views.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,10 +47,8 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
-import id.teknologi.teknologiid.adapter.ChipAdapter;
 import id.teknologi.teknologiid.adapter.RelatedJobAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
-import id.teknologi.teknologiid.feature.Tag;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanPresenter;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanView;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
@@ -84,6 +81,8 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     TextView labelDesc;
     @BindView(R.id.label_skill)
     TextView labelSkill;
+    @BindView(R.id.toolbar_detail_job)
+    android.support.v7.widget.Toolbar toolbarDetail;
 
 
 
@@ -95,10 +94,8 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     /**
      * for chip
      */
-    @BindView(R.id.chip_tags_detail)
-    ChipView chipView;
-    ChipAdapter adapterChip;
-
+    @BindView(R.id.chip_tags_job_detail)
+    Chip chipView;
 
     private int id;
     private String name;
@@ -127,8 +124,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     @Override
     protected void setupData(Bundle savedInstanceState) {
 
+        setSupportActionBar(toolbarDetail);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         id = intent.getIntExtra(ID, 0);
@@ -274,16 +273,15 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
         //chip
         if (pekerjaan.getTags() != null){
-            List<Chip> listChip = new ArrayList<>();
+            //List<Chip> listChip = new ArrayList<>();
             List<String> listTags = new ArrayList<>(pekerjaan.getTags());
             for (String tag : listTags
                     ) {
-                listChip.add(new Tag(tag));
+                chipView.setChipText(tag);
             }
 
             //chipView.setAdapter(adapterChip);
             //chipView.setChipBackgroundColor(R.color.colorAccent);
-            chipView.setChipList(listChip);
         } else{
             chipView.setVisibility(View.GONE);
         }
@@ -340,12 +338,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
     @Override
     public void onRecyclerItemClicked(int position) {
-        /*RelatedPekerjaan pekerjaan = relatedList.get(position);
+        RelatedPekerjaan pekerjaan = relatedList.get(position);
         Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
         DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
-        Intent intent = new Intent(DetailPekerjaanActivity.this, ProfileActivity.class);
-        startActivity(intent);
-        finish();*/
+        finish();
     }
 
 

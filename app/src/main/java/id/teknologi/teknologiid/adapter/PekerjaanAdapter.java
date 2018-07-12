@@ -2,16 +2,13 @@ package id.teknologi.teknologiid.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.plumillonforge.android.chipview.Chip;
-import com.plumillonforge.android.chipview.ChipView;
+import com.robertlevonyan.views.chip.Chip;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,7 +18,6 @@ import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
-import id.teknologi.teknologiid.feature.Tag;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
@@ -53,9 +49,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         @BindView(R.id.tv_date_exp_job)
         TextView tvDateExp;
         @BindView(R.id.chip_tags_job)
-        ChipView chipView;
-
-        ChipAdapter adapter;
+        Chip chipView;
 
         public PekerjaanVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
@@ -70,28 +64,29 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
             tvNamaJob.setText(pekerjaan.getName());
             if (pekerjaan.getCompany() != null) {
                 tvNamaPerusahaan.setText(pekerjaan.getCompany().getCompany_name());
+                tvAlamatJob.setText(pekerjaan.getCompany().getAddress());
             } else {
                 tvNamaPerusahaan.setVisibility(View.INVISIBLE);
+                tvAlamatJob.setVisibility(View.GONE);
                 //System.out.println("Tidak ada data perusahaan");
             }
             //Log.d("perusahaan","isinya"+pekerjaan.getCompany().);
-            tvAlamatJob.setText(pekerjaan.getLocation());
+
             tvDateExp.setText(pekerjaan.getDate_exp());
 
             //chip
-            List<Chip> listChip = new ArrayList<>();
             if (pekerjaan.getTags() != null)
             {
 
                 List<String> listTags = new ArrayList<>(pekerjaan.getTags());
                 for (String tag : listTags
                         ) {
-                    listChip.add(new Tag(tag));
+                    chipView.setChipText(tag);
                 }
 
                 //chipView.setAdapter(adapter);
                 //chipView.setChipBackgroundColor(R.color.colorAccent);
-                chipView.setChipList(listChip);
+
             } else {
                 chipView.setVisibility(View.GONE);
             }

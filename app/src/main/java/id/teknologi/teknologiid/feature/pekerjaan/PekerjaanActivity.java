@@ -60,6 +60,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
         rvPekerjaan.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvPekerjaan.setAdapter(adapter);
 
+
     }
 
     @Override

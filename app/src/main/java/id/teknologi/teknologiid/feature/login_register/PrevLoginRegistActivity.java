@@ -1,5 +1,7 @@
 package id.teknologi.teknologiid.feature.login_register;
 
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -7,6 +9,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
@@ -34,21 +38,47 @@ import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
+import id.teknologi.teknologiid.network.ApiService;
+import id.teknologi.teknologiid.network.DataManager;
+import okhttp3.ResponseBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PrevLoginRegistActivity extends BaseActivity {
 
-    @BindView(R.id.btn_to_login)
-    Button btnToLogin;
-    @BindView(R.id.btn_to_regist)
-    Button btnToRegist;
     @BindView(R.id.sign_in_google)
     SignInButton signInGoogle;
     @BindView(R.id.sign_in_facebook)
-    LoginButton loginButton;
+    LoginButton loginFacebookButton;
+
+    /**
+     * hibah dari login
+     */
+
+    @BindView(R.id.input_email_login)
+    EditText email;
+    @BindView(R.id.input_password_login)
+    EditText password;
+    @BindView(R.id.link_regist)
+    TextView linkRegis;
+    @BindView(R.id.btn_login)
+    Button loginButton;
+
+    Context mContext;
+    private ApiService apiService;
+    private ProgressDialog progressDialog;
+
+
 
     private static final int RC_SIGN_IN = 1;
 
@@ -112,8 +142,8 @@ public class PrevLoginRegistActivity extends BaseActivity {
 
         // Initialize Facebook Login button
         mCallbackManager = CallbackManager.Factory.create();
-        loginButton.setReadPermissions("email", "public_profile");
-        loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+        loginFacebookButton.setReadPermissions("email", "public_profile");
+        loginFacebookButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 Log.d(TAG_FACE, "facebook:onSuccess:" + loginResult);
@@ -134,25 +164,72 @@ public class PrevLoginRegistActivity extends BaseActivity {
             }
         });
 
+        /**
+         * hibah setup data dari login
+         */
 
-
-        btnToLogin.setOnClickListener(new View.OnClickListener() {
+        mContext = this;
+        apiService = DataManager.getApiService();
+        linkRegis.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PrevLoginRegistActivity.this, LoginActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(PrevLoginRegistActivity.this,RegisterActivity.class);
                 startActivity(intent);
-                //finish();
+            }
+        });
+        if(progressDialog == null) {
+            progressDialog = new ProgressDialog(PrevLoginRegistActivity.this);
+        }
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showProgressDialog();
+                String Email = email.getText().toString();
+                String Password = password.getText().toString();
+                if(Email.equals("") || Password.equals("")){
+                    email.setError("Email Tidak Boleh Kosong");
+                    password.setError("Password Tidak Boleh Kosong");
+                    return;
+                }
+                apiService.loginUser(Email,Password).enqueue(new Callback<ResponseBody>() {
+                    @Override
+                    public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        progressDialog.hide();
+                        if(response.isSuccessful()){
+                            try{
+                                String returnBodyText = response.body().string();
+                                JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                                if (jsonRESULTS.getString("status").equals("success")){
+                                    Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String error_message = jsonRESULTS.getString("message");
+                                    Log.d("message",error_message);
+                                    Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
+                                }
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }else{
+                            Log.d("error",response.toString());
+                            Toast.makeText(mContext,"Connection Error",Toast.LENGTH_SHORT).show();
+                        }
+
+                    }
+
+                    @Override
+                    public void onFailure(Call<ResponseBody> call, Throwable t) {
+                        progressDialog.hide();
+                        Log.e("debug", "onFailure: ERROR > " + t.getMessage());
+                        Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                });
+
             }
         });
 
-        btnToRegist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(PrevLoginRegistActivity.this, RegisterActivity.class);
-                startActivity(intent);
-                //finish();
-            }
-        });
     }
 
     @Override
@@ -253,5 +330,10 @@ public class PrevLoginRegistActivity extends BaseActivity {
                 });
     }
 
+    private void showProgressDialog(){
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
 
 }

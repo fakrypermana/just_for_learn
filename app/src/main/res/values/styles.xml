@@ -16,4 +16,10 @@
         <item name="colorAccent">@color/colorAccentRed</item>
         <item name="android:textColorPrimary">@color/colorPrimaryLight</item>
     </style>
+
+    <style name="Widget.App.Spinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="overlapAnchor">true</item>
+        <item name="android:background">@drawable/shape_spinner</item>
+    </style>
+
 </resources>

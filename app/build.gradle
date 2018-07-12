@@ -140,9 +140,12 @@ dependencies {
     implementation 'jp.wasabeef:richeditor-android:1.2.2'
 
     //chipview
-    implementation 'com.github.Plumillon:ChipView:1.2.0'
+    implementation 'com.robertlevonyan.view:MaterialChipView:1.2.4'
 
     //attach file (file picker)
     implementation 'com.nbsp:library:1.8'
+
+    //stepview
+    implementation 'com.layer-net:step-indicator:1.1.0'
 }
 apply plugin: 'com.google.gms.google-services'

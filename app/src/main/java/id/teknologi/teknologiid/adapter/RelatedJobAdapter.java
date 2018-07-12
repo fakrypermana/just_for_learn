@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.plumillonforge.android.chipview.Chip;
-import com.plumillonforge.android.chipview.ChipView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +23,7 @@ import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
-import id.teknologi.teknologiid.feature.Tag;
+
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanPresenter;
 import id.teknologi.teknologiid.feature.pekerjaan_detail.DetailPekerjaanActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
@@ -68,10 +66,10 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
         TextView tvSalaryMin;
         @BindView(R.id.tv_salary_max)
         TextView tvSalaryMax;
-        @BindView(R.id.btn_lihat_detail_related)
-        Button btnDetailRelated;
-        @BindView(R.id.btn_simpan_related_job)
-        Button btnSimpanRelated;
+        @BindView(R.id.tv_alamat_related)
+        TextView tvAlamatRelated;
+        @BindView(R.id.tv_date_exp_related)
+        TextView tvExpRelated;
 
 
         //List<RelatedPekerjaan> relatedPekerjaanList = new ArrayList<>();
@@ -79,17 +77,6 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
         public RelatedVH(View itemView, RecyclerInterface recyclerInterface, final OnItemClickListener listener) {
             super(itemView);
             ButterKnife.bind(this, itemView);
-            btnDetailRelated.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if (listener != null){
-                        int position = getAdapterPosition();
-                        if (position != RecyclerView.NO_POSITION){
-                            listener.OnBtnClick(position);
-                        }
-                    }
-                }
-            });
 
         }
 
@@ -102,14 +89,8 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
             Glide.with(itemView).load(related.getPhoto())
                     .into(ivCoverRelated);
 
-            btnSimpanRelated.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(v.getContext(), ProfileActivity.class);
-                    v.getContext().startActivity(intent);
-                    ((Activity)context).finish();
-                }
-            });
+            tvAlamatRelated.setText(related.getLocation());
+            tvExpRelated.setText(related.getDate_exp());
 
             //chip
             /*List<Chip> listChip = new ArrayList<>();
