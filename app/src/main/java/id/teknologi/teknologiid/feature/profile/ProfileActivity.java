@@ -59,6 +59,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
 
                 if (firebaseAuth.getCurrentUser() == null){
                     startActivity(new Intent(ProfileActivity.this, PrevLoginRegistActivity.class));
+                    finish();
                 }
 
             }
@@ -74,20 +75,20 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
 
     @Override
     protected void setupView() {
-        /*tvNamaProfile.setText(profile.getName());
-        tvAlamatProfile.setText(profile.getAdress());
-        tvEmailProfile.setText(profile.getEmail());
-        tvKontakProfile.setText(profile.getPhone_number());*/
 
-        tvNamaProfile.setText(profile.getName());
     }
 
     @Override
     public void onSuccessProfile(Profile profile) {
-
+        setView(profile);
     }
 
-
+    public void setView(Profile profile){
+        tvNamaProfile.setText(profile.getName());
+        tvAlamatProfile.setText(profile.getAdress());
+        tvEmailProfile.setText(profile.getEmail());
+        tvKontakProfile.setText(profile.getPhone_number());
+    }
 
     @Override
     public void onLoading(boolean isLoading) {

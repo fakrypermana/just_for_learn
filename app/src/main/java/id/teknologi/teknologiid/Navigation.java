@@ -6,11 +6,19 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TabHost;
 import android.widget.Toast;
+
+
 import id.teknologi.teknologiid.feature.Question.QuestionListActivity;
+import id.teknologi.teknologiid.feature.login_register.LoginActivity;
 import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
+import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity_ViewBinding;
+import id.teknologi.teknologiid.feature.login_register.RegisterActivity;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
+import id.teknologi.teknologiid.feature.profile.ProfileActivity;
 import id.teknologi.teknologiid.feature.thread.ThreadActivity;
-import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity3;
+import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity;
+import id.teknologi.teknologiid.feature.thread_new.ThreadNewActivity2;
+import id.teknologi.teknologiid.model.Thread;
 
 public class Navigation extends TabActivity{
 
@@ -58,9 +66,11 @@ public class Navigation extends TabActivity{
         });
         spec = tabHost.newTabSpec("pemberitahuan");
         spec.setIndicator("", getResources().getDrawable(R.drawable.pemberitahuan));
-        intent = new Intent(this, ThreadNewActivity3.class);
+//        intent = new Intent(this, ThreadNewActivity3.class);
 
         intent = new Intent(this, PrevLoginRegistActivity.class);
+        spec.setIndicator("", getResources().getDrawable(R.drawable.ic_notifications_black_24dp));
+        intent = new Intent(this, ThreadNewActivity2.class);
         spec.setContent(intent);
         tabHost.addTab(spec);
 
