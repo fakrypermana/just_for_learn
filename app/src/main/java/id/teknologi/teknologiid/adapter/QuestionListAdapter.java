@@ -69,8 +69,6 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
     }
 
 
-
-
     public class QuestionListVH extends BaseViewHolder<QuestionListModel> {
 
         @BindView(R.id.iv_user_profile_pict)

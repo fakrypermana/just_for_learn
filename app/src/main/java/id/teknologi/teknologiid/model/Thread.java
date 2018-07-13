@@ -18,7 +18,7 @@ public class Thread {
     private String user_url_photo;
     private String user_work;
     private List<String> topics;
-    private int comments;
+    private List<ThreadCommentModel> comments;
 
     //inisiasi variable di DetileThread
     private int id_user;
@@ -50,7 +50,9 @@ public class Thread {
     public String getUser_url_photo() { return user_url_photo; }
     public String getUser_work() { return user_work; }
     public List<String> getTopics() { return topics; }
-    public int getComments() { return comments; }
+    public List<ThreadCommentModel> getComments() {
+        return comments;
+    }
 
     //getter di DetileThread
     public int getId_user() {

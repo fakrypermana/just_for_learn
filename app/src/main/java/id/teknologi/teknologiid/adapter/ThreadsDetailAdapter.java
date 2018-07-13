@@ -5,9 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
-
 import java.util.List;
 
 import butterknife.BindView;
@@ -27,7 +24,7 @@ public class ThreadsDetailAdapter extends BaseRecyclerAdapter<Thread, ThreadsDet
 
     @Override
     protected int getResLayout(int type){
-        return R.layout.list_comment;
+        return R.layout.item_comment_thread;
     }
 
     @Override
@@ -36,12 +33,7 @@ public class ThreadsDetailAdapter extends BaseRecyclerAdapter<Thread, ThreadsDet
     }
 
     class ThreadDetailVH extends BaseViewHolder<Thread> {
-        @BindView(R.id.tv_user_name)
-        TextView tv_username;
-        @BindView(R.id.tv_user_work)
-        TextView tvUserwork;
-        @BindView(R.id.iv_user_url_photo)
-        TextView ivUser_url_photo;
+
 
         public ThreadDetailVH(View itemView, RecyclerInterface recyclerInterface){
             super(itemView,recyclerInterface);
@@ -50,12 +42,7 @@ public class ThreadsDetailAdapter extends BaseRecyclerAdapter<Thread, ThreadsDet
 
         @Override
         public void onBind(Thread thread){
-//            Glide.with(itemView)
-//                    .load(thread.getUser_url_photo())
-//                    .apply(RequestOptions.circleCropTransform())
-//                    .into(ivUser_url_photo);
-            tv_username.setText(thread.getUsername());
-            tvUserwork.setText(thread.getUser_work());
+
         }
     }
 }

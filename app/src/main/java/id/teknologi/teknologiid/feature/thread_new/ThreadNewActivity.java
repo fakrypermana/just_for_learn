@@ -1,6 +1,5 @@
 package id.teknologi.teknologiid.feature.thread_new;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -9,13 +8,11 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
-import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Environment;
-import android.provider.ContactsContract;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v13.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.FileProvider;
@@ -24,39 +21,31 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.afollestad.materialdialogs.DialogAction;
-import com.afollestad.materialdialogs.MaterialDialog;
 import com.bumptech.glide.Glide;
-
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
-import id.teknologi.teknologiid.model.Thread;
 import id.teknologi.teknologiid.model.Topic;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
-import jp.wasabeef.richeditor.RichEditor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -65,7 +54,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ThreadNewActivity3 extends AppCompatActivity{
+public class ThreadNewActivity extends AppCompatActivity{
+
+    //getTopik
+    ThreadTopicPresenter presenter;
+    List<Topic> topikList = new ArrayList<>();
 
     public static final int REQUEST_CODE_CAMERA = 300;
     public static final int REQUEST_CODE_GALLERY = 200;
@@ -78,11 +71,8 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     private boolean checker;
     private File tempFile = null;
     private Uri uriCamera = null;
-    //Editor
-    private RichEditor mEditor;
 
     //MultiChoice
-    TextView mItemSelected;
     String[] listItems;
     boolean[] checkedItems;
     ArrayList<Integer> mUserItems = new ArrayList<>();
@@ -92,17 +82,22 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     EditText etTitle;
     @BindView(R.id.btn_topik)
     Button btnTopik;
-    @BindView(R.id.b_create)
-    Button bCreate;
+    @BindView(R.id.btn_next)
+    Button btnNext;
     @BindView(R.id.iv_browsePhoto)
     ImageView ivBrowsePhoto;
     @BindView(R.id.btn_take_image)
-    Button btnLoadImage;
+    FloatingActionButton btnLoadImage;
     @BindView(R.id.textview_image_path)
     TextView tvPath;
     @BindView(R.id.topik)
-            TextView topik;
-
+    TextView topik;
+    @BindView(R.id.tvItemSelected)
+    TextView mItemSelected;
+    @BindView(R.id.s_category)
+    Spinner sCategory;
+    @BindView(R.id.tv_kategori)
+    TextView tvKategori;
 
     ApiService mApiService;
 
@@ -112,19 +107,13 @@ public class ThreadNewActivity3 extends AppCompatActivity{
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_thread_new3);
+        setContentView(R.layout.activity_thread_new);
         ButterKnife.bind(this);
-        mContext = ThreadNewActivity3.this;
+        mContext = ThreadNewActivity.this;
         mApiService = DataManager.getApiService();
-        progressDialog = new ProgressDialog(ThreadNewActivity3.this);
+        progressDialog = new ProgressDialog(ThreadNewActivity.this);
 
-        //Editor
-        mEditor = (RichEditor) findViewById(R.id.editor);
-        mEditor.setEditorHeight(200);
-        mEditor.setEditorFontSize(16);
-        mEditor.setEditorFontColor(Color.BLACK);
-        mEditor.setPadding(10, 10, 10, 10);
-        mEditor.setPlaceholder("Tulis Konten...");
+
 
         //klik upload button
         btnLoadImage.setOnClickListener(new View.OnClickListener() {
@@ -138,194 +127,6 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             }
         });
 
-        //membuat thread
-        bCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-
-                String title = etTitle.getText().toString();
-                String post = mEditor.getHtml().toString();
-                Log.d("checker",""+checker);
-                Log.d("cari title", title.toString());
-                Log.d("cari post", post.toString());
-                if(checker==true){
-                    uploadImage(pathCamera,title,post,"1");
-                }else if(checker==false){
-                    uploadImage(pathPhoto,title,post,"1");
-                }
-            }
-        });
-
-        //klik fungsi editor
-        findViewById(R.id.action_undo).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.undo();
-            }
-        });
-
-        findViewById(R.id.action_redo).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.redo();
-            }
-        });
-
-        findViewById(R.id.action_bold).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setBold();
-            }
-        });
-
-        findViewById(R.id.action_italic).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setItalic();
-            }
-        });
-
-        findViewById(R.id.action_subscript).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setSubscript();
-            }
-        });
-
-        findViewById(R.id.action_superscript).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setSuperscript();
-            }
-        });
-
-        findViewById(R.id.action_strikethrough).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setStrikeThrough();
-            }
-        });
-
-        findViewById(R.id.action_underline).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setUnderline();
-            }
-        });
-
-        findViewById(R.id.action_heading1).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setHeading(1);
-            }
-        });
-
-        findViewById(R.id.action_heading2).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setHeading(2);
-            }
-        });
-
-        findViewById(R.id.action_heading3).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setHeading(3);
-            }
-        });
-
-        findViewById(R.id.action_heading4).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setHeading(4);
-            }
-        });
-
-        findViewById(R.id.action_heading5).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setHeading(5);
-            }
-        });
-
-        findViewById(R.id.action_heading6).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setHeading(6);
-            }
-        });
-
-        findViewById(R.id.action_txt_color).setOnClickListener(new View.OnClickListener() {
-            private boolean isChanged;
-
-            @Override public void onClick(View v) {
-                mEditor.setTextColor(isChanged ? Color.BLACK : Color.RED);
-                isChanged = !isChanged;
-            }
-        });
-
-        findViewById(R.id.action_bg_color).setOnClickListener(new View.OnClickListener() {
-            private boolean isChanged;
-
-            @Override public void onClick(View v) {
-                mEditor.setTextBackgroundColor(isChanged ? Color.TRANSPARENT : Color.YELLOW);
-                isChanged = !isChanged;
-            }
-        });
-
-        findViewById(R.id.action_indent).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setIndent();
-            }
-        });
-
-        findViewById(R.id.action_outdent).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setOutdent();
-            }
-        });
-
-        findViewById(R.id.action_align_left).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setAlignLeft();
-            }
-        });
-
-        findViewById(R.id.action_align_center).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setAlignCenter();
-            }
-        });
-
-        findViewById(R.id.action_align_right).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setAlignRight();
-            }
-        });
-
-        findViewById(R.id.action_blockquote).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setBlockquote();
-            }
-        });
-
-        findViewById(R.id.action_insert_bullets).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setBullets();
-            }
-        });
-
-        findViewById(R.id.action_insert_numbers).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.setNumbers();
-            }
-        });
-
-        findViewById(R.id.action_insert_image).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.insertImage("http://www.1honeywan.com/dachshund/image/7.21/7.21_3_thumb.JPG",
-                        "dachshund");
-            }
-        });
-
-        findViewById(R.id.action_insert_link).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.insertLink("https://github.com/wasabeef", "wasabeef");
-            }
-        });
-        findViewById(R.id.action_insert_checkbox).setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                mEditor.insertTodo();
-            }
-        });
-
 
 
         //MultiChoice
@@ -336,19 +137,19 @@ public class ThreadNewActivity3 extends AppCompatActivity{
         btnTopik.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ThreadNewActivity3.this);
+                AlertDialog.Builder mBuilder = new AlertDialog.Builder(ThreadNewActivity.this);
                 mBuilder.setTitle("Topik");
                 mBuilder.setMultiChoiceItems(listItems, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int position, boolean isChecked) {
-                      if (isChecked) {
-                          if (!mUserItems.contains(position)) {
-                              mUserItems.add(position);
-                          }
-                      }else if(mUserItems.contains(position)){
-                              mUserItems.remove(position);
-                          }
-                      }
+                        if (isChecked) {
+                            if (!mUserItems.contains(position)) {
+                                mUserItems.add(position);
+                            }
+                        }else if(mUserItems.contains(position)){
+                            mUserItems.remove(position);
+                        }
+                    }
                 });
 
                 mBuilder.setCancelable(false);
@@ -391,6 +192,34 @@ public class ThreadNewActivity3 extends AppCompatActivity{
             }
         });
 
+        sCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String item = parent.getItemAtPosition(position).toString();
+               // Toast.makeText(parent.getContext(), "selected "+ item , Toast.LENGTH_LONG.show();
+                //Toast.makeText(parent.getContext(), item, Toast.LENGTH_LONG).show();
+                tvKategori.setText(item);
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        btnNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ThreadNewActivity.this, ThreadNewActivity2.class);
+                intent.putExtra("judul", etTitle.getText().toString());
+                intent.putExtra("topik", mItemSelected.getText().toString());
+                intent.putExtra("kategori",tvKategori.getText().toString());
+                startActivity(intent);
+            }
+        });
+
+
 
 
 
@@ -423,8 +252,8 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 
     private void openGalery(){
         try {
-            if (ContextCompat.checkSelfPermission(ThreadNewActivity3.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(ThreadNewActivity3.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
+            if (ContextCompat.checkSelfPermission(ThreadNewActivity.this, android.Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ThreadNewActivity.this, new String[]{android.Manifest.permission.READ_EXTERNAL_STORAGE, android.Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
             } else {
                 Intent i = new Intent(Intent.ACTION_PICK,android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
                 startActivityForResult(i, REQUEST_CODE_GALLERY);
@@ -437,8 +266,8 @@ public class ThreadNewActivity3 extends AppCompatActivity{
 
     private void openCamera(){
         try {
-            if (ContextCompat.checkSelfPermission(ThreadNewActivity3.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(ThreadNewActivity3.this, new String[]{android.Manifest.permission.CAMERA}, PERMISSION_REQUEST);
+            if (ContextCompat.checkSelfPermission(ThreadNewActivity.this, android.Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(ThreadNewActivity.this, new String[]{android.Manifest.permission.CAMERA}, PERMISSION_REQUEST);
             } else {
                 Intent cameraIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 if (cameraIntent.resolveActivity(getPackageManager()) != null) {
