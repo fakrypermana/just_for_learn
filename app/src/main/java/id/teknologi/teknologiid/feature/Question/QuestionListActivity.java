@@ -99,78 +99,78 @@ public class QuestionListActivity extends  BaseActivity implements QuestionView,
             }
         });
 
-        CircleImageView icon = new CircleImageView(this);
-        icon.setImageResource(R.drawable.menu);
-        final FloatingActionButton floatingButton =
-                new FloatingActionButton.Builder(this)
-                .setContentView(icon).build();
-//        floatingButton.setBackgroundResource(R.color.colorAccentYellow);
-//        floatingButton.setBackground(getResources().getDrawable(R.color.colorAccentYellow));
-        SubActionButton.Builder builder = new SubActionButton.Builder(this);
-//        builder.setBackgroundDrawable(getResources().getDrawable(R.color.colorAccentYellow));
-
-
-        CircleImageView createQuestionButton = new CircleImageView(this);
-        createQuestionButton.setImageResource(R.drawable.pen_white_48);
-        SubActionButton createButton =builder.setContentView(createQuestionButton)
-                .build();
-
-        ImageView filterQuestion = new ImageView(this);
-        filterQuestion.setImageResource(R.drawable.filter);
-        SubActionButton filterButton =builder.setContentView(filterQuestion).build();
-
-        ImageView tagFilter = new ImageView(this);
-        tagFilter.setImageResource(R.drawable.tag_label);
-        SubActionButton tagFilterButton =builder.setContentView(tagFilter).build();
-
-        LayoutParams params=new LayoutParams(200,200);
-        createButton.setLayoutParams(params);
-        filterButton.setLayoutParams(params);
-        tagFilterButton.setLayoutParams(params);
-
-        floatingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                blackLayout.setVisibility(View.VISIBLE);
-                final FloatingActionMenu floatingmenu = new FloatingActionMenu.Builder(QuestionListActivity.this)
-                        .addSubActionView(createButton)
-                        .addSubActionView(filterButton)
-                        .addSubActionView(tagFilterButton)
-                        .attachTo(floatingButton)
-                        .setRadius(400)
-                        .setStartAngle(270)
-                        .setEndAngle(150)
-                        .build();
-
-                createButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Intent intent = new Intent(QuestionListActivity.this, QuestionCreateActivity.class);
-                        startActivity(intent);
-                        floatingmenu.close(true);
-                    }
-                });
-                filterButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(QuestionListActivity.this,"filter question",Toast.LENGTH_SHORT).show();
-                        floatingmenu.close(true);
-                    }
-                });
-                tagFilterButton.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(QuestionListActivity.this,"filter tag question",Toast.LENGTH_SHORT).show();
-                        floatingmenu.close(true);
-                    }
-                });
-                blackLayout.setVisibility(View.GONE);
-
-            }
-        });
-        Log.d("trigger", "trigger= "+trigger);
-
-    }
+//        CircleImageView icon = new CircleImageView(this);
+//        icon.setImageResource(R.drawable.menu);
+//        final FloatingActionButton floatingButton =
+//                new FloatingActionButton.Builder(this)
+//                .setContentView(icon).build();
+////        floatingButton.setBackgroundResource(R.color.colorAccentYellow);
+////        floatingButton.setBackground(getResources().getDrawable(R.color.colorAccentYellow));
+//        SubActionButton.Builder builder = new SubActionButton.Builder(this);
+////        builder.setBackgroundDrawable(getResources().getDrawable(R.color.colorAccentYellow));
+//
+//
+//        CircleImageView createQuestionButton = new CircleImageView(this);
+//        createQuestionButton.setImageResource(R.drawable.pen_white_48);
+//        SubActionButton createButton =builder.setContentView(createQuestionButton)
+//                .build();
+//
+//        ImageView filterQuestion = new ImageView(this);
+//        filterQuestion.setImageResource(R.drawable.filter);
+//        SubActionButton filterButton =builder.setContentView(filterQuestion).build();
+//
+//        ImageView tagFilter = new ImageView(this);
+//        tagFilter.setImageResource(R.drawable.tag_label);
+//        SubActionButton tagFilterButton =builder.setContentView(tagFilter).build();
+//
+//        LayoutParams params=new LayoutParams(200,200);
+//        createButton.setLayoutParams(params);
+//        filterButton.setLayoutParams(params);
+//        tagFilterButton.setLayoutParams(params);
+//
+//        floatingButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                blackLayout.setVisibility(View.VISIBLE);
+//                final FloatingActionMenu floatingmenu = new FloatingActionMenu.Builder(QuestionListActivity.this)
+//                        .addSubActionView(createButton)
+//                        .addSubActionView(filterButton)
+//                        .addSubActionView(tagFilterButton)
+//                        .attachTo(floatingButton)
+//                        .setRadius(400)
+//                        .setStartAngle(270)
+//                        .setEndAngle(150)
+//                        .build();
+//
+//                createButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Intent intent = new Intent(QuestionListActivity.this, QuestionCreateActivity.class);
+//                        startActivity(intent);
+//                        floatingmenu.close(true);
+//                    }
+                };
+//                filterButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(QuestionListActivity.this,"filter question",Toast.LENGTH_SHORT).show();
+//                        floatingmenu.close(true);
+//                    }
+//                });
+//                tagFilterButton.setOnClickListener(new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View view) {
+//                        Toast.makeText(QuestionListActivity.this,"filter tag question",Toast.LENGTH_SHORT).show();
+//                        floatingmenu.close(true);
+//                    }
+//                });
+//                blackLayout.setVisibility(View.GONE);
+//
+//            }
+//        });
+//        Log.d("trigger", "trigger= "+trigger);
+//
+//    }
 
     @Override
     public void onSuccessQuestion(List<QuestionListModel> questionListModels) {

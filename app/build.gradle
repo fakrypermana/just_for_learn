@@ -142,5 +142,6 @@ dependencies {
 
     //floating action menu
     implementation 'com.oguzdev:CircularFloatingActionMenu:1.0.2'
+    implementation 'com.github.clans:fab:1.6.4'
 }
 apply plugin: 'com.google.gms.google-services'
