@@ -141,7 +141,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PrevLoginRegistActivity.this, LoginActivity.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
 
@@ -150,7 +150,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(PrevLoginRegistActivity.this, RegisterActivity.class);
                 startActivity(intent);
-                //finish();
+                finish();
             }
         });
     }

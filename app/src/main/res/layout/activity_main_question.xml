@@ -6,12 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
     <LinearLayout
         android:layout_width="352dp"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="32dp"
-        tools:ignore="MissingConstraints">
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="32dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -20,10 +21,10 @@
 
 
             <SearchView
+                android:id="@+id/action_search_view"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:id="@+id/action_search_view"/>
+                android:layout_weight="1" />
 
             <Spinner
                 android:id="@+id/spinner2"
@@ -36,26 +37,43 @@
         <android.support.v4.widget.SwipeRefreshLayout
             android:id="@+id/srl_QuestionList"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
             tools:layout_editor_absoluteX="32dp"
             tools:layout_editor_absoluteY="59dp">
 
-
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/rv_QuestionList"
-                android:layout_width="347dp"
-                android:layout_height="436dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
                 android:layout_marginEnd="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginTop="8dp"
+                android:layout_weight="2"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.864">
 
+
             </android.support.v7.widget.RecyclerView>
+
+
+
+        </android.support.constraint.ConstraintLayout>
         </android.support.v4.widget.SwipeRefreshLayout>
+
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/black_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#99000000"
+        android:orientation="horizontal">
 
     </LinearLayout>
 

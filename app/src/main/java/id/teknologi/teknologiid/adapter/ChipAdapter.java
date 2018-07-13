@@ -52,6 +52,6 @@ public class ChipAdapter extends ChipViewAdapter {
         Tag tag = (Tag) getChip(position);
 
         if (tag.getType() == 2)
-            ((TextView) view.findViewById(android.R.id.text1)).setTextColor(getColor(R.color.colorAccent));
+            ((TextView) view.findViewById(android.R.id.text1)).setTextColor(getColor(R.color.transparent));
     }
 }

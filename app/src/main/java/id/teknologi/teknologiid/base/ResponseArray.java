@@ -2,6 +2,8 @@ package id.teknologi.teknologiid.base;
 
 import java.util.List;
 
+import id.teknologi.teknologiid.model.QuestionListModel;
+
 /**
  * Created by galihgasur on 10/9/17.
  */

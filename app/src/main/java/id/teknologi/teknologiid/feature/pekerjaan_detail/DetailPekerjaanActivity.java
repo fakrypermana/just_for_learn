@@ -54,7 +54,9 @@ import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.Tag;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanPresenter;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanView;
+import id.teknologi.teknologiid.feature.profile.ProfileActivity;
 import id.teknologi.teknologiid.model.Pekerjaan;
+import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.RelatedPekerjaan;
 import id.teknologi.teknologiid.utils.AppUtils;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
@@ -155,6 +157,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
                  * Mengeset komponen dari custom dialog
                  */
                 Button btnAddFileCV = dialog.findViewById(R.id.btn_upload_cv);
+                Button btnClose = dialog.findViewById(R.id.btn_close_dialog);
                 EditText inputNamaDaftar = dialog.findViewById(R.id.input_nama_daftar_job);
 
                 EditText inputEmailDaftar = dialog.findViewById(R.id.input_email_daftar_job);
@@ -162,6 +165,17 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
                 EditText inputTeleponDaftar = dialog.findViewById(R.id.input_telepon_daftar_job);
 
                 TextView tvFilePath = dialog.findViewById(R.id.tv_filepath);
+
+
+                /**
+                 * Jika tombol diklik
+                 */
+                btnClose.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
 
                 /**
                  * permission access file
@@ -171,13 +185,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
                     requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE},1001);
                 }
 
-                /**
-                 * Jika tombol diklik
-                 */
-                Button btnAddFile = dialog.findViewById(R.id.btn_upload_cv);
-                btnAddFile.setOnClickListener(new View.OnClickListener() {
+                btnAddFileCV.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
+
                         new MaterialFilePicker()
                                 .withActivity(DetailPekerjaanActivity.this)
                                 .withRequestCode(1000)
@@ -310,7 +321,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     public void onRecyclerItemClicked(int position) {
         RelatedPekerjaan pekerjaan = relatedList.get(position);
         Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
-        DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
+        //DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
+        Intent intent = new Intent(DetailPekerjaanActivity.this, ProfileActivity.class);
+        startActivity(intent);
+        finish();
     }
 
 

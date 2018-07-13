@@ -12,6 +12,7 @@ import id.teknologi.teknologiid.model.QuestionAnsweredModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
+import id.teknologi.teknologiid.model.ThreadCommentModel;
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -42,12 +43,19 @@ public class DataManager {
         return apiService.getQuestionList();
     }
 
+
     public Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(int id, String slug) {
         return apiService.getQuestionDetail(id,slug);
     }
 
+
+
     public Observable<ResponseObject<CobaModel>> getThreadDetail(int id, String slug) {
         return apiService.getThreadDetail(id, slug);
+    }
+
+    public Observable<ResponseObject<ThreadCommentModel>> getThreadComment(int id, String slug){
+        return apiService.getThreadComment(id,slug);
     }
 
     //Pekerjaan

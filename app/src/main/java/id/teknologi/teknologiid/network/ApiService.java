@@ -13,6 +13,7 @@ import id.teknologi.teknologiid.model.QuestionAnsweredModel;
 import id.teknologi.teknologiid.model.QuestionDetailModel;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.model.Thread;
+import id.teknologi.teknologiid.model.ThreadCommentModel;
 import id.teknologi.teknologiid.model.Topic;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
@@ -45,6 +46,12 @@ public interface ApiService {
             @Path("slug") String slug
     );
 
+    @GET("threads/{id}/{slug}")
+    Observable<ResponseObject<ThreadCommentModel>> getThreadComment(
+            @Path("id") int id,
+            @Path("slug") String slug
+    );
+
     @GET("init/topic")
     Observable<ResponseArray<Topic>> getTopic();
 
@@ -62,6 +69,13 @@ public interface ApiService {
     Call<ResponseBody> postingTread(
             @Part MultipartBody.Part photo,
             @PartMap Map<String, RequestBody> text
+    );
+
+    @Multipart
+    @POST("forum/question/store")
+    Call<ResponseBody> QuestionCreate(
+//            @Part MultipartBody.Part photo,
+            @PartMap Map<String,RequestBody> text
     );
 
     @GET("threads/{id}/{slug}/{comments}")

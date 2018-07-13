@@ -12,15 +12,20 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.plumillonforge.android.chipview.Chip;
+import com.plumillonforge.android.chipview.ChipView;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindFont;
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
+import id.teknologi.teknologiid.feature.Tag;
 import id.teknologi.teknologiid.model.QuestionListModel;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
@@ -64,8 +69,6 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
     }
 
 
-
-
     public class QuestionListVH extends BaseViewHolder<QuestionListModel> {
 
         @BindView(R.id.iv_user_profile_pict)
@@ -81,8 +84,8 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         TextView tvDate;
         @BindView(R.id.tv_question)
         TextView tvQuestion;
-        @BindView(R.id.tv_tag)
-        TextView tvTag;
+//        @BindView(R.id.tv_tag)
+//        TextView tvTag;
         @BindView(R.id.tv_user_name)
         TextView tvUserName;
 //        @BindView(R.id.spin_filter)
@@ -91,6 +94,16 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
         TextView tvVoted;
         @BindView(R.id.iv_isAnswered)
         ImageView ivIsAnswered;
+        @BindView(R.id.chv_tag)
+        ChipView chvTag;
+        @BindView(R.id.tv_user_work)
+        TextView tvUserwork;
+        @BindView(R.id.tv_views)
+        TextView tvView;
+        @BindView(R.id.tv_answer_count)
+        TextView tvAnswerCount;
+
+        ChipAdapter chipAdapter;
 
 
         public QuestionListVH(View itemView, RecyclerInterface recyclerInterface) {
@@ -114,9 +127,18 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
             Log.d("QuestionList", questionList.getUser_url_photo());
             tvDate.setText(questionList.getCreated_at());
             tvQuestion.setText(questionList.getTitle());
-            tvTag.setText(questionList.getTags().toArray().toString());
-            tvUserName.setText(questionList.getUser_name());
+//            tvTag.setText(questionList.getTags().toArray().toString());
+            tvUserName.setText(questionList.getUser_name()+",");
             tvVoted.setText(""+questionList.getUpvote());
+            if(questionList.getUser_work()!=null){
+            tvUserwork.setText(questionList.getUser_work());
+            }
+            else {
+                tvUserwork.setText("Common Programmer");
+            }
+
+            tvAnswerCount.setText(questionList.getAnswer_count()+" Jawaban");
+            tvView.setText(questionList.getViews()+" dilihat");
 //            for (List<String> i = questionList.getTags(); i.hasNext();) {
 //                String item = i.next();
 //                System.out.println(item);
@@ -125,18 +147,29 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
             if(isAnswered==false){
                 ivIsAnswered.setVisibility(View.INVISIBLE);
             }
+//            chvTag.setBackgroundColor(getResources().getColor(R.color.transparent));
+            List<Chip> listChip = new ArrayList<>();
+            if (questionList.getTags() != null)
+            {
+
+                List<String> listTags = new ArrayList<>(questionList.getTags());
+                for (String tag : listTags
+                        ) {
+                    listChip.add(new Tag(tag));
+                }
+
+                //chipView.setAdapter(adapter);
+                //chipView.setChipBackgroundColor(R.color.colorAccent);
+                chvTag.setChipList(listChip);
+            } else {
+                chvTag.setVisibility(View.GONE);
+            }
 
 
             }
 
 
         }
-//    public void updateList(List<QuestionListModel> newList){
-//        names=new ArrayList<>();
-//        names.addAll(newList);
-//        notifyDataSetChanged();
-//
-//    }
 
     private static class MyFilter extends Filter {
 
@@ -183,24 +216,6 @@ public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, 
 
         }
     }
-//    public void filter(String text) {
-//        List<QuestionListModel> namecopy = new ArrayList<>();
-////        namecopy=names;
-////        getNames().clear();
-//
-//            if (text.isEmpty()) {
-//                getNames().addAll(namecopy);
-//            } else {
-//                text = text.toLowerCase();
-//                for (QuestionListModel qlModel : namecopy) {
-//                    if (qlModel.getTitle().toLowerCase().contains(text) || qlModel.getUser_name().toLowerCase().contains(text)) {
-//                        qlModel.add(qlModel);
-//                    }
-//                }
-//            }
-//            notifyDataSetChanged();
-//
-//    }
 
 
 }
