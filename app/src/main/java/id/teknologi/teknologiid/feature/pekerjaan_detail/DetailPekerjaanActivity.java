@@ -48,7 +48,6 @@ import java.util.regex.Pattern;
 import butterknife.BindView;
 import id.teknologi.teknologiid.Manifest;
 import id.teknologi.teknologiid.R;
-import id.teknologi.teknologiid.adapter.ChipAdapter;
 import id.teknologi.teknologiid.adapter.RelatedJobAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.Tag;
@@ -66,20 +65,28 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     TextView tvNamaJobDetail;
     @BindView(R.id.tv_nama_perusahan_detail)
     TextView tvPerusahaanJobDetail;
+    @BindView(R.id.tv_alamat_job_detail)
+    TextView tvAlamatJobDetail;
     @BindView(R.id.tv_date_exp_job_detail)
     TextView tvDateJobDetail;
     @BindView(R.id.wv_job_desc_detail)
     WebView wvJobDetail;
-    @BindView(R.id.wv_skill)
-    WebView wvSkill;
-    @BindView(R.id.wv_short_desc)
-    WebView wvShortDesc;
+    @BindView(R.id.tv_skill)
+    TextView tvSkill;
+    @BindView(R.id.tv_short_desc)
+    TextView tvShortDesc;
     @BindView(R.id.tv_gaji_min)
     TextView tvGajiPekerjaanMin;
     @BindView(R.id.tv_gaji_max)
     TextView tvGajiPekerjaanMax;
     @BindView(R.id.iv_cover_job_detail)
     ImageView ivCoverJobDetail;
+    @BindView(R.id.label_desc)
+    TextView labelDesc;
+    @BindView(R.id.label_skill)
+    TextView labelSkill;
+    @BindView(R.id.toolbar_detail_job)
+    android.support.v7.widget.Toolbar toolbarDetail;
 
 
 
@@ -91,10 +98,8 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     /**
      * for chip
      */
-    @BindView(R.id.chip_tags_detail)
+    @BindView(R.id.chip_tags_job_detail)
     ChipView chipView;
-    ChipAdapter adapterChip;
-
 
     private int id;
     private String name;
@@ -123,8 +128,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     @Override
     protected void setupData(Bundle savedInstanceState) {
 
+        setSupportActionBar(toolbarDetail);
 
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
         Intent intent = getIntent();
         id = intent.getIntExtra(ID, 0);
@@ -136,6 +143,14 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
         pekerjaanPresenter.getPekerjaan();*/
 
         adapter = new RelatedJobAdapter(this, relatedList, this);
+        adapter.setOnItemClickListener(new RelatedJobAdapter.OnItemClickListener() {
+            @Override
+            public void OnBtnClick(int position) {
+                RelatedPekerjaan pekerjaan = relatedList.get(position);
+                //Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
+                DetailPekerjaanActivity.start(DetailPekerjaanActivity.this, pekerjaan.getId(), pekerjaan.getSlug());
+            }
+        });
 
         btnDaftarDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -238,10 +253,10 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
             }
         });
 
-        /*LinearLayoutManager layoutManager
-                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);*/
+        LinearLayoutManager layoutManager
+                = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        rvRelated.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
+        rvRelated.setLayoutManager(layoutManager);
         rvRelated.setAdapter(adapter);
 
     }
@@ -266,24 +281,34 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
             List<String> listTags = new ArrayList<>(pekerjaan.getTags());
             for (String tag : listTags
                     ) {
+
                 listChip.add(new Tag(tag));
             }
-
+            chipView.setChipBackgroundRes(R.drawable.shape_chip_view_tag_job);
+            chipView.setChipList(listChip);
             //chipView.setAdapter(adapterChip);
             //chipView.setChipBackgroundColor(R.color.colorAccent);
-            chipView.setChipList(listChip);
         } else{
             chipView.setVisibility(View.GONE);
         }
 
 
         String descJob = pekerjaan.getDesc_long();
-        String descSingkat = pekerjaan.getDescription();
-        String skill = pekerjaan.getSkills();
 
         wvJobDetail.loadData(descJob, "text/html", "UTF-8");
-        wvShortDesc.loadData(descSingkat, "text/html", "UTF-8");
-        wvSkill.loadData(skill, "text/html", "UTF-8");
+        if (pekerjaan.getDescription() != null) {
+            tvShortDesc.setText(pekerjaan.getDescription());
+        } else{
+            tvShortDesc.setVisibility(View.GONE);
+            labelDesc.setVisibility(View.GONE);
+        }
+
+        if (pekerjaan.getSkills() != null){
+            tvSkill.setText(pekerjaan.getSkills());
+        } else{
+            tvSkill.setVisibility(View.GONE);
+            labelSkill.setVisibility(View.GONE);
+        }
         tvGajiPekerjaanMin.setText(String.valueOf(pekerjaan.getSalary_min()));
         tvGajiPekerjaanMax.setText(String.valueOf(pekerjaan.getSalary_max()));
 
@@ -292,6 +317,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
         tvNamaJobDetail.setText(pekerjaan.getName());
         //Log.d("Deskripsi","data : "+pekerjaan.getName());
+        tvAlamatJobDetail.setText(pekerjaan.getCompany().getAddress());
         if (pekerjaan.getCompany() != null) {
             tvPerusahaanJobDetail.setText(pekerjaan.getCompany().getCompany_name());
         } else {
@@ -321,9 +347,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     public void onRecyclerItemClicked(int position) {
         RelatedPekerjaan pekerjaan = relatedList.get(position);
         Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
-        //DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
-        Intent intent = new Intent(DetailPekerjaanActivity.this, ProfileActivity.class);
-        startActivity(intent);
+        DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
         finish();
     }
 

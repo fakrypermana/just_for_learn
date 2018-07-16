@@ -2,8 +2,7 @@ package id.teknologi.teknologiid.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.nfc.Tag;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -21,7 +20,6 @@ import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
-import id.teknologi.teknologiid.feature.Tag;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
@@ -55,8 +53,6 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         @BindView(R.id.chip_tags_job)
         ChipView chipView;
 
-        ChipAdapter adapter;
-
         public PekerjaanVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
             ButterKnife.bind(this, itemView);
@@ -70,29 +66,30 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
             tvNamaJob.setText(pekerjaan.getName());
             if (pekerjaan.getCompany() != null) {
                 tvNamaPerusahaan.setText(pekerjaan.getCompany().getCompany_name());
+                tvAlamatJob.setText(pekerjaan.getCompany().getAddress());
             } else {
                 tvNamaPerusahaan.setVisibility(View.INVISIBLE);
+                tvAlamatJob.setVisibility(View.GONE);
                 //System.out.println("Tidak ada data perusahaan");
             }
             //Log.d("perusahaan","isinya"+pekerjaan.getCompany().);
-            tvAlamatJob.setText(pekerjaan.getLocation());
+
             tvDateExp.setText(pekerjaan.getDate_exp());
 
             //chip
-            List<Chip> listChip = new ArrayList<>();
-            if (pekerjaan.getTags() != null)
-            {
-
+            //chip
+            if (pekerjaan.getTags() != null){
+                List<Chip> listChip = new ArrayList<>();
                 List<String> listTags = new ArrayList<>(pekerjaan.getTags());
                 for (String tag : listTags
                         ) {
-                    listChip.add(new Tag(tag));
+                    listChip.add(new id.teknologi.teknologiid.feature.Tag(tag));
                 }
-
-                //chipView.setAdapter(adapter);
-                //chipView.setChipBackgroundColor(R.color.colorAccent);
+                chipView.setChipBackgroundRes(R.drawable.shape_chip_view_tag_job);
                 chipView.setChipList(listChip);
-            } else {
+                //chipView.setAdapter(adapterChip);
+                //chipView.setChipBackgroundColor(R.color.colorAccent);
+            } else{
                 chipView.setVisibility(View.GONE);
             }
 

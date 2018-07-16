@@ -20,7 +20,7 @@
     <color name="colorGrayBlue">#E8EAF6</color>
     <color name="colorDarkBlack">#000000</color>
     <color name="colorDarkGray">#9e9e9e</color>
-    <color name="colorLightGray">#E0E0E0</color>
+    <color name="colorLightGray">#f6f9ff</color>
     <color name="colorLight">#FAFAFA</color>
 
     <!--color untuk gradient transition -->

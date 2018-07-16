@@ -1,7 +1,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <!--<item name="colorPrimaryDark">@color/colorPrimaryDark</item>-->
@@ -16,4 +16,10 @@
         <item name="colorAccent">@color/colorAccentRed</item>
         <item name="android:textColorPrimary">@color/colorPrimaryLight</item>
     </style>
+
+    <style name="Widget.App.Spinner" parent="@style/Widget.AppCompat.Spinner">
+        <item name="overlapAnchor">true</item>
+        <item name="android:background">@drawable/shape_spinner</item>
+    </style>
+
 </resources>

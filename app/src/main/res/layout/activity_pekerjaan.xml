@@ -8,9 +8,25 @@
     tools:context=".feature.pekerjaan.PekerjaanActivity"
     android:background="@color/colorPrimaryLight">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_job"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimaryDark"
+        app:title="Teknologi.id"
+        app:titleTextColor="@color/colorPrimaryLight">
+
+    </android.support.v7.widget.Toolbar>
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_pekerjaan"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
+
+
+
+    </android.support.v7.widget.RecyclerView>
+
+
 
 </LinearLayout>

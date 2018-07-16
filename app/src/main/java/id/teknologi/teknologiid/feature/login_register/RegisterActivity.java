@@ -43,10 +43,6 @@ public class RegisterActivity extends BaseActivity {
     EditText edtpass = null;
     @BindView(R.id.input_conpassword_regist)
     EditText edtconfpass = null;
-    @BindView(R.id.btn_register)
-    Button btnRegist = null;
-    @BindView(R.id.link_login)
-    TextView linkToLogin;
     Context mContext;
     ApiService mApiService;
     private ProgressDialog progressDialog;
@@ -61,15 +57,7 @@ public class RegisterActivity extends BaseActivity {
         mApiService = DataManager.getApiService();
         initControls();
         mContext = this;
-        linkToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(RegisterActivity.this,LoginActivity.class);
-                startActivity(intent);
-                finish();
-            }
-        });
-        btnRegist.setOnClickListener(new View.OnClickListener() {
+        /*btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
@@ -92,7 +80,7 @@ public class RegisterActivity extends BaseActivity {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         hideProgressDialog();
-                        StringBuffer messageBuffer   = new StringBuffer();
+                        StringBuffer messageBuffer = new StringBuffer();
                         int statusCode = response.code();
                         if(response.isSuccessful())
                         {
@@ -148,12 +136,12 @@ public class RegisterActivity extends BaseActivity {
                 mApiService.registUser(name,email,password,"1").enqueue(callback);
 
             }
-        });
+        });*/
 
     }
 
     private void initControls() {
-        if (edtname==null)
+        /*if (edtname==null)
         {
             edtname = findViewById(R.id.input_nama_regist);
         }
@@ -171,7 +159,7 @@ public class RegisterActivity extends BaseActivity {
         }
         if(progressDialog == null) {
             progressDialog = new ProgressDialog(RegisterActivity.this);
-        }
+        }*/
     }
 
     /* Show progress dialog. */

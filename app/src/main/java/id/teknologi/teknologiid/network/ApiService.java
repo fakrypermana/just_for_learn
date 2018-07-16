@@ -28,6 +28,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 /**
  * Created by galihgasur on 10/1/17.
@@ -87,8 +88,11 @@ public interface ApiService {
 
 
     //Pekerjaan
-    @GET("jobs")
-    Observable<ResponseArray<Pekerjaan>> getPekerjaan();
+    @GET("jobs/more")
+    Observable<ResponseArray<Pekerjaan>> getPekerjaan(
+            @Query("path") String path,
+            @Query("page") int page
+    );
 
     @GET("jobs/{id}/{slug}")
     Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(

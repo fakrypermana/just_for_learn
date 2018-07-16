@@ -9,9 +9,8 @@ import android.widget.Toast;
 
 
 import id.teknologi.teknologiid.feature.Question.QuestionListActivity;
-import id.teknologi.teknologiid.feature.login_register.LoginActivity;
 import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
-import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity_ViewBinding;
+
 import id.teknologi.teknologiid.feature.login_register.RegisterActivity;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
