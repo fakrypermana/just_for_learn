@@ -90,7 +90,6 @@ public interface ApiService {
     //Pekerjaan
     @GET("jobs/more")
     Observable<ResponseArray<Pekerjaan>> getPekerjaan(
-            @Query("path") String path,
             @Query("page") int page
     );
 

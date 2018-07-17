@@ -32,8 +32,8 @@ import id.teknologi.teknologiid.utils.RecyclerInterface;
 public class QuestionListAdapter extends BaseRecyclerAdapter<QuestionListModel, QuestionListAdapter.QuestionListVH> implements Filterable {
 
     private final Context context;
-    private List<QuestionListModel> defaulList;
-    private List<QuestionListModel>filteredList;
+    private List<QuestionListModel> defaulList = new ArrayList<>();
+    private List<QuestionListModel>filteredList = new ArrayList<>();
     public MyFilter myFilter;
 
     public QuestionListAdapter(Context context, List<QuestionListModel> questionList, RecyclerInterface recyclerCallback) {

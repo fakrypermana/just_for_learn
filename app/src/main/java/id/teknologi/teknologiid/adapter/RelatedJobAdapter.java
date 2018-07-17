@@ -32,18 +32,9 @@ import id.teknologi.teknologiid.model.RelatedPekerjaan;
 import id.teknologi.teknologiid.utils.RecyclerInterface;
 
 public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, RelatedJobAdapter.RelatedVH> {
-    private OnItemClickListener mListener;
 
     public RelatedJobAdapter(Context context, List<RelatedPekerjaan> relatedList, RecyclerInterface recyclerCallBack) {
         super(context, relatedList, recyclerCallBack);
-    }
-
-    public interface OnItemClickListener{
-        void OnBtnClick(int position);
-    }
-
-    public void setOnItemClickListener(OnItemClickListener listener){
-        mListener = listener;
     }
 
     @Override
@@ -53,7 +44,7 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
 
     @Override
     public RelatedJobAdapter.RelatedVH onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new RelatedVH(initView(viewType, parent), getRecyclerCallback(), mListener);
+        return new RelatedVH(initView(viewType, parent), getRecyclerCallback());
     }
 
     public class RelatedVH extends BaseViewHolder<RelatedPekerjaan> {
@@ -62,10 +53,6 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
         TextView tvNamaRelated;
         @BindView(R.id.iv_cover_related_job)
         ImageView ivCoverRelated;
-        @BindView(R.id.tv_salary_min)
-        TextView tvSalaryMin;
-        @BindView(R.id.tv_salary_max)
-        TextView tvSalaryMax;
         @BindView(R.id.tv_alamat_related)
         TextView tvAlamatRelated;
         @BindView(R.id.tv_date_exp_related)
@@ -74,7 +61,7 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
 
         //List<RelatedPekerjaan> relatedPekerjaanList = new ArrayList<>();
 
-        public RelatedVH(View itemView, RecyclerInterface recyclerInterface, final OnItemClickListener listener) {
+        public RelatedVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -83,8 +70,6 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
         @Override
         public void onBind(RelatedPekerjaan related) {
             tvNamaRelated.setText(related.getName());
-            tvSalaryMax.setText(String.valueOf(related.getSalary_max()));
-            tvSalaryMin.setText(String.valueOf(related.getSalary_min()));
             //Log.d("wadidaw","isinya"+new Gson().toJson(related.getName()));
             Glide.with(itemView).load(related.getPhoto())
                     .into(ivCoverRelated);

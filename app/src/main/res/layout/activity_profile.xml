@@ -1,290 +1,255 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".feature.profile.ProfileActivity">
 
-    <RelativeLayout
-        android:id="@+id/rellays"
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolnar_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/grad"
-        android:paddingBottom="20dp">
+        android:background="@color/colorPrimaryDark">
+
+    </android.support.v7.widget.Toolbar>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:orientation="vertical"
+        android:weightSum="12"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
 
         <LinearLayout
+            android:id="@+id/wrap_point_profile"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center"
-            android:layout_centerHorizontal="true">
+            android:layout_height="0dp"
+            android:weightSum="10"
+            android:orientation="horizontal"
+            android:layout_weight="4">
 
-            <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_settings_black_24dp"
-                android:background="@null"
-                android:layout_gravity="end"
-                android:layout_margin="16dp"
-                tools:ignore="VectorDrawableCompat" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/img_user_profil"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:src="@drawable/profilsaya" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="15dp">
-
-            <RelativeLayout
-                android:id="@+id/img_user"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_gravity="center"
-                android:background="@drawable/circle_border_profile">
-
-
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/img_user_profil"
-                    android:layout_width="120dp"
-                    android:layout_height="120dp"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_margin="10dp"
-                    android:layout_marginTop="10dp"
-                    android:background="@drawable/circle_wrap_profile"
-                    android:padding="3dp"
-                    android:src="@drawable/profilsaya" />
-
-            </RelativeLayout>
-
-            <TextView
-                android:id="@+id/tv_nama_user_profil"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="32sp"
-                android:text="Nama User"
-                android:textAlignment="center"
-                android:layout_marginTop="15dp"/>
-
-            <TextView
-                android:id="@+id/tv_biodata_user_profil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textColor="@color/colorPrimaryLight"
-                android:textSize="12sp"
-                android:text="Biodata"
-                android:textAlignment="center" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:background="#80FFFFFF"
-                android:layout_margin="5dp"/>
 
             <LinearLayout
-                android:id="@+id/location"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:orientation="horizontal"
-                android:layout_margin="3dp"
-                android:layout_gravity="center">
+                android:gravity="center_vertical"
+                android:layout_weight="8">
 
-                <ImageView
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_location_on_black_24dp"/>
+                    android:layout_weight="3"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_alamat_user_profil"
+                    <TextView
+                        android:id="@+id/tv_comment_profil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="17"
+                        android:textAlignment="center"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="comment"
+                        android:textAlignment="center"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="3dp"
-                    android:text="Alamat user"
-                    android:textColor="@color/colorPrimaryLight"/>
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_pertanyaan_profil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="46"
+                        android:textAlignment="center"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Pertanyaan"
+                        android:textAlignment="center"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_jawaban_profil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="36"
+                        android:textAlignment="center"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Jawaban"
+                        android:textAlignment="center"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_vote_profil"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="98"
+                        android:textAlignment="center"
+                        android:textSize="24sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Vote"
+                        android:textAlignment="center"
+                        android:textSize="11sp" />
+
+                </LinearLayout>
+
+
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/nomor_hp"
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/wrap_data_bio_umum"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="horizontal">
+
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="3dp"
-                android:layout_gravity="center">
+                android:src="@drawable/profil"
+                android:layout_gravity="center_vertical"/>
 
-                <ImageView
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical">
+
+                <TextView
+                    android:id="@+id/tv_nama_user_profil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_local_phone_black_24dp"/>
+                    android:text="Nama User"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/tv_nomor_user_profil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="3dp"
-                    android:text="Nomor telepon User"
-                    android:textColor="@color/colorPrimaryLight"/>
+                    android:textSize="12sp"
+                    android:text="Nomor telepon User" />
 
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/email"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="3dp"
-                android:layout_gravity="center">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_email_black_24dp"
-                    android:layout_marginRight="3dp"/>
 
                 <TextView
                     android:id="@+id/tv_email_user_profil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Email user"
-                    android:textColor="@color/colorPrimaryLight"/>
+                    android:textSize="12sp"
+                    android:text="Email user" />
+
 
             </LinearLayout>
-
         </LinearLayout>
 
-            <View
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="horizontal">
+
+            <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="2dp"
-                android:background="#80FFFFFF"
-                android:layout_margin="9dp"/>
+                android:layout_height="wrap_content"
+                android:src="@drawable/profil"
+                android:layout_gravity="center_vertical"/>
 
             <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_vertical">
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nama User"
+                    android:textAlignment="center"
+                    android:textSize="16sp" />
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:weightSum="12"
-                        android:layout_marginTop="9dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="Nomor telepon User" />
 
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="3">
 
-                            <TextView
-                                android:id="@+id/tv_point_profil"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="17"
-                                android:textSize="24sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Point"
-                                android:textSize="11sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="3">
-
-                            <TextView
-                                android:id="@+id/tv_pertanyaan_profil"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="46"
-                                android:textSize="24sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Pertanyaan"
-                                android:textSize="11sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="3">
-
-                            <TextView
-                                android:id="@+id/tv_jawaban_profil"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="36"
-                                android:textSize="24sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Jawaban"
-                                android:textSize="11sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_weight="3">
-
-                            <TextView
-                                android:id="@+id/tv_vote_profil"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="98"
-                                android:textSize="24sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Vote"
-                                android:textSize="11sp"
-                                android:textAlignment="center"
-                                android:textColor="@color/colorPrimaryLight"/>
-
-                        </LinearLayout>
-
-                    </LinearLayout>
-
-                </RelativeLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:text="Email user" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </RelativeLayout>
-    
+    </LinearLayout>
 
+    <android.support.design.widget.TabLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/tab_profile"
+        app:tabMode="fixed"
+        app:tabGravity="center"/>
 
-</RelativeLayout>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/pager_profile"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" >
+
+    </android.support.v4.view.ViewPager>
+
+</LinearLayout>

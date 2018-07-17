@@ -59,8 +59,8 @@ public class DataManager {
     }
 
     //Pekerjaan
-    public Observable<ResponseArray<Pekerjaan>> getPekerjaan(String path, int page) {
-        return apiService.getPekerjaan(path,page);
+    public Observable<ResponseArray<Pekerjaan>> getPekerjaan(int page) {
+        return apiService.getPekerjaan(page);
     }
 
     public Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(int id, String slug) {

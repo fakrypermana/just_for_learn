@@ -19,6 +19,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -41,6 +43,8 @@ import com.nbsp.materialfilepicker.ui.FilePickerActivity;
 import com.plumillonforge.android.chipview.Chip;
 import com.plumillonforge.android.chipview.ChipView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
@@ -51,6 +55,7 @@ import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.adapter.RelatedJobAdapter;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.Tag;
+import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanActivity;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanPresenter;
 import id.teknologi.teknologiid.feature.pekerjaan.PekerjaanView;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
@@ -87,9 +92,8 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     TextView labelSkill;
     @BindView(R.id.toolbar_detail_job)
     android.support.v7.widget.Toolbar toolbarDetail;
-
-
-
+    @BindView(R.id.tv_lihat_semua_button)
+    TextView tvLihatSemua;
     @BindView(R.id.btn_daftar_detail)
     Button btnDaftarDetail;
 
@@ -132,6 +136,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbarDetail.setNavigationIcon(R.drawable.ic_keyboard_arrow_left_black_24dp);
 
         Intent intent = getIntent();
         id = intent.getIntExtra(ID, 0);
@@ -143,14 +148,6 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
         pekerjaanPresenter.getPekerjaan();*/
 
         adapter = new RelatedJobAdapter(this, relatedList, this);
-        adapter.setOnItemClickListener(new RelatedJobAdapter.OnItemClickListener() {
-            @Override
-            public void OnBtnClick(int position) {
-                RelatedPekerjaan pekerjaan = relatedList.get(position);
-                //Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
-                DetailPekerjaanActivity.start(DetailPekerjaanActivity.this, pekerjaan.getId(), pekerjaan.getSlug());
-            }
-        });
 
         btnDaftarDetail.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -217,6 +214,16 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
                 dialog.getWindow().setAttributes(lp);
             }
         });
+
+        tvLihatSemua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DetailPekerjaanActivity.this, PekerjaanActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
+
     }
 
     @Override
@@ -256,7 +263,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
         LinearLayoutManager layoutManager
                 = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
 
-        rvRelated.setLayoutManager(layoutManager);
+        rvRelated.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvRelated.setAdapter(adapter);
 
     }
@@ -285,6 +292,9 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
                 listChip.add(new Tag(tag));
             }
             chipView.setChipBackgroundRes(R.drawable.shape_chip_view_tag_job);
+            chipView.setChipSpacing(12);
+            chipView.setLineSpacing(6);
+            chipView.setChipTextSize(8);
             chipView.setChipList(listChip);
             //chipView.setAdapter(adapterChip);
             //chipView.setChipBackgroundColor(R.color.colorAccent);
@@ -294,6 +304,8 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
 
         String descJob = pekerjaan.getDesc_long();
+        WebSettings webSettings = wvJobDetail.getSettings();
+        webSettings.setDefaultFontSize(12);
 
         wvJobDetail.loadData(descJob, "text/html", "UTF-8");
         if (pekerjaan.getDescription() != null) {
@@ -346,11 +358,34 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     @Override
     public void onRecyclerItemClicked(int position) {
         RelatedPekerjaan pekerjaan = relatedList.get(position);
+        Log.d("isi related","datanya"+pekerjaan);
         Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
         DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
-        finish();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_more_mert, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_more) {
+            Toast.makeText(DetailPekerjaanActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+
+
+        return super.onOptionsItemSelected(item);
+    }
 
 
     /* Show progress dialog. */

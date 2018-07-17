@@ -35,29 +35,32 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
-                    android:orientation="horizontal">
+                    android:layout_margin="10dp"
+                    android:orientation="horizontal"
+                    android:weightSum="10">
 
                     <de.hdodenhof.circleimageview.CircleImageView
                         android:id="@+id/iv_cover_job_detail"
-                        android:layout_width="60dp"
+                        android:layout_width="0dp"
                         android:layout_height="60dp"
                         android:layout_alignParentLeft="true"
                         android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_weight="2"/>
 
                     <LinearLayout
-                        android:layout_width="match_parent"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical">
+                        android:orientation="vertical"
+                        android:layout_weight="8">
 
                         <TextView
                             android:id="@+id/tv_nama_job_detail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_centerVertical="true"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginRight="10dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="8dp"
                             android:layout_toRightOf="@+id/daftar_icon"
                             android:text="Nama pekerjaan"
                             android:textAppearance="?attr/textAppearanceListItem"
@@ -68,8 +71,8 @@
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp"
                             android:orientation="vertical">
 
                             <TextView
@@ -109,14 +112,14 @@
                             android:id="@+id/chip_tags_job_detail"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="10dp" />
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="8dp" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
-                            android:layout_marginTop="10dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginTop="5dp"
                             android:orientation="horizontal">
 
                             <TextView
@@ -150,7 +153,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_margin="16dp"
+                    android:layout_margin="10dp"
                     android:gravity="center"
                     android:orientation="vertical">
 
@@ -161,15 +164,15 @@
                         android:layout_gravity="start"
                         android:text="Deskripsi Singkat"
                         android:textAlignment="textStart"
-                        android:textColor="@color/colorPrimaryDark"
-                        android:textSize="16dp"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="11dp"
                         android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/tv_short_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="16dp" />
+                        android:textSize="12sp"/>
 
                     <TextView
                         android:id="@+id/label_skill"
@@ -179,7 +182,7 @@
                         android:text="Kebutuhan Skill"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16dp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                     <TextView
@@ -187,7 +190,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_margin="16dp" />
+                        android:textSize="12sp"/>
 
                     <TextView
                         android:layout_width="match_parent"
@@ -196,22 +199,22 @@
                         android:text="Salary"
                         android:textAlignment="textStart"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16dp"
+                        android:textSize="11sp"
                         android:textStyle="bold" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:layout_marginBottom="20dp"
                         android:gravity="center"
                         android:orientation="horizontal">
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
+                            android:layout_marginLeft="8dp"
                             android:text="Rp."
+                            android:textSize="12sp"
                             android:textColor="@color/colorAccentGreen" />
 
                         <TextView
@@ -222,6 +225,7 @@
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="10dp"
                             android:text="Gaji Min"
+                            android:textSize="12sp"
                             android:textColor="@color/colorAccentGreen" />
 
                         <TextView
@@ -229,13 +233,15 @@
                             android:layout_height="wrap_content"
                             android:layout_margin="10dp"
                             android:text=" - "
+                            android:textSize="12sp"
                             android:textColor="@color/colorAccentGreen" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="16dp"
+                            android:layout_marginLeft="8dp"
                             android:text="Rp."
+                            android:textSize="12sp"
                             android:textColor="@color/colorAccentGreen" />
 
                         <TextView
@@ -245,6 +251,7 @@
                             android:layout_marginBottom="10dp"
                             android:layout_marginRight="10dp"
                             android:layout_marginTop="10dp"
+                            android:textSize="12sp"
                             android:text="Gaji Max"
                             android:textColor="@color/colorAccentGreen" />
 
@@ -256,14 +263,13 @@
                         android:layout_gravity="center"
                         android:text="Deskripsi Detail"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16dp"
+                        android:textSize="11dp"
                         android:textStyle="bold" />
 
                     <WebView
                         android:id="@+id/wv_job_desc_detail"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="16dp">
+                        android:layout_height="wrap_content">
 
                     </WebView>
 
@@ -281,27 +287,30 @@
                     android:weightSum="10">
 
                     <TextView
+                        android:id="@+id/tv_related_label"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:layout_marginLeft="16dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_weight="5"
                         android:text="Pekerjaan Terkait"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="16sp"
+                        android:textSize="12sp"
                         android:textStyle="bold" />
 
                     <TextView
+                        android:id="@+id/tv_lihat_semua_button"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="5dp"
-                        android:layout_marginRight="16dp"
+                        android:layout_marginRight="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_weight="5"
+                        android:textSize="12sp"
                         android:gravity="end"
                         android:text="Lihat Semua"
-                        android:textColor="@color/colorPrimary" />
+                        android:textColor="@color/colorPrimaryDark" />
 
                 </LinearLayout>
 
@@ -309,9 +318,9 @@
                     android:id="@+id/rv_related_job"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginBottom="45dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="55dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
                     tools:listitem="@layout/item_list_related_job">
 
                 </android.support.v7.widget.RecyclerView>
@@ -334,7 +343,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/colorPrimary"
+            android:background="@color/colorPrimaryDark"
             android:text="APPLY"
             android:textAllCaps="false"
             android:textColor="@color/colorPrimaryLight" />
