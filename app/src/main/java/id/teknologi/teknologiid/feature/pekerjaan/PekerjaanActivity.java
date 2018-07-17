@@ -52,6 +52,8 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     RecyclerView rvPekerjaan;
     @BindView(R.id.btn_floating_job)
     FloatingActionButton fab;
+    @BindView(R.id.toolbar_job)
+    android.support.v7.widget.Toolbar toolbar;
 
     @Override
     protected int contentView() {
@@ -71,6 +73,8 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     protected void setupView() {
         rvPekerjaan.setLayoutManager(AppUtils.defaultLinearLayoutManager(this));
         rvPekerjaan.setAdapter(adapter);
+
+        setSupportActionBar(toolbar);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

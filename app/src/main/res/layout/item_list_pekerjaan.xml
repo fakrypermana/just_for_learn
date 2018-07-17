@@ -19,21 +19,15 @@
         android:orientation="horizontal"
         android:weightSum="10">
 
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="1.75">
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_cover_job"
-                android:layout_width="60dp"
+                android:layout_width="0dp"
                 android:layout_height="60dp"
                 android:layout_alignParentLeft="true"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@mipmap/ic_launcher"
+                android:layout_weight="1.75"/>
 
-        </LinearLayout>
 
         <LinearLayout
             android:layout_width="0dp"
@@ -168,7 +162,8 @@
                 android:layout_height="30dp"
                 android:layout_gravity="end"
                 android:gravity="end"
-                android:background="@drawable/baseline_more_vert_24"/>
+                android:background="@drawable/baseline_more_vert_24"
+                android:backgroundTint="@color/colorDarkGray"/>
 
         </LinearLayout>
 

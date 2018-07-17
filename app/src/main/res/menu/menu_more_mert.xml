@@ -3,10 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <item android:id="@+id/action_more"
-        app:showAsAction="ifRoom|collapseActionView"
+    <item
+        android:id="@+id/action_more"
         android:icon="@drawable/baseline_more_vert_24"
         android:iconTint="#FFFFFF"
-        android:title="more" />
+        android:title="more"
+        app:showAsAction="ifRoom|collapseActionView">
+
+        <menu>
+            <item
+                android:id="@+id/option_share"
+                android:tooltipText="Bagikan"
+                android:title="Bagikan" />
+        </menu>
+
+    </item>
 
 </menu>
