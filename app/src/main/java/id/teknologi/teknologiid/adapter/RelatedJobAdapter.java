@@ -57,6 +57,8 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
         TextView tvAlamatRelated;
         @BindView(R.id.tv_date_exp_related)
         TextView tvExpRelated;
+        @BindView(R.id.tv_nama_perusahaan_related)
+        TextView tvPerusahaan;
 
 
         //List<RelatedPekerjaan> relatedPekerjaanList = new ArrayList<>();
@@ -76,6 +78,7 @@ public class RelatedJobAdapter extends BaseRecyclerAdapter<RelatedPekerjaan, Rel
 
             tvAlamatRelated.setText(related.getLocation());
             tvExpRelated.setText(related.getDate_exp());
+            tvPerusahaan.setText(related.getName_company());
 
             //chip
             /*List<Chip> listChip = new ArrayList<>();

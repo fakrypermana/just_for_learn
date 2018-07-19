@@ -24,6 +24,12 @@ public class RelatedPekerjaan {
     private String photo;
     private List<String> rtags;
 
+    public String getName_company() {
+        return name_company;
+    }
+
+    private String name_company;
+
     public int getId() {
         return id;
     }

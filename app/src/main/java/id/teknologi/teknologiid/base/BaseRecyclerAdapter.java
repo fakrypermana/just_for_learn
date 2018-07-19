@@ -1,5 +1,6 @@
 package id.teknologi.teknologiid.base;
 
+import android.app.Activity;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -18,6 +19,9 @@ public abstract class BaseRecyclerAdapter<Model,VH extends BaseViewHolder<Model>
     protected Context context;
     protected List<Model> modelList;
     protected LayoutInflater inflater;
+    protected Activity getActivity(){
+        return (Activity) context;
+    }
 
     public BaseRecyclerAdapter(Context context, List<Model> modelList) {
         this.context = context;

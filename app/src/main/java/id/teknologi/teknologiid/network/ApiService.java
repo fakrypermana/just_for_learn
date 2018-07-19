@@ -79,6 +79,21 @@ public interface ApiService {
             @PartMap Map<String,RequestBody> text
     );
 
+    @GET("forum/question")
+    Observable<ResponseArray<QuestionListModel>> getQuestionList();
+
+    @GET("question/{id}/{slug}")
+    Observable<ResponseArray<QuestionAnsweredModel>> getAnswerList(
+            @Path("id") int id,
+            @Path("slug") String slug
+    );
+
+    @GET("question/{id}/{slug}")
+    Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(
+            @Path("id") int id,
+            @Path("slug") String slug
+    );
+
     @GET("threads/{id}/{slug}/{comments}")
     Observable<ResponseObject<DetileThread>> getThreadDetail(
             @Path("id") int id,
@@ -86,6 +101,9 @@ public interface ApiService {
             @Path("comments") String comments
     );
 
+    /**
+     * Bagian Fakry Adi Permana
+     */
 
     //Pekerjaan
     @GET("jobs/more")
@@ -93,23 +111,9 @@ public interface ApiService {
             @Query("page") int page
     );
 
+    //Detail Pekerjaan
     @GET("jobs/{id}/{slug}")
     Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(
-            @Path("id") int id,
-            @Path("slug") String slug
-    );
-
-    @GET("forum/question")
-    Observable<ResponseArray<QuestionListModel>> getQuestionList();
-
-
-    @GET("question/{id}/{slug}")
-    Observable<ResponseObject<QuestionDetailModel>> getQuestionDetail(
-            @Path("id") int id,
-            @Path("slug") String slug
-    );
-    @GET("question/{id}/{slug}")
-    Observable<ResponseArray<QuestionAnsweredModel>> getAnswerList(
             @Path("id") int id,
             @Path("slug") String slug
     );
@@ -118,7 +122,7 @@ public interface ApiService {
     @GET("profile")
     Observable<ResponseObject<Profile>> getProfile();
 
-    //login dan register
+    //register
     @FormUrlEncoded
     @POST("register")
     Call<ResponseBody> registUser(
@@ -128,6 +132,7 @@ public interface ApiService {
             @Field("tag[0]") String tag
     );
 
+    //login
     @FormUrlEncoded
     @POST("login")
     Call<ResponseBody> loginUser(
@@ -136,4 +141,11 @@ public interface ApiService {
     );
 
 
+    //bookmark pekerjaan
+    @FormUrlEncoded
+    @POST("jobs/{id}/{slug}/save")
+    Call<ResponseBody> bookJob(
+            @Path("id") int id,
+            @Path("slug") String slug
+    );
 }

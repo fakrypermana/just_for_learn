@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
@@ -63,6 +64,13 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
 
     @Override
     protected void setupData(Bundle savedInstanceState) {
+
+        if(progressDialog == null) {
+            progressDialog = new ProgressDialog(PekerjaanActivity.this);
+        }
+
+        showProgressDialog();
+
         presenter = new PekerjaanPresenter(this);
         presenter.getPekerjaan(PAGE);
         adapter = new PekerjaanAdapter(this, pekerjaanList, this);
@@ -120,6 +128,8 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
         //Log.d("Pekerjaan", new Gson().toJson(pekerjaanList));
         //showProgressDialog();
         adapter.insertAndNotify(pekerjaanList);
+
+        progressDialog.hide();
     }
 
     @Override
@@ -137,14 +147,14 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
     @Override
     public void onRecyclerItemClicked(int position) {
         Pekerjaan pekerjaan = pekerjaanList.get(position);
-        Toast.makeText(this,"Clicked"+pekerjaanList.get(position).getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this,"Clicked"+pekerjaanList.get(position).getName(), Toast.LENGTH_SHORT).show();
         DetailPekerjaanActivity.start(this,pekerjaan.getId(),pekerjaan.getSlug());
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_search_notif, menu);
+        getMenuInflater().inflate(R.menu.menu_search_notif_bookmark, menu);
         return true;
     }
 
@@ -157,16 +167,25 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_search) {
-            Toast.makeText(PekerjaanActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(PekerjaanActivity.this, "search clicked", Toast.LENGTH_LONG).show();
             return true;
         }
         if (id == R.id.action_notification){
-            Toast.makeText(PekerjaanActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(PekerjaanActivity.this, "notif clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.action_listbookmark){
+            Toast.makeText(PekerjaanActivity.this, "bookmark clicked", Toast.LENGTH_LONG).show();
             return true;
         }
 
-
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showProgressDialog(){
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
     }
     /* Show progress dialog. */
     /*private void showProgressDialog()

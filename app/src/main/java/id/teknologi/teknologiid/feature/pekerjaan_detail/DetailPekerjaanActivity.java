@@ -132,6 +132,12 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     @Override
     protected void setupData(Bundle savedInstanceState) {
 
+        if(progressDialog == null) {
+            progressDialog = new ProgressDialog(DetailPekerjaanActivity.this);
+        }
+
+        showProgressDialog();
+
         setSupportActionBar(toolbarDetail);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -275,6 +281,8 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
         setTextView(pekerjaan);
         adapter.insertAndNotify(pekerjaan.getRelatedJob());
         Log.d("related","isinya"+pekerjaan.getRelatedJob());
+
+        progressDialog.dismiss();
     }
 
 
@@ -359,7 +367,7 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
     public void onRecyclerItemClicked(int position) {
         RelatedPekerjaan pekerjaan = relatedList.get(position);
         Log.d("isi related","datanya"+pekerjaan);
-        Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "Clicked" + relatedList.get(position).getName(), Toast.LENGTH_SHORT).show();
         DetailPekerjaanActivity.start(this, pekerjaan.getId(), pekerjaan.getSlug());
     }
 
@@ -379,12 +387,18 @@ public class DetailPekerjaanActivity extends BaseActivity implements DetailPeker
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_more) {
-            Toast.makeText(DetailPekerjaanActivity.this, "Action clicked", Toast.LENGTH_LONG).show();
+            Toast.makeText(DetailPekerjaanActivity.this, "au dah fitur bagikan kapan dikasih taunya", Toast.LENGTH_LONG).show();
             return true;
         }
 
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void showProgressDialog(){
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
     }
 
 

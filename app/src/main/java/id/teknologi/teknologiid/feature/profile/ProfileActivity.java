@@ -1,15 +1,30 @@
 package id.teknologi.teknologiid.feature.profile;
 
+import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.res.ColorStateList;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
 import butterknife.BindView;
@@ -27,6 +42,7 @@ import id.teknologi.teknologiid.model.Profile;
 public class ProfileActivity extends BaseActivity implements ProfileView{
     ProfilePresenter presenter;
     Profile profile;
+    ProgressDialog progressDialog;
 
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mAuthListener;
@@ -45,24 +61,38 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     TextView tvJawabanProfile;
     @BindView(R.id.tv_vote_profil)
     TextView tvVoteProfile;
+    @BindView(R.id.img_user_profil)
+    ImageView ivUser;
+
+
     @BindView(R.id.pager_profile)
     ViewPager viewPager;
     @BindView(R.id.tab_profile)
     TabLayout tabLayout;
+    @BindView(R.id.toolbar_profile)
+    Toolbar toolbar;
+
+    GoogleApiClient mGoogleApiClient;
 
     @Override
     protected int contentView() {
         return R.layout.activity_profile;
     }
 
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void setupData(Bundle savedInstanceState) {
         presenter = new ProfilePresenter(this);
         presenter.getProfile();
 
+        setSupportActionBar(toolbar);
+
         setupViewPager(viewPager);
         
         tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setTabTextColors(ColorStateList.valueOf(R.color.colorDarkGray));
+        tabLayout.setSelectedTabIndicatorColor(R.color.colorPrimary);
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         mAuth = FirebaseAuth.getInstance();
         mAuthListener = new FirebaseAuth.AuthStateListener() {
@@ -104,9 +134,14 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     }
 
     public void setView(Profile profile){
+        Glide.with(this).load(profile.getUrl_photo()).into(ivUser);
         tvNamaProfile.setText(profile.getName());
         tvEmailProfile.setText(profile.getEmail());
         tvKontakProfile.setText(profile.getPhone_number());
+        tvPertanyaanProfile.setText(String.valueOf(profile.getVoteQuetion()));
+        tvJawabanProfile.setText(String.valueOf(profile.getVoteAnswer()));
+        tvCommentProfile.setText(String.valueOf(profile.getVoteComent()));
+        tvVoteProfile.setText(String.valueOf(profile.getVoteThread()));
     }
 
     @Override
@@ -118,4 +153,70 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     public void onFailed(String message) {
 
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_more_mert_logout, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_more_profil) {
+            Toast.makeText(ProfileActivity.this, "more clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.option_edit) {
+            Toast.makeText(ProfileActivity.this, "edit clicked", Toast.LENGTH_LONG).show();
+            return true;
+        }
+        if (id == R.id.option_logout) {
+            //Toast.makeText(ProfileActivity.this, "logout clicked", Toast.LENGTH_LONG).show();
+            signOut();
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void showProgressDialog(){
+        progressDialog.setMessage("Please Wait");
+        progressDialog.setCancelable(true);
+        progressDialog.show();
+    }
+
+    private void signOut() {
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient)
+                .setResultCallback(new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+                        Intent intent = new Intent(ProfileActivity.this,PrevLoginRegistActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+    }
+
+    /*private void signOut() {
+        // Firebase sign out
+        mAuth.signOut();
+
+        // Google sign out
+        Auth.GoogleSignInApi.signOut(mGoogleApiClient).setResultCallback(
+                new ResultCallback<Status>() {
+                    @Override
+                    public void onResult(@NonNull Status status) {
+                        Intent intent = new Intent(ProfileActivity.this,PrevLoginRegistActivity.class);
+                        startActivity(intent);
+                        finish();
+                    }
+                });
+    }*/
 }

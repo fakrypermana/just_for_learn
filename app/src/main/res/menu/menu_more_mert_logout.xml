@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <item
+        android:id="@+id/action_more_profil"
+        android:icon="@drawable/baseline_more_vert_24"
+        android:iconTint="#FFFFFF"
+        android:title="more"
+        app:showAsAction="ifRoom|collapseActionView">
+
+        <menu>
+            <item
+                android:id="@+id/option_edit"
+                android:tooltipText="Edit profil"
+                android:title="Edit Profil" />
+
+            <item
+                android:id="@+id/option_logout"
+                android:tooltipText="Logout"
+                android:title="Logout" />
+        </menu>
+
+    </item>
+
+</menu>

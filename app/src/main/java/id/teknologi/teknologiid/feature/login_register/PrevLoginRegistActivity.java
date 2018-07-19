@@ -37,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.gson.Gson;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -90,6 +91,13 @@ public class PrevLoginRegistActivity extends BaseActivity {
 
     private static final String TAG = "Google Sign In";
     private static final String TAG_FACE = "FACEBOOK LOG";
+
+
+
+
+
+
+
 
     @Override
     protected int contentView() {
@@ -199,6 +207,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
                             try{
                                 String returnBodyText = response.body().string();
                                 JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                                Log.d("isinyabanyak",returnBodyText);
                                 if (jsonRESULTS.getString("status").equals("success")){
                                     Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
                                 } else {
@@ -264,6 +273,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
+                Log.d("accountoy","isinya"+account);
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately

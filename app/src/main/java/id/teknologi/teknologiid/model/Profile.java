@@ -13,6 +13,26 @@ public class Profile {
     private int idrank;
     private String username;
     private String url_photo;
+    private int voteComent;
+    private int voteAnswer;
+    private int voteQuetion;
+    private int voteThread;
+
+    public int getVoteComent() {
+        return voteComent;
+    }
+
+    public int getVoteAnswer() {
+        return voteAnswer;
+    }
+
+    public int getVoteQuetion() {
+        return voteQuetion;
+    }
+
+    public int getVoteThread() {
+        return voteThread;
+    }
 
     public int getId() {
         return id;

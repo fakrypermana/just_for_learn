@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.nfc.Tag;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 import com.nbsp.materialfilepicker.MaterialFilePicker;
 import com.plumillonforge.android.chipview.Chip;
 import com.plumillonforge.android.chipview.ChipView;
@@ -30,6 +32,7 @@ import butterknife.ButterKnife;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseRecyclerAdapter;
 import id.teknologi.teknologiid.base.BaseViewHolder;
+import id.teknologi.teknologiid.feature.login_register.PrevLoginRegistActivity;
 import id.teknologi.teknologiid.feature.pekerjaan_detail.DetailPekerjaanActivity;
 import id.teknologi.teknologiid.feature.pekerjaan_detail.FormDaftarJobActivity;
 import id.teknologi.teknologiid.model.Pekerjaan;
@@ -50,7 +53,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         return new PekerjaanVH(initView(viewType, parent), getRecyclerCallback());
     }
 
-    static class PekerjaanVH extends BaseViewHolder<Pekerjaan> {
+    class PekerjaanVH extends BaseViewHolder<Pekerjaan> {
 
         @BindView(R.id.iv_cover_job)
         ImageView ivCoverJob;
@@ -71,6 +74,9 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
         @BindView(R.id.btn_more_item_job)
         Button btnMore;
 
+        private FirebaseAuth mAuth;
+        private FirebaseAuth.AuthStateListener mAuthListener;
+
         public PekerjaanVH(View itemView, RecyclerInterface recyclerInterface) {
             super(itemView, recyclerInterface);
             ButterKnife.bind(this, itemView);
@@ -79,6 +85,22 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
             /**
              * btn clicked
              */
+
+            btnSimpan.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mAuth = FirebaseAuth.getInstance();
+                    mAuthListener = new FirebaseAuth.AuthStateListener() {
+                        @Override
+                        public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                            if (firebaseAuth.getCurrentUser() == null){
+                                v.getContext().startActivity(new Intent(v.getContext(), PrevLoginRegistActivity.class));
+                            }
+                        }
+                    };
+                }
+            });
+
             btnDaftar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -132,6 +154,7 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
                         public void onClick(View v) {
 
                             new MaterialFilePicker()
+                                    .withActivity(getActivity())
                                     .withRequestCode(1000)
                                     .withHiddenFiles(true) // Show hidden files and folders
                                     .start();

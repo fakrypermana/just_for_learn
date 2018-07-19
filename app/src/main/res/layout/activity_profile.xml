@@ -8,10 +8,12 @@
     tools:context=".feature.profile.ProfileActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/toolnar_profile"
+        android:id="@+id/toolbar_profile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimaryDark">
+        android:background="@color/colorPrimaryDark"
+        app:title="Teknologi.id"
+        app:titleTextColor="@color/colorPrimaryLight">
 
     </android.support.v7.widget.Toolbar>
 
@@ -36,6 +38,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:layout_marginRight="20dp"
                 android:src="@drawable/profilsaya" />
 
 
@@ -44,7 +47,8 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:layout_weight="8">
+                android:layout_weight="8"
+                android:layout_marginLeft="10dp">
 
 
                 <LinearLayout
@@ -59,14 +63,16 @@
                         android:layout_height="wrap_content"
                         android:text="17"
                         android:textAlignment="center"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textColor="@color/colorPrimary"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="comment"
                         android:textAlignment="center"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        android:textColor="@color/colorPrimary"/>
 
                 </LinearLayout>
 
@@ -82,14 +88,16 @@
                         android:layout_height="wrap_content"
                         android:text="46"
                         android:textAlignment="center"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textColor="@color/colorPrimary"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Pertanyaan"
                         android:textAlignment="center"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        android:textColor="@color/colorPrimary"/>
 
                 </LinearLayout>
 
@@ -105,14 +113,16 @@
                         android:layout_height="wrap_content"
                         android:text="36"
                         android:textAlignment="center"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textColor="@color/colorPrimary"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Jawaban"
                         android:textAlignment="center"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        android:textColor="@color/colorPrimary"/>
 
                 </LinearLayout>
 
@@ -128,14 +138,16 @@
                         android:layout_height="wrap_content"
                         android:text="98"
                         android:textAlignment="center"
-                        android:textSize="24sp" />
+                        android:textSize="24sp"
+                        android:textColor="@color/colorPrimary"/>
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="Vote"
                         android:textAlignment="center"
-                        android:textSize="11sp" />
+                        android:textSize="11sp"
+                        android:textColor="@color/colorPrimary"/>
 
                 </LinearLayout>
 
@@ -155,7 +167,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profil"
+                app:srcCompat="@drawable/ic_person_black_24dp"
                 android:layout_gravity="center_vertical"/>
 
             <LinearLayout
@@ -171,14 +183,16 @@
                     android:layout_height="wrap_content"
                     android:text="Nama User"
                     android:textAlignment="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"/>
 
                 <TextView
                     android:id="@+id/tv_nomor_user_profil"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="Nomor telepon User" />
+                    android:text="Nomor telepon User"
+                    android:textColor="@color/colorPrimary"/>
 
 
                 <TextView
@@ -186,7 +200,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="Email user" />
+                    android:text="Email user"
+                    android:textColor="@color/colorPrimary"/>
 
 
             </LinearLayout>
@@ -201,7 +216,7 @@
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/profil"
+                app:srcCompat="@drawable/ic_person_black_24dp"
                 android:layout_gravity="center_vertical"/>
 
             <LinearLayout
@@ -216,20 +231,23 @@
                     android:layout_height="wrap_content"
                     android:text="Nama User"
                     android:textAlignment="center"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimary"/>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="Nomor telepon User" />
+                    android:text="Nomor telepon User"
+                    android:textColor="@color/colorPrimary"/>
 
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
-                    android:text="Email user" />
+                    android:text="Email user"
+                    android:textColor="@color/colorPrimary"/>
 
             </LinearLayout>
 
@@ -237,12 +255,17 @@
 
     </LinearLayout>
 
+    <View android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/colorDarkGray"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"/>
+
     <android.support.design.widget.TabLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tab_profile"
-        app:tabMode="fixed"
-        app:tabGravity="center"/>
+        app:tabMode="fixed" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/pager_profile"

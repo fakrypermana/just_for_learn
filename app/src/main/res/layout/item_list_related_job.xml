@@ -54,6 +54,7 @@
                     android:src="@drawable/com_facebook_profile_picture_blank_square" />
 
                 <TextView
+                    android:id="@+id/tv_nama_perusahaan_related"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="Nama Perusahaan"

@@ -16,8 +16,8 @@ import id.teknologi.teknologiid.R;
 
 
 public class DataRegistFragment extends Fragment {
-    @BindView(R.id.btn_lanjut)
-    Button btnLanjut;
+    /*@BindView(R.id.btn_lanjut)
+    Button btnLanjut;*/
 
     public DataRegistFragment() {
         // Required empty public constructor
