@@ -36,6 +36,7 @@ import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
 
@@ -91,11 +92,6 @@ public class PrevLoginRegistActivity extends BaseActivity {
 
     private static final String TAG = "Google Sign In";
     private static final String TAG_FACE = "FACEBOOK LOG";
-
-
-
-
-
 
 
 
@@ -202,6 +198,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
                 apiService.loginUser(Email,Password).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                        Log.d("azz", new Gson().toJson(response));
                         progressDialog.hide();
                         if(response.isSuccessful()){
                             try{
@@ -273,7 +270,8 @@ public class PrevLoginRegistActivity extends BaseActivity {
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d("accountoy","isinya"+account);
+                Log.d("accountoy","isinya"+account.toJson());
+
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
@@ -298,7 +296,15 @@ public class PrevLoginRegistActivity extends BaseActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
+
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Log.d("azz uid", user.getUid());
+                            user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                    Log.d("azz", task.getResult().getToken());
+                                }
+                            });
                             //updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -326,6 +332,15 @@ public class PrevLoginRegistActivity extends BaseActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Log.d("azz", user.getUid());
+                            Log.d("azz", user.getProviderId());
+                            user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<GetTokenResult> task) {
+                                    Log.d("azz", task.getResult().getToken());
+                                }
+                            });
+
                             //updateUI();
                         } else {
                             // If sign in fails, display a message to the user.
