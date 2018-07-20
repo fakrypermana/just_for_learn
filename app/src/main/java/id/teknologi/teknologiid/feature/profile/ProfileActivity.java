@@ -167,6 +167,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
+        mAuth = FirebaseAuth.getInstance();
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_more_profil) {
@@ -179,7 +180,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         }
         if (id == R.id.option_logout) {
             //Toast.makeText(ProfileActivity.this, "logout clicked", Toast.LENGTH_LONG).show();
-            signOut();
+            mAuth.signOut();
             return true;
         }
 
@@ -192,17 +193,6 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         progressDialog.show();
     }
 
-    private void signOut() {
-        Auth.GoogleSignInApi.signOut(mGoogleApiClient)
-                .setResultCallback(new ResultCallback<Status>() {
-                    @Override
-                    public void onResult(@NonNull Status status) {
-                        Intent intent = new Intent(ProfileActivity.this,PrevLoginRegistActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                });
-    }
 
     /*private void signOut() {
         // Firebase sign out

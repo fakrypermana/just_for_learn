@@ -150,7 +150,7 @@ dependencies {
     implementation 'com.github.clans:fab:1.6.4'
 
     //stepview
-    implementation 'com.layer-net:step-indicator:1.1.0'
+    implementation 'com.github.badoualy:stepper-indicator:1.0.7'
 
 }
 apply plugin: 'com.google.gms.google-services'

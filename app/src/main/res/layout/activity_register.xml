@@ -34,17 +34,26 @@
             android:orientation="vertical"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <com.layer_net.stepindicator.StepIndicator
+            <com.badoualy.stepperindicator.StepperIndicator
                 android:id="@+id/step_indicator"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:stpi_lineStrokeWidth="2dp"
+                app:stpi_circleStrokeWidth="3dp"
+                app:stpi_indicatorColor="@color/colorPrimaryDark"
+                app:stpi_lineColor="@color/colorDarkGray"
+                app:stpi_showDoneIcon="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginRight="30dp"
                 android:layout_marginBottom="20dp"
-                app:siBackgroundColor="@color/colorPrimary"
-                app:siStepColor="@color/colorPrimary" />
+                app:stpi_circleColor="@color/colorDarkGray"/>
 
-            <include layout="@layout/fragment_data_regist"/>
+            <android.support.v4.view.ViewPager
+                android:id="@+id/pager_registration"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v4.view.ViewPager>
 
         </LinearLayout>
 

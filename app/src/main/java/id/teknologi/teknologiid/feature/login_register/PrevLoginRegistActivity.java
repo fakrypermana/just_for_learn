@@ -1,5 +1,7 @@
 package id.teknologi.teknologiid.feature.login_register;
 
+import android.app.ActivityGroup;
+import android.app.LocalActivityManager;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -56,7 +58,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PrevLoginRegistActivity extends BaseActivity {
+public class PrevLoginRegistActivity extends BaseActivity{
 
     @BindView(R.id.sign_in_google)
     SignInButton signInGoogle;
@@ -128,7 +130,8 @@ public class PrevLoginRegistActivity extends BaseActivity {
 
                 if (firebaseAuth.getCurrentUser() != null){
 
-                    startActivity(new Intent(PrevLoginRegistActivity.this, ProfileActivity.class));
+                    Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
+                    startActivity(intent);
                     //finish();
                 }
 
@@ -204,7 +207,7 @@ public class PrevLoginRegistActivity extends BaseActivity {
                             try{
                                 String returnBodyText = response.body().string();
                                 JSONObject jsonRESULTS = new JSONObject(returnBodyText);
-                                Log.d("isinyabanyak",returnBodyText);
+                                Log.d("isinyabanyak",new Gson().toJson(returnBodyText));
                                 if (jsonRESULTS.getString("status").equals("success")){
                                     Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
                                 } else {

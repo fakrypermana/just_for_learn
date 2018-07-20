@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.UserManager;
 import android.provider.ContactsContract;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.badoualy.stepperindicator.StepperIndicator;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
@@ -26,6 +28,9 @@ import java.util.List;
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseActivity;
+import id.teknologi.teknologiid.feature.login_register.fragment_register.DataRegistFragment;
+import id.teknologi.teknologiid.feature.login_register.fragment_register.DataRegistJobMinatFragment;
+import id.teknologi.teknologiid.feature.profile.ViewPagerAdapter;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import okhttp3.ResponseBody;
@@ -49,6 +54,11 @@ public class RegisterActivity extends BaseActivity {
     ApiService mApiService;
     private ProgressDialog progressDialog;
 
+    @BindView(R.id.pager_registration)
+    ViewPager pagerRegist;
+    @BindView(R.id.step_indicator)
+    StepperIndicator stepIndic;
+
     @Override
     protected int contentView() {
         return R.layout.activity_register;
@@ -59,6 +69,14 @@ public class RegisterActivity extends BaseActivity {
         mApiService = DataManager.getApiService();
         initControls();
         mContext = this;
+
+        //stepIndicator
+        stepIndic.setViewPager(pagerRegist);
+        stepIndic.setStepCount(2);
+        stepIndic.setCurrentStep(1);
+
+        setupViewPager(pagerRegist);
+
         btnRegist.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -142,6 +160,13 @@ public class RegisterActivity extends BaseActivity {
             }
         });
 
+    }
+
+    private void setupViewPager(ViewPager viewPager) {
+        ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+        adapter.addFragment(new DataRegistFragment(), "step 1");
+        adapter.addFragment(new DataRegistJobMinatFragment(), "step 2");
+        viewPager.setAdapter(adapter);
     }
 
     private void initControls() {

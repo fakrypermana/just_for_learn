@@ -91,7 +91,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textEmailAddress"
                         android:hint="Email"
-                        android:padding="13dip"
+                        android:padding="11dip"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/shape_edittext_border"/>
@@ -101,7 +101,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="textPassword"
                         android:hint="Password"
-                        android:padding="13dip"
+                        android:padding="11dip"
                         android:layout_marginLeft="20dp"
                         android:layout_marginRight="20dp"
                         android:background="@drawable/shape_edittext_border"/>
