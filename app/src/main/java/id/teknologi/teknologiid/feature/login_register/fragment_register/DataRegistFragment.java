@@ -70,7 +70,7 @@ public class DataRegistFragment extends Fragment {
         initControls();
         mContext = getActivity();
 
-        Button btnRegist = view.findViewById(R.id.btn_register);
+        Button btnLanjut = view.findViewById(R.id.btn_lanjut);
 
         btnLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,7 +181,7 @@ public class DataRegistFragment extends Fragment {
         }
         if (btnLanjut == null)
         {
-            btnLanjut = getActivity().findViewById(R.id.btn_register);
+            btnLanjut = getActivity().findViewById(R.id.btn_lanjut);
         }
         if(progressDialog == null) {
             progressDialog = new ProgressDialog(getActivity().getApplicationContext());

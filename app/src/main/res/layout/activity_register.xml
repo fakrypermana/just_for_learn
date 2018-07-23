@@ -5,53 +5,60 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-        <LinearLayout
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            android:src="@drawable/logo" />
+
+        <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_marginTop="20dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp">
+            android:layout_margin="20dp"
+            android:text="Buat Akun"
+            android:textAlignment="center"
+            android:textColor="@color/colorDarkBlack"
+            android:textSize="20sp"
+            android:textStyle="bold" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:src="@drawable/logo" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="20dp"
-                android:text="Buat Akun"
-                android:textAlignment="center"
-                android:textColor="@color/colorDarkBlack"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-        </LinearLayout>
+    </LinearLayout>
 
 
-            <com.badoualy.stepperindicator.StepperIndicator
-                android:id="@+id/step_indicator"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="110dp"
-                android:layout_marginRight="110dp"
-                app:stpi_circleColor="@color/colorDarkGray"
-                app:stpi_circleStrokeWidth="3dp"
-                app:stpi_indicatorColor="@color/colorPrimaryDark"
-                app:stpi_lineColor="@color/colorDarkGray"
-                app:stpi_lineStrokeWidth="2dp"
-                app:stpi_showDoneIcon="true"
-                app:stpi_stepCount="2" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-            <id.teknologi.teknologiid.CustomViewPager
-                android:id="@+id/pager_registration"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+        <com.badoualy.stepperindicator.StepperIndicator
+            android:id="@+id/step_indicator"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="110dp"
+            android:layout_marginRight="110dp"
+            app:stpi_circleColor="@color/colorDarkGray"
+            app:stpi_circleStrokeWidth="3dp"
+            app:stpi_indicatorColor="@color/colorPrimaryDark"
+            app:stpi_lineColor="@color/colorDarkGray"
+            app:stpi_lineStrokeWidth="2dp"
+            app:stpi_showDoneIcon="true"
+            app:stpi_stepCount="2" />
 
-            </id.teknologi.teknologiid.CustomViewPager>
+        <id.teknologi.teknologiid.CustomViewPager
+            android:id="@+id/pager_registration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+        </id.teknologi.teknologiid.CustomViewPager>
+
+    </LinearLayout>
 
 
 </LinearLayout>
