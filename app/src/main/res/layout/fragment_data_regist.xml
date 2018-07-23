@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:layout_margin="20dp"
     tools:context=".feature.login_register.fragment_register.DataRegistFragment">
 
     <ScrollView
@@ -23,7 +24,7 @@
                 android:textStyle="bold"
                 android:text="Alamat email"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
             <EditText
@@ -40,7 +41,7 @@
                 android:textStyle="bold"
                 android:text="Nama Pengguna"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
             <EditText
@@ -57,7 +58,7 @@
                 android:textStyle="bold"
                 android:text="Password"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
             <EditText
@@ -74,7 +75,7 @@
                 android:textStyle="bold"
                 android:text="Konfirmasi Password"
                 android:textSize="16sp"
-                android:textColor="@color/colorPrimaryDark"
+                android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
             <EditText
@@ -85,7 +86,7 @@
                 android:inputType="textPassword" />
 
             <android.support.v7.widget.AppCompatButton
-                android:id="@+id/btn_register"
+                android:id="@+id/btn_lanjut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
@@ -93,7 +94,7 @@
                 android:layout_marginTop="24dp"
                 android:background="@drawable/shape_buttin_facebook_blue"
                 android:text="Lanjut"
-                android:textColor="#ffffff" />
+                android:textColor="@color/colorPrimaryLight"/>
 
         </LinearLayout>
 
