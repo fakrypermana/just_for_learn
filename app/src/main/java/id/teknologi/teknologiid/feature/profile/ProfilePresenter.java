@@ -9,9 +9,9 @@ public class ProfilePresenter extends BasePresenter<ProfileView> {
         super(profileView);
     }
 
-    void getProfile(){
+    void getProfile(String token){
         getView().onLoading(true);
-        dataManager.getProfile()
+        dataManager.getProfile(token)
                 .doOnTerminate(() -> getView().onLoading(false))
                 .compose(RxUtils.applyScheduler())
                 .compose(RxUtils.applyApiCall())

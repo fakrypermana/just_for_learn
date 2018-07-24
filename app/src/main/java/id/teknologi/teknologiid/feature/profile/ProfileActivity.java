@@ -10,6 +10,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,6 +27,7 @@ import com.google.android.gms.common.api.Status;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.orhanobut.hawk.Hawk;
 
 import butterknife.BindView;
 import id.teknologi.teknologiid.R;
@@ -37,7 +39,9 @@ import id.teknologi.teknologiid.feature.profile.fragment.AktivitasFragment;
 import id.teknologi.teknologiid.feature.profile.fragment.JawabanFragment;
 import id.teknologi.teknologiid.feature.profile.fragment.PertanyaanFragment;
 import id.teknologi.teknologiid.feature.profile.fragment.ThreadFragment;
+import id.teknologi.teknologiid.model.LoginModel;
 import id.teknologi.teknologiid.model.Profile;
+import id.teknologi.teknologiid.network.TokenPreferences;
 
 public class ProfileActivity extends BaseActivity implements ProfileView{
     ProfilePresenter presenter;
@@ -83,7 +87,13 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     @Override
     protected void setupData(Bundle savedInstanceState) {
         presenter = new ProfilePresenter(this);
-        presenter.getProfile();
+        /*LoginModel loginModel = TokenPreferences.load(this);
+        String token = loginModel.getToken();
+        Log.d("tokewoy","isinya"+token);*/
+        Hawk.init(this).build();
+        String token = Hawk.get("token");
+        Log.d("tokon","token"+token);
+        presenter.getProfile(token);
 
         setSupportActionBar(toolbar);
 

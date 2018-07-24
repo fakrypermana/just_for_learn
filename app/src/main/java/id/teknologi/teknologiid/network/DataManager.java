@@ -75,8 +75,8 @@ public class DataManager {
     }
 
     //Profile
-    public Observable<ResponseObject<Profile>> getProfile() {
-        return apiService.getProfile();
+    public Observable<ResponseObject<Profile>> getProfile(String token) {
+        return apiService.getProfile(token);
     }
 
     //login

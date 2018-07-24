@@ -2,14 +2,17 @@ package id.teknologi.teknologiid.network;
 
 import android.content.Context;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.firebase.auth.GetTokenResult;
+
 import id.teknologi.teknologiid.model.LoginModel;
 
 public class TokenPreferences {
     public static final String PREFS_NAME = "token_prefs";
     public static final String PREFS_VAL = "token_value";
 
-    public static void save(LoginModel data, Context ctx){
-        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences(ctx, PREFS_NAME, 0);
+    public static void save(LoginModel data, OnCompleteListener<GetTokenResult> ctx){
+        ComplexPreferences complexPreferences = ComplexPreferences.getComplexPreferences((Context) ctx, PREFS_NAME, 0);
         complexPreferences.putObject(PREFS_VAL, data);
         complexPreferences.commit();
     }

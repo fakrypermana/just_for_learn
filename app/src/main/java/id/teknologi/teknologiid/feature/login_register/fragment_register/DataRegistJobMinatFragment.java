@@ -2,6 +2,8 @@ package id.teknologi.teknologiid.feature.login_register.fragment_register;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,13 +43,14 @@ public class DataRegistJobMinatFragment extends Fragment implements RegisterJobV
     ChipView chipTagMinat;
     RegisterJobPresenter presenter;
     Job job;
-    List<Job> jobList;
+    //List<Job> jobList = new ArrayList<>();
     ApiService apiService;
     Context mContext;
 
     public DataRegistJobMinatFragment() {
         // Required empty public constructor
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -62,19 +65,7 @@ public class DataRegistJobMinatFragment extends Fragment implements RegisterJobV
         presenter = new RegisterJobPresenter(this);
         presenter.getJob();
 
-        spnListJob.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String selectedName = parent.getItemAtPosition(position).toString();
-                Toast.makeText(mContext, "diClick" + selectedName, Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
+        //List<Job> jobList = new ArrayList<>();
 
         //Log.d("joboy",new Gson().toJson(presenter));
 
@@ -89,7 +80,59 @@ public class DataRegistJobMinatFragment extends Fragment implements RegisterJobV
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+    }
+
+    @Override
     public void onSuccessJob(List<Job> jobList) {
+        //int i = 0;
+        //String[] jobItems = new String[jobList.size()];
+
+
+        //List<Job> jobList = new ArrayList<>();
+        List<Job> jobUhuy = new ArrayList<>(jobList);
+        Log.d("jobitem","uhuy"+jobUhuy.toString());
+        List<String> jobListItem = new ArrayList<String>();
+
+        for (int j = 0; j < jobUhuy.size(); j++) {
+            jobListItem.add(jobUhuy.get(j).getName());
+        }
+
+        ArrayAdapter<String> spinnerArrayAdapterBudget = new ArrayAdapter<>(getActivity().getBaseContext(),
+                android.R.layout.simple_spinner_item,jobListItem);
+        spinnerArrayAdapterBudget.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnListJob.setAdapter(spinnerArrayAdapterBudget);
+
+        spnListJob.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String selectedName = parent.getItemAtPosition(position).toString();
+                Toast.makeText(getActivity().getApplicationContext(), "diClick" + selectedName, Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+
+
+
+        //Log.d("aku harus apa","lieur"+jobListItem);
+        /*for (Job job:jobList) {
+            jobItems[i].add = job.getName();
+            i++;
+        }*/
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, jobListItem);
+        adapter.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+        spnListJob.setAdapter(adapter);*/
+        /*ArrayAdapter<String> adapter = new ArrayAdapter<String>(getActivity(),
+                android.R.layout.simple_spinner_item, jobItems);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spnListJob.setAdapter(adapter);*/
         Log.d("pasti ayaan",new Gson().toJson(jobList));
     }
 
@@ -105,5 +148,6 @@ public class DataRegistJobMinatFragment extends Fragment implements RegisterJobV
     public void onFailed(String message) {
 
     }
+
 
 }

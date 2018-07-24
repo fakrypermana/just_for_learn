@@ -41,6 +41,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.gson.Gson;
+import com.orhanobut.hawk.Hawk;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -51,8 +52,10 @@ import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
+import id.teknologi.teknologiid.model.LoginModel;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
+import id.teknologi.teknologiid.network.TokenPreferences;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -82,7 +85,7 @@ public class PrevLoginRegistActivity extends BaseActivity{
     private ApiService apiService;
     private ProgressDialog progressDialog;
 
-
+    TokenPreferences preferences;
 
     private static final int RC_SIGN_IN = 1;
 
@@ -95,8 +98,6 @@ public class PrevLoginRegistActivity extends BaseActivity{
     private static final String TAG = "Google Sign In";
     private static final String TAG_FACE = "FACEBOOK LOG";
 
-
-
     @Override
     protected int contentView() {
         return R.layout.activity_prev_registlogin;
@@ -104,6 +105,8 @@ public class PrevLoginRegistActivity extends BaseActivity{
 
     @Override
     protected void setupData(Bundle savedInstanceState) {
+
+        Hawk.init(PrevLoginRegistActivity.this).build();
 
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -302,10 +305,16 @@ public class PrevLoginRegistActivity extends BaseActivity{
 
                             FirebaseUser user = mAuth.getCurrentUser();
                             Log.d("azz uid", user.getUid());
+
                             user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<GetTokenResult> task) {
+
+                                    Hawk.put("token",task.getResult().getToken());
                                     Log.d("azz", task.getResult().getToken());
+                                    /*String saveToken = task.getResult().getToken();
+                                    Log.d("tokene","token"+saveToken);
+                                    TokenPreferences.save(new LoginModel(saveToken),this);*/
                                 }
                             });
                             //updateUI(user);
