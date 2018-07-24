@@ -6,6 +6,7 @@ import java.util.Map;
 import id.teknologi.teknologiid.base.ResponseArray;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
+import id.teknologi.teknologiid.model.Job;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.model.Profile;
 import id.teknologi.teknologiid.model.DetileThread;
@@ -148,4 +149,8 @@ public interface ApiService {
             @Path("id") int id,
             @Path("slug") String slug
     );
+
+    @GET("init/job")
+    Observable<ResponseArray<Job>> getJob();
+
 }

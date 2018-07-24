@@ -46,7 +46,7 @@
                 android:text="Nama pekerjaan"
                 android:textAppearance="?attr/textAppearanceListItem"
                 android:textColor="@color/colorDarkBlack"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 android:textStyle="bold" />
 
             <LinearLayout
@@ -83,7 +83,7 @@
                     android:layout_toRightOf="@+id/daftar_icon"
                     android:text="Alamat Perusahaan"
                     android:textAppearance="?attr/textAppearanceListItem"
-                    android:textColor="@color/colorDarkGray"
+                    android:textColor="@color/colorLightBlue"
                     android:textSize="10sp"
                     android:layout_marginTop="5dp"/>
 
@@ -107,7 +107,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Deadline : "
-                    android:textSize="10sp" />
+                    android:textSize="9sp" />
 
                 <TextView
                     android:id="@+id/tv_date_exp_job"
@@ -118,7 +118,7 @@
                     android:text="Tanggal expired"
                     android:textAppearance="?attr/textAppearanceListItem"
                     android:textColor="@color/colorAccentGreen"
-                    android:textSize="10sp" />
+                    android:textSize="9sp" />
 
             </LinearLayout>
 
@@ -131,16 +131,16 @@
 
                 <Button
                     android:id="@+id/btn_simpan_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
                     android:background="@drawable/shape_button_black_border"
                     android:text="SIMPAN"
                     android:textColor="@color/colorPrimaryDark" />
 
                 <Button
                     android:id="@+id/btn_daftar_item"
-                    android:layout_width="wrap_content"
-                    android:layout_height="30dp"
+                    android:layout_width="70dp"
+                    android:layout_height="25dp"
                     android:layout_marginLeft="10dp"
                     android:background="@drawable/shape_buttin_facebook_blue"
                     android:text="APPLY"

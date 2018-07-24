@@ -125,7 +125,7 @@ public class PekerjaanActivity extends BaseActivity implements PekerjaanView,Rec
 
     @Override
     public void onSuccessPekerjaan(List<Pekerjaan> pekerjaanList) {
-        //Log.d("Pekerjaan", new Gson().toJson(pekerjaanList));
+        Log.d("Pekerjaan", new Gson().toJson(pekerjaanList));
         //showProgressDialog();
         adapter.insertAndNotify(pekerjaanList);
 

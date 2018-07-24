@@ -16,12 +16,12 @@
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo"
+            android:layout_marginBottom="5dp"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp"
             android:text="Buat Akun"
             android:textAlignment="center"
             android:textColor="@color/colorDarkBlack"
@@ -34,6 +34,10 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="20dp"
         android:orientation="vertical">
 
         <com.badoualy.stepperindicator.StepperIndicator

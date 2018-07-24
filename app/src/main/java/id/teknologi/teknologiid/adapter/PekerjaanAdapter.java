@@ -199,8 +199,8 @@ public class PekerjaanAdapter extends BaseRecyclerAdapter<Pekerjaan, PekerjaanAd
                     listChip.add(new id.teknologi.teknologiid.feature.Tag(tag));
                 }
                 chipView.setChipBackgroundRes(R.drawable.shape_chip_view_tag_job);
-                chipView.setChipSpacing(12);
-                chipView.setLineSpacing(6);
+                chipView.setChipSpacing(16);
+                chipView.setLineSpacing(8);
                 chipView.setChipTextSize(8);
                 chipView.setChipList(listChip);
                 //chipView.setAdapter(adapterChip);

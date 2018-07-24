@@ -32,6 +32,7 @@ import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.login_register.fragment_register.DataRegistFragment;
 import id.teknologi.teknologiid.feature.login_register.fragment_register.DataRegistJobMinatFragment;
 import id.teknologi.teknologiid.feature.profile.ViewPagerAdapter;
+import id.teknologi.teknologiid.model.Job;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import okhttp3.ResponseBody;
@@ -40,12 +41,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RegisterActivity extends BaseActivity {
+public class RegisterActivity extends BaseActivity  {
 
     @BindView(R.id.pager_registration)
     CustomViewPager pagerRegist;
     @BindView(R.id.step_indicator)
     StepperIndicator stepIndic;
+
 
     @Override
     protected int contentView() {
@@ -62,6 +64,8 @@ public class RegisterActivity extends BaseActivity {
         stepIndic.setViewPager(pagerRegist,true);
         stepIndic.setStepCount(2);
         stepIndic.setCurrentStep(0);
+
+
 
         stepIndic.addOnStepClickListener(new StepperIndicator.OnStepClickListener() {
             @Override
@@ -88,5 +92,6 @@ public class RegisterActivity extends BaseActivity {
     public void setCurrentItem (int item, boolean smoothScroll) {
         pagerRegist.setCurrentItem(item, smoothScroll);
     }
+
 
 }

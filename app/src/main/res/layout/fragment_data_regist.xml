@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Alamat email"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
@@ -39,7 +39,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Nama Pengguna"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
@@ -56,7 +56,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Password"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
@@ -73,7 +73,7 @@
                 android:layout_height="wrap_content"
                 android:textStyle="bold"
                 android:text="Konfirmasi Password"
-                android:textSize="16sp"
+                android:textSize="12sp"
                 android:textColor="@color/colorPrimary"
                 android:layout_marginBottom="5dp"/>
 
@@ -89,8 +89,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:layout_marginBottom="24dp"
-                android:layout_marginTop="24dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/shape_buttin_facebook_blue"
                 android:text="Lanjut"
                 android:textColor="@color/colorPrimaryLight"/>

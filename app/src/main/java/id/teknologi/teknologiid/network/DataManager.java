@@ -1,6 +1,7 @@
 package id.teknologi.teknologiid.network;
 
 import id.teknologi.teknologiid.base.ResponseArray;
+import id.teknologi.teknologiid.model.Job;
 import id.teknologi.teknologiid.model.Pekerjaan;
 import id.teknologi.teknologiid.base.ResponseObject;
 import id.teknologi.teknologiid.model.CobaModel;
@@ -16,6 +17,7 @@ import id.teknologi.teknologiid.model.ThreadCommentModel;
 import io.reactivex.Observable;
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
+import retrofit2.Call;
 import retrofit2.Converter;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -61,6 +63,11 @@ public class DataManager {
     //Pekerjaan
     public Observable<ResponseArray<Pekerjaan>> getPekerjaan(int page) {
         return apiService.getPekerjaan(page);
+    }
+
+    //Job
+    public Observable<ResponseArray<Job>> getJob() {
+        return apiService.getJob();
     }
 
     public Observable<ResponseObject<Pekerjaan>> getPekerjaanDetail(int id, String slug) {
