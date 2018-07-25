@@ -41,7 +41,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class RegisterActivity extends BaseActivity  {
+public class RegisterActivity extends BaseActivity {
 
     @BindView(R.id.pager_registration)
     CustomViewPager pagerRegist;
@@ -61,19 +61,16 @@ public class RegisterActivity extends BaseActivity  {
         pagerRegist.disableScroll(true);
         //stepIndicator
 
-        stepIndic.setViewPager(pagerRegist,true);
+        stepIndic.setViewPager(pagerRegist, true);
         stepIndic.setStepCount(2);
         stepIndic.setCurrentStep(0);
-
-
 
         stepIndic.addOnStepClickListener(new StepperIndicator.OnStepClickListener() {
             @Override
             public void onStepClicked(int step) {
-                pagerRegist.setCurrentItem(step,true);
+                pagerRegist.setCurrentItem(step, true);
             }
         });
-
 
     }
 
@@ -89,9 +86,8 @@ public class RegisterActivity extends BaseActivity  {
 
     }
 
-    public void setCurrentItem (int item, boolean smoothScroll) {
+    public void setCurrentItem(int item, boolean smoothScroll) {
         pagerRegist.setCurrentItem(item, smoothScroll);
     }
-
 
 }

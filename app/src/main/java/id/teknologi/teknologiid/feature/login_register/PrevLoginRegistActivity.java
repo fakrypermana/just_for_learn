@@ -325,6 +325,28 @@ public class PrevLoginRegistActivity extends BaseActivity{
                                         @Override
                                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                             Log.d("pls", new Gson().toJson(response));
+                                            if (response.isSuccessful()){
+                                                try {
+                                                    String returnBodyText = response.body().string();
+                                                    JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                                                    Log.d("uhuy",new Gson().toJson(returnBodyText));
+                                                    if (jsonRESULTS.getString("status").equals("success")){
+                                                        String initoken = jsonRESULTS.getString("token");
+                                                        Log.d("uhuy","initoken"+initoken);
+                                                        /*Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
+                                                        Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
+                                                        startActivity(intent);*/
+                                                    } else {
+                                                        String error_message = jsonRESULTS.getString("message");
+                                                        Log.d("message",error_message);
+                                                        Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }catch (JSONException e) {
+                                                    e.printStackTrace();
+                                                } catch (IOException e) {
+                                                    e.printStackTrace();
+                                                }
+                                            }
                                         }
 
                                         @Override

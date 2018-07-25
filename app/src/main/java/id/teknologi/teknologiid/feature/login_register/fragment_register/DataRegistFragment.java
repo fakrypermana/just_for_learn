@@ -75,13 +75,6 @@ public class DataRegistFragment extends Fragment {
         btnLanjut.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ((RegisterActivity)getActivity()).setCurrentItem (2, true);
-            }
-        });
-
-        /*btnRegist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
                 String name = edtname.getText().toString();
                 String email = edtemail.getText().toString();
@@ -158,8 +151,12 @@ public class DataRegistFragment extends Fragment {
                 //call.enqueue(callback);
                 mApiService.registUser(name,email,password,"1").enqueue(callback);
 
+
+                ((RegisterActivity)getActivity()).setCurrentItem (2, true);
             }
-        });*/
+        });
+
+
 
         return view;
 
