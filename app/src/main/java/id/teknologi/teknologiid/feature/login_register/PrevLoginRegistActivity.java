@@ -205,28 +205,28 @@ public class PrevLoginRegistActivity extends BaseActivity{
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Log.d("azz", new Gson().toJson(response));
-                        progressDialog.hide();
-                        if(response.isSuccessful()){
-                            try{
-                                String returnBodyText = response.body().string();
-                                JSONObject jsonRESULTS = new JSONObject(returnBodyText);
-                                Log.d("isinyabanyak",new Gson().toJson(returnBodyText));
-                                if (jsonRESULTS.getString("status").equals("success")){
-                                    Hawk.put("token",jsonRESULTS.getString("token"));
-                                    Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
-                                    Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
-                                    startActivity(intent);
-                                } else {
-                                    String error_message = jsonRESULTS.getString("message");
-                                    Log.d("message",error_message);
-                                    Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
-                                }
+                            progressDialog.hide();
+                            if(response.isSuccessful()){
+                                try{
+                                    String returnBodyText = response.body().string();
+                                    JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                                    Log.d("isinyabanyak",new Gson().toJson(returnBodyText));
+                                    if (jsonRESULTS.getString("status").equals("success")){
+                                        Hawk.put("token",jsonRESULTS.getString("token"));
+                                        Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
+                                        Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
+                                        startActivity(intent);
+                                    } else {
+                                        String error_message = jsonRESULTS.getString("message");
+                                        Log.d("message",error_message);
+                                        Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
+                                    }
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
+                                } catch (JSONException e) {
+                                    e.printStackTrace();
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
                         }else{
                             Log.d("error",response.toString());
                             Toast.makeText(mContext,"Connection Error",Toast.LENGTH_SHORT).show();
@@ -316,6 +316,22 @@ public class PrevLoginRegistActivity extends BaseActivity{
                                 public void onComplete(@NonNull Task<GetTokenResult> task) {
                                     Hawk.put("token",task.getResult().getToken());
                                     Log.d("azura", task.getResult().getToken());
+                                    String name = user.getDisplayName();
+                                    String email = user.getEmail();
+                                    String uid = user.getUid();
+                                    String access_token = task.getResult().getToken();
+
+                                    apiService.postTokenFire(name,email,uid,access_token).enqueue(new Callback<ResponseBody>() {
+                                        @Override
+                                        public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+                                            Log.d("pls", new Gson().toJson(response));
+                                        }
+
+                                        @Override
+                                        public void onFailure(Call<ResponseBody> call, Throwable t) {
+
+                                        }
+                                    });
                                     /*String saveToken = task.getResult().getToken();
                                     Log.d("tokene","token"+saveToken);
                                     TokenPreferences.save(new LoginModel(saveToken),this);*/

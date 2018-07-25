@@ -146,6 +146,14 @@ public interface ApiService {
             @Field("password") String password
     );
 
+    @FormUrlEncoded
+    @POST("login/socmed")
+    Call<ResponseBody> postTokenFire(
+            @Body String name,
+            @Body String email,
+            @Body String uid,
+            @Body String access_token
+    );
 
     //bookmark pekerjaan
     @FormUrlEncoded
