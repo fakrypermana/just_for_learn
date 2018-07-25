@@ -158,8 +158,8 @@
 
             <Button
                 android:id="@+id/btn_more_item_job"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_gravity="end"
                 android:gravity="end"
                 android:background="@drawable/baseline_more_vert_24"

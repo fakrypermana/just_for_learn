@@ -90,10 +90,10 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         /*LoginModel loginModel = TokenPreferences.load(this);
         String token = loginModel.getToken();
         Log.d("tokewoy","isinya"+token);*/
-        Hawk.init(this).build();
+        //Hawk.init(this).build();
         String token = Hawk.get("token");
         Log.d("tokon","token"+token);
-        presenter.getProfile(token);
+        presenter.getProfile("$2y$10$imJWxlU/yhjazOnxMPlwoev97dO0XAZjb6tmtrdnj3WJ1kXpzHJGG");
 
         setSupportActionBar(toolbar);
 

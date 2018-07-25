@@ -212,7 +212,10 @@ public class PrevLoginRegistActivity extends BaseActivity{
                                 JSONObject jsonRESULTS = new JSONObject(returnBodyText);
                                 Log.d("isinyabanyak",new Gson().toJson(returnBodyText));
                                 if (jsonRESULTS.getString("status").equals("success")){
+                                    Hawk.put("token",jsonRESULTS.getString("token"));
                                     Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
+                                    Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
+                                    startActivity(intent);
                                 } else {
                                     String error_message = jsonRESULTS.getString("message");
                                     Log.d("message",error_message);
@@ -291,8 +294,10 @@ public class PrevLoginRegistActivity extends BaseActivity{
     }
 
     //handler google
+    String idTokenString = "";
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
+        idTokenString = account.getIdToken();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -309,9 +314,8 @@ public class PrevLoginRegistActivity extends BaseActivity{
                             user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<GetTokenResult> task) {
-
                                     Hawk.put("token",task.getResult().getToken());
-                                    Log.d("azz", task.getResult().getToken());
+                                    Log.d("azura", task.getResult().getToken());
                                     /*String saveToken = task.getResult().getToken();
                                     Log.d("tokene","token"+saveToken);
                                     TokenPreferences.save(new LoginModel(saveToken),this);*/
