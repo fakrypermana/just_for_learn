@@ -52,7 +52,6 @@ import butterknife.BindView;
 import id.teknologi.teknologiid.R;
 import id.teknologi.teknologiid.base.BaseActivity;
 import id.teknologi.teknologiid.feature.profile.ProfileActivity;
-import id.teknologi.teknologiid.model.LoginModel;
 import id.teknologi.teknologiid.network.ApiService;
 import id.teknologi.teknologiid.network.DataManager;
 import id.teknologi.teknologiid.network.TokenPreferences;
@@ -212,10 +211,9 @@ public class PrevLoginRegistActivity extends BaseActivity{
                                     JSONObject jsonRESULTS = new JSONObject(returnBodyText);
                                     Log.d("isinyabanyak",new Gson().toJson(returnBodyText));
                                     if (jsonRESULTS.getString("status").equals("success")){
-                                        Hawk.put("token",jsonRESULTS.getString("token"));
-                                        Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
+                                        /*Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
                                         Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
-                                        startActivity(intent);
+                                        startActivity(intent);*/
                                     } else {
                                         String error_message = jsonRESULTS.getString("message");
                                         Log.d("message",error_message);
@@ -331,8 +329,12 @@ public class PrevLoginRegistActivity extends BaseActivity{
                                                     JSONObject jsonRESULTS = new JSONObject(returnBodyText);
                                                     Log.d("uhuy",new Gson().toJson(returnBodyText));
                                                     if (jsonRESULTS.getString("status").equals("success")){
-                                                        String initoken = jsonRESULTS.getString("token");
-                                                        Log.d("uhuy","initoken"+initoken);
+                                                        String token = jsonRESULTS.getJSONObject("data").getString("token");
+                                                        Log.d("mamah",token);
+                                                        Hawk.deleteAll();
+                                                        Hawk.put("token_google",token);
+                                                        String token_legend = Hawk.get("token_google");
+                                                        Log.d("tokon","token"+token_legend);
                                                         /*Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
                                                         Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
                                                         startActivity(intent);*/

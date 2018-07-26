@@ -39,9 +39,7 @@ import id.teknologi.teknologiid.feature.profile.fragment.AktivitasFragment;
 import id.teknologi.teknologiid.feature.profile.fragment.JawabanFragment;
 import id.teknologi.teknologiid.feature.profile.fragment.PertanyaanFragment;
 import id.teknologi.teknologiid.feature.profile.fragment.ThreadFragment;
-import id.teknologi.teknologiid.model.LoginModel;
 import id.teknologi.teknologiid.model.Profile;
-import id.teknologi.teknologiid.network.TokenPreferences;
 
 public class ProfileActivity extends BaseActivity implements ProfileView{
     ProfilePresenter presenter;
@@ -91,14 +89,14 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         String token = loginModel.getToken();
         Log.d("tokewoy","isinya"+token);*/
         //Hawk.init(this).build();
-        String token = Hawk.get("token");
+        String token = Hawk.get("token_google");
         Log.d("tokon","token"+token);
-        presenter.getProfile("$2y$10$AY5cV681gGcasge1jVXxiuyOi7B9USGtMrkrLHT17YKrkR6Wc65rW");
+        presenter.getProfile(token);
 
         setSupportActionBar(toolbar);
 
         setupViewPager(viewPager);
-        
+
         tabLayout.setupWithViewPager(viewPager);
         tabLayout.setTabTextColors(ColorStateList.valueOf(R.color.colorDarkGray));
         tabLayout.setSelectedTabIndicatorColor(R.color.colorPrimary);
