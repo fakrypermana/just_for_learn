@@ -76,6 +76,7 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
 
     GoogleApiClient mGoogleApiClient;
 
+
     @Override
     protected int contentView() {
         return R.layout.activity_profile;
@@ -85,11 +86,11 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
     @Override
     protected void setupData(Bundle savedInstanceState) {
         presenter = new ProfilePresenter(this);
+        String token = Hawk.get("token");
         /*LoginModel loginModel = TokenPreferences.load(this);
-        String token = loginModel.getToken();
-        Log.d("tokewoy","isinya"+token);*/
+        String token = loginModel.getToken();*/
+        Log.d("tokewoy","isinya"+token);
         //Hawk.init(this).build();
-        String token = Hawk.get("token_google");
         Log.d("tokon","token"+token);
         presenter.getProfile(token);
 
@@ -188,7 +189,11 @@ public class ProfileActivity extends BaseActivity implements ProfileView{
         }
         if (id == R.id.option_logout) {
             //Toast.makeText(ProfileActivity.this, "logout clicked", Toast.LENGTH_LONG).show();
-            mAuth.signOut();
+                Hawk.put("token","");
+                mAuth.signOut();
+                Intent intent = new Intent(ProfileActivity.this,PrevLoginRegistActivity.class);
+                startActivity(intent);
+                finish();
             return true;
         }
 

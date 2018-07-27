@@ -80,7 +80,8 @@
         </provider>
 
         <activity android:name=".feature.thread_new.ThreadNewActivity" />
-        <activity android:name=".feature.thread_new.ThreadNewActivity2"></activity>
+        <activity android:name=".feature.thread_new.ThreadNewActivity2" />
+        <activity android:name=".feature.profile.FormEditProfileActivity"></activity>
     </application>
 
 </manifest>

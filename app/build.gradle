@@ -152,5 +152,8 @@ dependencies {
     //stepview
     implementation 'com.github.badoualy:stepper-indicator:1.0.7'
 
+    //spinner with searchable
+    implementation 'com.toptoche.searchablespinner:searchablespinnerlibrary:1.3.1'
+
 }
 apply plugin: 'com.google.gms.google-services'

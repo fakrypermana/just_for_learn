@@ -60,7 +60,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class PrevLoginRegistActivity extends BaseActivity{
+public class PrevLoginRegistActivity extends BaseActivity {
 
     @BindView(R.id.sign_in_google)
     SignInButton signInGoogle;
@@ -106,7 +106,6 @@ public class PrevLoginRegistActivity extends BaseActivity{
     protected void setupData(Bundle savedInstanceState) {
 
         Hawk.init(PrevLoginRegistActivity.this).build();
-
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -130,9 +129,9 @@ public class PrevLoginRegistActivity extends BaseActivity{
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
 
-                if (firebaseAuth.getCurrentUser() != null){
+                if (firebaseAuth.getCurrentUser() != null) {
 
-                    Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
+                    Intent intent = new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
                     startActivity(intent);
                     //finish();
                 }
@@ -182,52 +181,55 @@ public class PrevLoginRegistActivity extends BaseActivity{
         linkRegis.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(PrevLoginRegistActivity.this,RegisterActivity.class);
+                Intent intent = new Intent(PrevLoginRegistActivity.this, RegisterActivity.class);
                 startActivity(intent);
             }
         });
-        if(progressDialog == null) {
+        if (progressDialog == null) {
             progressDialog = new ProgressDialog(PrevLoginRegistActivity.this);
         }
+
+        //login email biasa
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showProgressDialog();
+                //showProgressDialog();
                 String Email = email.getText().toString();
                 String Password = password.getText().toString();
-                if(Email.equals("") || Password.equals("")){
+                if (Email.equals("") || Password.equals("")) {
                     email.setError("Email Tidak Boleh Kosong");
                     password.setError("Password Tidak Boleh Kosong");
                     return;
                 }
-                apiService.loginUser(Email,Password).enqueue(new Callback<ResponseBody>() {
+                apiService.loginUser(Email, Password).enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                         Log.d("azz", new Gson().toJson(response));
-                            progressDialog.hide();
-                            if(response.isSuccessful()){
-                                try{
-                                    String returnBodyText = response.body().string();
-                                    JSONObject jsonRESULTS = new JSONObject(returnBodyText);
-                                    Log.d("isinyabanyak",new Gson().toJson(returnBodyText));
-                                    if (jsonRESULTS.getString("status").equals("success")){
-                                        /*Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
-                                        Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
-                                        startActivity(intent);*/
-                                    } else {
-                                        String error_message = jsonRESULTS.getString("message");
-                                        Log.d("message",error_message);
-                                        Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
-                                    }
-
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                } catch (IOException e) {
-                                    e.printStackTrace();
+                        progressDialog.hide();
+                        if (response.isSuccessful()) {
+                            try {
+                                String returnBodyText = response.body().string();
+                                JSONObject jsonRESULTS = new JSONObject(returnBodyText);
+                                Log.d("isinyabanyak", new Gson().toJson(returnBodyText));
+                                if (jsonRESULTS.getString("status").equals("success")){
+                                    String token = jsonRESULTS.getJSONObject("data").getString("token");
+                                    Log.d("mamah", token);
+                                    Hawk.put("token", token);
+                                    Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    String error_message = jsonRESULTS.getString("message");
+                                    Log.d("message", error_message);
+                                    Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
                                 }
-                        }else{
-                            Log.d("error",response.toString());
-                            Toast.makeText(mContext,"Connection Error",Toast.LENGTH_SHORT).show();
+
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
+                            Log.d("error", response.toString());
+                            Toast.makeText(mContext, "Connection Error", Toast.LENGTH_SHORT).show();
                         }
 
                     }
@@ -239,7 +241,9 @@ public class PrevLoginRegistActivity extends BaseActivity{
                         Toast.makeText(getApplicationContext(), t.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
+                /*Intent intent = new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                finish();*/
             }
         });
 
@@ -258,7 +262,7 @@ public class PrevLoginRegistActivity extends BaseActivity{
     }
 
     private void updateUI() {
-        Toast.makeText(PrevLoginRegistActivity.this,"You are logged in", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PrevLoginRegistActivity.this, "You are logged in", Toast.LENGTH_SHORT).show();
     }
 
     private void signIn() {
@@ -277,7 +281,7 @@ public class PrevLoginRegistActivity extends BaseActivity{
             try {
                 // Google Sign In was successful, authenticate with Firebase
                 GoogleSignInAccount account = task.getResult(ApiException.class);
-                Log.d("accountoy","isinya"+account.toJson());
+                Log.d("accountoy", "isinya" + account.toJson());
 
                 firebaseAuthWithGoogle(account);
             } catch (ApiException e) {
@@ -292,10 +296,9 @@ public class PrevLoginRegistActivity extends BaseActivity{
     }
 
     //handler google
-    String idTokenString = "";
+
     private void firebaseAuthWithGoogle(GoogleSignInAccount account) {
         Log.d(TAG, "firebaseAuthWithGoogle:" + account.getId());
-        idTokenString = account.getIdToken();
 
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mAuth.signInWithCredential(credential)
@@ -312,38 +315,34 @@ public class PrevLoginRegistActivity extends BaseActivity{
                             user.getIdToken(true).addOnCompleteListener(new OnCompleteListener<GetTokenResult>() {
                                 @Override
                                 public void onComplete(@NonNull Task<GetTokenResult> task) {
-                                    Hawk.put("token",task.getResult().getToken());
                                     Log.d("azura", task.getResult().getToken());
                                     String name = user.getDisplayName();
                                     String email = user.getEmail();
                                     String uid = user.getUid();
                                     String access_token = task.getResult().getToken();
 
-                                    apiService.postTokenFire(name,email,uid,access_token).enqueue(new Callback<ResponseBody>() {
+                                    apiService.postTokenFire(name, email, uid, access_token).enqueue(new Callback<ResponseBody>() {
                                         @Override
                                         public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                                             Log.d("pls", new Gson().toJson(response));
-                                            if (response.isSuccessful()){
+                                            if (response.isSuccessful()) {
                                                 try {
                                                     String returnBodyText = response.body().string();
                                                     JSONObject jsonRESULTS = new JSONObject(returnBodyText);
-                                                    Log.d("uhuy",new Gson().toJson(returnBodyText));
-                                                    if (jsonRESULTS.getString("status").equals("success")){
+                                                    Log.d("uhuy", new Gson().toJson(returnBodyText));
+                                                    if (jsonRESULTS.getString("status").equals("success")) {
                                                         String token = jsonRESULTS.getJSONObject("data").getString("token");
-                                                        Log.d("mamah",token);
-                                                        Hawk.deleteAll();
-                                                        Hawk.put("token_google",token);
-                                                        String token_legend = Hawk.get("token_google");
-                                                        Log.d("tokon","token"+token_legend);
+                                                        Log.d("mamah", token);
+                                                        Hawk.put("token", token);
                                                         /*Toast.makeText(mContext, "BERHASIL LOGIN", Toast.LENGTH_SHORT).show();
                                                         Intent intent =  new Intent(PrevLoginRegistActivity.this, ProfileActivity.class);
                                                         startActivity(intent);*/
                                                     } else {
                                                         String error_message = jsonRESULTS.getString("message");
-                                                        Log.d("message",error_message);
+                                                        Log.d("message", error_message);
                                                         Toast.makeText(mContext, error_message, Toast.LENGTH_SHORT).show();
                                                     }
-                                                }catch (JSONException e) {
+                                                } catch (JSONException e) {
                                                     e.printStackTrace();
                                                 } catch (IOException e) {
                                                     e.printStackTrace();
@@ -411,10 +410,10 @@ public class PrevLoginRegistActivity extends BaseActivity{
                 });
     }
 
-    private void showProgressDialog(){
+    /*private void showProgressDialog() {
         progressDialog.setMessage("Please Wait");
         progressDialog.setCancelable(true);
         progressDialog.show();
-    }
+    }*/
 
 }

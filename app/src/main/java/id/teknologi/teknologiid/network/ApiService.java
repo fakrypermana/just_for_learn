@@ -163,6 +163,18 @@ public interface ApiService {
             @Path("slug") String slug
     );
 
+    @FormUrlEncoded
+    @POST("profile/edit")
+    Call<ResponseBody> postEditProfile(
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("username") String username,
+            @Field("adress") String adress,
+            @Field("phone_number") String phone_number,
+            @Field("short_bio") String short_bio,
+            @Field("work") String work
+    );
+
     @GET("init/job")
     Observable<ResponseArray<Job>> getJob();
 
